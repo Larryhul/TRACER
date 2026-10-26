@@ -1,0 +1,75 @@
+evaluation:
+  mode: closed_loop
+  phase: test
+  claim_boundary: supplementary_synthetic_three_robot_belief_attribution_not_external_navigation
+
+simulation:
+  episodes: 256
+  splits: [id, ood]
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_candidates: 16
+  execute_steps: 3
+  dt: 0.4
+  response_noise: 0.18
+  influence_radius: 4.0
+  entity_max_speed: 3.0
+  data_seed: 558731
+
+candidate_source:
+  type: sage
+  checkpoint: experiments/pilot/h3_sage_generator_p0_seed2027/synthetic_sage_epoch5.pt
+  checkpoint_scope: upstream_sage_candidate_generator_frozen_epoch5
+  guided: true
+  step_stride: 10
+  goal_speed: 1.2
+  oversample_factor: 4
+  task_prefilter: true
+  task_prefix_steps: 3
+  goal_direction: task_goal
+  include_task_anchor: true
+  task_anchor_speed_scales: [0.4]
+  cache_candidate_pools: true
+  shared_candidate_pools: false
+  batch_size: 16
+
+planning:
+  task_weight: 1.0
+  safety_weight: 2.0
+  human_weight: 0.6
+  comfort_scale: 1.0
+  collision_margin: 0.65
+  task_steps: 3
+  violation_probability_alpha: 0.1
+  risk_samples: 32
+
+belief:
+  likelihood_scale: 0.05
+  calibration_path: experiments/h2_decision_calibration_20260906/seed{seed}.json
+  calibration_scope: checkpoint_bound_validation_only_executed_prefix3_decision_mode_nll
+  adaptive_base_hazard: 0.0
+  adaptive_max_hazard: 0.10
+  adaptive_surprise_threshold: 2.0
+  adaptive_surprise_scale: 0.10
+
+response_gate:
+  belief_threshold: 0.35
+  belief_scale: 0.10
+  uncertainty_threshold: 0.45
+  uncertainty_scale: 0.08
+
+suite:
+  seeds: [2027, 2028, 2029, 2030, 2031]
+  num_threads_per_seed: 4
+  checkpoint_dir: experiments/formal_v2/clean_chain_submission_20260904/h2
+  output_dir: experiments/h3_belief_attribution_repaired_20260906
+
+additional_policies:
+  - recurrent-joint
+  - uniform-gated-joint
+  - reset-gated-joint
+  - persistent-gated-joint
+  - adaptive-persistent-joint
+  - adaptive-persistent-gated-joint

@@ -1,0 +1,47 @@
+# Small installation/training example, not a formal evaluation protocol.
+dataset:
+  source: causal_response
+  history: 8
+  horizon: 12
+  dt: 0.4
+  causal_response:
+    train_base_scenes: 8
+    val_base_scenes: 4
+    test_base_scenes: 4
+    interventions_per_scene: 4
+    num_robots: 2
+    num_entities: 3
+    seed: 2027
+    area_size: 10.0
+    influence_radius: 4.0
+    individual_gain: 1.0
+    joint_gain: 3.0
+    joint_slowdown: 1.0
+    joint_lateral_gain: 1.25
+    entity_noise: 0.015
+    entity_max_speed: 3.0
+    scene_family: radial
+    response_family: pincer
+model:
+  num_robots: 2
+  hidden_dim: 32
+  num_heads: 4
+  architecture: tracer
+  graph_layers: 2
+  geometry_features: true
+  dynamic_interaction_features: true
+  temporal_pooling: attention
+  dropout: 0.1
+  min_log_std: -4.0
+  max_log_std: 2.0
+training:
+  variants: [joint]
+  batch_size: 4
+  epochs: 1
+  lr: 0.0003
+  weight_decay: 0.0001
+  num_workers: 0
+  seed: 2027
+  output_dir: experiments/quickstart
+evaluation:
+  interaction_radius: 4.0

@@ -1,0 +1,37 @@
+simulation:
+  episodes: 64
+  splits: [id, ood]
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_candidates: 16
+  execute_steps: 3
+  dt: 0.4
+  response_noise: 0.18
+  influence_radius: 4.0
+  entity_max_speed: 3.0
+
+candidate_source:
+  type: sage
+  checkpoint: experiments/sage/eth_ucy/goal/eth_sage_epoch100.pt
+  checkpoint_scope: single_robot_proxy_pilot_only
+  guided: true
+  step_stride: 10
+  goal_speed: 1.2
+
+planning:
+  task_weight: 1.0
+  safety_weight: 2.0
+  human_weight: 0.6
+  comfort_scale: 1.0
+  collision_margin: 0.65
+
+belief:
+  likelihood_scale: 0.2
+
+suite:
+  seeds: [2027]
+  num_threads_per_seed: 4
+  checkpoint_dir: experiments/pilot/h2_p0_multi_entity/suite_seed2027
+  output_dir: experiments/pilot/h3_p0_sage_candidates

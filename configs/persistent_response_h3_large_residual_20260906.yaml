@@ -1,0 +1,59 @@
+dataset:
+  train_episodes: 512
+  val_episodes: 128
+  test_episodes: 128
+  ood_episodes: 128
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_entities: 6
+  active_entities: 3
+  shared_team_actions: true
+  dt: 0.4
+  scene_family: radial
+  response_family: pincer
+  execute_steps: 3
+  response_noise: 0.18
+  influence_radius: 4.0
+  entity_max_speed: 3.0
+  seed: 2027
+  data_seed: 418731
+  cache_samples: true
+  include_interaction_residual: true
+  ood_action_policy: correlated
+
+model:
+  architecture: tracer
+  hidden_dim: 64
+  recurrent_hidden_dim: 64
+  num_heads: 4
+  graph_layers: 2
+  dropout: 0.05
+  geometry_features: true
+  temporal_pooling: attention
+  candidate_uncertainty: true
+  set_interactions: true
+  zero_init_interaction_residual: true
+
+training:
+  epochs: 8
+  response_epochs: 8
+  recurrent_epochs: 2
+  batch_size: 32
+  lr: 0.0003
+  recurrent_lr: 0.001
+  weight_decay: 0.0001
+  prefix_loss_weight: 1.0
+  interaction_residual_weight: 10.0
+  mode_discrimination_weight: 0.0
+  mode_temperature: 0.2
+  num_workers: 0
+  num_threads: 4
+
+evaluation:
+  id_split: val
+  likelihood_scale: 0.05
+  confidence_threshold: 0.8
+
+output_dir: experiments/h3_large_residual_20260906

@@ -1,0 +1,38 @@
+formal_protocol:
+  version: formal-v2-h2-bayesian-hazard-audit
+  stage: H2
+  status: supplementary_filter_audit
+  claim_boundary:
+    - same_frozen_frm_checkpoints_as_formal_h2
+    - executed_prefix_only
+    - hazard_rate_frozen_before_evaluation
+
+dataset:
+  train_episodes: 8192
+  val_episodes: 256
+  test_episodes: 256
+  ood_episodes: 256
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_entities: 10
+  active_entities: 3
+  shared_team_actions: true
+  dt: 0.4
+  seed: 2027
+  data_seed: 418731
+  response_noise: 0.18
+  influence_radius: 4.0
+  execute_steps: 3
+  entity_max_speed: 3.0
+  cache_samples: true
+  ood_action_policy: correlated
+
+evaluation:
+  id_split: test
+  likelihood_scale: 0.05
+  confidence_threshold: 0.8
+  bayesian_hazard_rate: 0.10
+
+output_dir: experiments/h2_bayesian_hazard_audit_20260905

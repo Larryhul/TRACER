@@ -1,0 +1,33 @@
+evaluation:
+  phase: validation
+  split: val
+  selection_metric: decision_mode_nll
+
+dataset:
+  val_episodes: 256
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_entities: 10
+  active_entities: 3
+  shared_team_actions: true
+  dt: 0.4
+  data_seed: 418731
+  response_noise: 0.18
+  influence_radius: 4.0
+  execute_steps: 3
+  entity_max_speed: 3.0
+  cache_samples: true
+
+training:
+  batch_size: 64
+  num_threads: 4
+
+calibration:
+  scales: [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0]
+
+suite:
+  seeds: [2027, 2028, 2029, 2030, 2031]
+  checkpoint_root: experiments/formal_v2/clean_chain_submission_20260904/h2
+  output_dir: experiments/h2_decision_calibration_20260906

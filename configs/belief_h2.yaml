@@ -1,0 +1,31 @@
+dataset:
+  train_episodes: 2048
+  val_episodes: 512
+  ood_episodes: 512
+  windows: 10
+  num_modes: 3
+  response_noise: 0.35
+  seed: 2027
+  ood_action_policy: correlated
+
+model:
+  recurrent_hidden_dim: 32
+  likelihood_hidden_dim: 64
+  dropout: 0.0
+
+training:
+  epochs: 20
+  batch_size: 128
+  lr: 0.001
+  weight_decay: 0.0001
+  num_workers: 0
+  num_threads: 2
+
+evaluation:
+  confidence_threshold: 0.8
+
+output_dir: experiments/belief/h2_analytic
+
+suite:
+  seeds: [2027, 2028, 2029]
+  output_dir: experiments/belief/h2_suite

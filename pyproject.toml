@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tracer-navigation"
+version = "0.1.0"
+description = "Joint human-response prediction and belief-adaptive multi-robot replanning"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "third_party/notices/*"]
+requires-python = ">=3.10"
+dependencies = ["torch>=2.0", "numpy", "scipy", "pandas", "PyYAML", "matplotlib", "tqdm", "dill", "tensorboard"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+legacy = ["ncls", "orjson", "h5py", "tensorboardX"]
+
+[project.urls]
+Repository = "https://github.com/Larryhul/TRACER"
+Issues = "https://github.com/Larryhul/TRACER/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sage*", "models*", "dataset*", "environment*", "evaluation*", "utils*"]
+exclude = ["tests*", "third_party*", "data", "data.*", "paper*", "results*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+

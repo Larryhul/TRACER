@@ -1,0 +1,10 @@
+name: Reproduction question
+description: Ask about a specific protocol, result or required artifact
+title: "[Reproduction] "
+body:
+  - type: textarea
+    attributes:
+      label: Target result and current attempt
+      description: Link the paper table or CSV, then provide your command, config and environment.
+    validations:
+      required: true

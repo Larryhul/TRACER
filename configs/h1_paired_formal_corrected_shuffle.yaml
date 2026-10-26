@@ -1,0 +1,72 @@
+formal_protocol:
+  version: formal-v1-corrected-paired-shuffle
+  stage: H1
+  status: confirmatory_reanalysis
+  gate_file: experiments/formal_v1/gates/h1_rescue_passed.json
+  execution: evaluation_only_frozen_checkpoints
+  source_training_data_seed: 318731
+  formal_test_data_seed: 328731
+  independent_unit: base_scene
+  model_seed_role: nuisance_block
+  confirmatory_splits: [test]
+  primary_contrasts:
+    - nonlinear_matched_additive_minus_joint_nll
+    - nonlinear_matched_additive_minus_joint_interaction_rmse
+    - none_shuffled_joint_minus_joint_nll_equivalence
+    - additive_shuffled_joint_minus_joint_nll
+  exclusion_rules:
+    - exclude_only_nonfinite_or_structurally_invalid_base_scenes
+    - retain_all_interaction_strengths_in_primary_analysis
+
+dataset:
+  source: causal_response
+  history: 8
+  horizon: 12
+  dt: 0.4
+  causal_response:
+    train_base_scenes: 4096
+    val_base_scenes: 256
+    test_base_scenes: 256
+    interventions_per_scene: 4
+    num_robots: 2
+    num_entities: 12
+    seed: 328731
+    area_size: 10.0
+    influence_radius: 4.0
+    individual_gain: 1.0
+    joint_gain: 3.0
+    joint_slowdown: 1.0
+    joint_lateral_gain: 1.25
+    entity_noise: 0.015
+    entity_max_speed: 3.0
+
+model:
+  num_robots: 2
+  hidden_dim: 96
+  num_heads: 4
+  architecture: tracer
+  graph_layers: 2
+  dropout: 0.1
+  min_log_std: -4.0
+  max_log_std: 2.0
+
+training:
+  variants: [additive, matched-additive, joint]
+  batch_size: 64
+  epochs: 40
+  lr: 0.0003
+  weight_decay: 0.0001
+  num_workers: 0
+  nested_residual_training: true
+  checkpoint_rule: best_val_nll
+
+evaluation:
+  interaction_radius: 4.0
+  bootstrap_resamples: 10000
+
+suite:
+  modes: [none, additive, nonlinear]
+  seeds: [2027, 2028, 2029, 2030, 2031]
+  evaluation_split: test
+  checkpoint_root: experiments/pilot/h1_paired_rescue_stage1_v2/checkpoints
+  output_dir: experiments/formal_v1/h1/paired_response_evaluation_corrected_shuffle

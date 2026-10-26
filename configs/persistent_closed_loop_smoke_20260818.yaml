@@ -1,0 +1,33 @@
+simulation:
+  episodes: 16
+  splits: [id, ood]
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_candidates: 16
+  execute_steps: 3
+  dt: 0.4
+  response_noise: 0.18
+  influence_radius: 4.0
+  entity_max_speed: 3.0
+  data_seed: 518731
+
+candidate_source:
+  type: synthetic
+
+planning:
+  task_weight: 1.0
+  safety_weight: 2.0
+  human_weight: 0.6
+  comfort_scale: 1.0
+  collision_margin: 0.65
+
+belief:
+  likelihood_scale: 0.05
+
+suite:
+  seeds: [2027]
+  num_threads_per_seed: 1
+  checkpoint_dir: experiments/pilot/h2_p0_multi_entity/smoke_20260818
+  output_dir: experiments/pilot/h3_closed_loop_synthetic_smoke_20260818

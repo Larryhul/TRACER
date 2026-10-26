@@ -1,0 +1,80 @@
+formal_protocol:
+  version: formal-v2-tracer-bounded-closed-loop
+  stage: H3
+  status: bounded_confirmatory_validation
+  gate_file: experiments/formal_v2/gates/h2_tracer_effect_passed.json
+  candidate_gate: experiments/pilot/h3_sage_generator_gate_repair_20260819/evaluation_exact/gate.json
+  candidate_selection: experiments/pilot/h3_sage_generator_gate_repair_20260819/evaluation_exact/clip_selection.json
+  independent_unit: episode
+  model_seed_role: nuisance_block
+  confirmatory_splits: [id, ood]
+  primary_contrasts:
+    - reset_joint_minus_persistent_joint_realized_total_cost
+    - persistent_additive_minus_persistent_joint_realized_total_cost
+    - interaction_of_belief_and_response_realized_total_cost
+  exclusion_rules:
+    - exclude_only_nonfinite_or_structurally_invalid_episodes
+    - retain_collisions_deadlocks_and_task_failures
+  claim_boundary:
+    - response_model_is_tracer_and_candidate_generator_is_upstream_sage
+    - report_closed_loop_adaptation_and_conditional_task_response_only
+    - report_probabilistic_safety_filter_and_fallback_usage
+    - do_not_claim_real_human_causality_or_long_term_persistence
+    - do_not_claim_uniform_superiority_over_recurrent_oracle
+
+simulation:
+  episodes: 256
+  splits: [id, ood]
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_candidates: 16
+  execute_steps: 3
+  dt: 0.4
+  response_noise: 0.18
+  influence_radius: 4.0
+  entity_max_speed: 3.0
+  data_seed: 558731
+
+candidate_source:
+  type: sage
+  checkpoint: experiments/pilot/h3_sage_generator_p0_seed2027/synthetic_sage_epoch5.pt
+  checkpoint_scope: upstream_sage_candidate_generator_frozen_epoch5
+  guided: true
+  step_stride: 10
+  guidance_step_clip_norm: 0.1
+  goal_speed: 1.2
+  oversample_factor: 4
+  task_prefilter: true
+  task_prefix_steps: 3
+  goal_direction: entity
+  include_task_anchor: true
+  task_anchor_speed_scales: [0.4]
+  cache_candidate_pools: true
+  batch_size: 16
+
+planning:
+  task_weight: 1.0
+  safety_weight: 2.0
+  human_weight: 0.6
+  comfort_scale: 1.0
+  collision_margin: 0.65
+  task_steps: 3
+  violation_probability_alpha: 0.1
+  risk_samples: 32
+
+belief:
+  likelihood_scale: 0.05
+  calibration_scope: frozen_from_h2_validation_only
+
+analysis:
+  bootstrap_samples: 10000
+  seed: 20270810
+
+suite:
+  seeds: [2027, 2028, 2029, 2030, 2031]
+  parallel_seeds: 1
+  num_threads_per_seed: 4
+  checkpoint_dir: experiments/formal_v2/h2/persistent_trajectory_suite_tracer_effect
+  output_dir: experiments/formal_v2/h3/persistent_closed_loop_suite_tracer_effect

@@ -1,0 +1,76 @@
+formal_protocol:
+  version: formal-v1-h3-candidate-rescue-replication
+  stage: H3
+  status: secondary_independent_seed_replication
+  gate_file: experiments/formal_v1/gates/h2_passed.json
+  candidate_gate: experiments/pilot/h3_sage_generator_gate_repair_20260819/evaluation_exact/gate.json
+  candidate_selection: experiments/pilot/h3_sage_generator_gate_repair_20260819/evaluation_exact/clip_selection.json
+  independent_unit: episode
+  model_seed_role: nuisance_block
+  confirmatory_splits: [id, ood]
+  primary_contrasts:
+    - reset_joint_minus_persistent_joint_realized_total_cost
+    - persistent_additive_minus_persistent_joint_realized_total_cost
+    - interaction_of_belief_and_response_realized_total_cost
+  exclusion_rules:
+    - exclude_only_nonfinite_or_structurally_invalid_episodes
+    - retain_collisions_deadlocks_and_task_failures
+  deviation_amendment: reports/h3_task_objective_correction_2026-08-19.md
+  rescue_selection: experiments/pilot/h3_task_rescue_validation_20260819/selection.json
+  parent_formal_run: experiments/formal_v1/h3/persistent_closed_loop_suite_candidate_rescue
+  replication_role: independent_data_seed_secondary_robustness
+
+simulation:
+  episodes: 128
+  splits: [id, ood]
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_candidates: 16
+  execute_steps: 3
+  dt: 0.4
+  response_noise: 0.18
+  influence_radius: 4.0
+  entity_max_speed: 3.0
+  data_seed: 558731
+
+candidate_source:
+  type: sage
+  checkpoint: experiments/pilot/h3_sage_generator_p0_seed2027/synthetic_sage_epoch20.pt
+  checkpoint_scope: frozen_from_formal_candidate_rescue
+  guided: true
+  step_stride: 10
+  guidance_step_clip_norm: 0.1
+  goal_speed: 1.2
+  oversample_factor: 4
+  task_prefilter: true
+  task_prefix_steps: 3
+  goal_direction: entity
+  include_task_anchor: true
+  task_anchor_speed_scales: [0.4]
+  cache_candidate_pools: true
+  batch_size: 16
+
+planning:
+  task_weight: 1.0
+  safety_weight: 2.0
+  human_weight: 0.6
+  comfort_scale: 1.0
+  collision_margin: 0.65
+  task_steps: 3
+
+belief:
+  likelihood_scale: 0.05
+  calibration_scope: frozen_from_h2_validation_only
+
+analysis:
+  bootstrap_samples: 5000
+  seed: 20270811
+
+suite:
+  seeds: [2027, 2028, 2029, 2030, 2031]
+  parallel_seeds: 1
+  num_threads_per_seed: 4
+  checkpoint_dir: experiments/formal_v1/h2/persistent_trajectory_suite_fast
+  output_dir: experiments/pilot/h3_candidate_rescue_replication_20260819

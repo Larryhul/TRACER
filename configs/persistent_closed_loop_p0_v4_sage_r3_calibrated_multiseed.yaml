@@ -1,0 +1,43 @@
+simulation:
+  episodes: 8
+  splits: [id, ood]
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_candidates: 16
+  execute_steps: 3
+  dt: 0.4
+  response_noise: 0.18
+  influence_radius: 4.0
+  entity_max_speed: 3.0
+
+candidate_source:
+  type: sage
+  checkpoint: experiments/pilot/h3_sage_generator_p0_seed2027/synthetic_sage_epoch20.pt
+  checkpoint_scope: three_robot_synthetic_p0_selected_on_validation
+  guided: true
+  step_stride: 10
+  goal_speed: 1.2
+  oversample_factor: 4
+  task_prefilter: true
+  task_prefix_steps: 3
+  goal_direction: entity
+
+planning:
+  task_weight: 1.0
+  safety_weight: 2.0
+  human_weight: 0.6
+  comfort_scale: 1.0
+  collision_margin: 0.65
+
+belief:
+  likelihood_scale: 0.05
+  calibration_scope: post-pilot_id_validation_persistent_nll
+
+suite:
+  seeds: [2027, 2028, 2029]
+  parallel_seeds: 1
+  num_threads_per_seed: 4
+  checkpoint_dir: experiments/pilot/h2_p0_multi_entity/v4_shared_matched_seed2027
+  output_dir: experiments/pilot/h3_p0_sage_candidates/v5_calibrated_r3_multiseed

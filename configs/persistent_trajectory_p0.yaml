@@ -1,0 +1,47 @@
+dataset:
+  train_episodes: 256
+  val_episodes: 64
+  ood_episodes: 64
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_entities: 10
+  active_entities: 3
+  shared_team_actions: true
+  dt: 0.4
+  seed: 2027
+  response_noise: 0.18
+  influence_radius: 4.0
+  execute_steps: 3
+  entity_max_speed: 3.0
+  ood_action_policy: correlated
+
+model:
+  hidden_dim: 96
+  recurrent_hidden_dim: 112
+  recurrent_use_entity_history: true
+  dropout: 0.05
+
+training:
+  epochs: 10
+  response_epochs: 20
+  recurrent_epochs: 40
+  batch_size: 8
+  lr: 0.0003
+  recurrent_lr: 0.001
+  weight_decay: 0.0001
+  mode_discrimination_weight: 0.1
+  mode_temperature: 0.2
+  num_workers: 0
+  num_threads: 4
+
+evaluation:
+  likelihood_scale: 0.2
+  confidence_threshold: 0.8
+
+output_dir: experiments/pilot/h2_p0_multi_entity/seed2027
+
+suite:
+  seeds: [2027, 2028, 2029]
+  output_dir: experiments/pilot/h2_p0_multi_entity/suite

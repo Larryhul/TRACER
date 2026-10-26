@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this implementation, please cite the associated manuscript."
+type: software
+title: "TRACER research implementation"
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/Larryhul/TRACER"
+url: "https://github.com/Larryhul/TRACER"
+authors:
+  - family-names: "Hu"
+    given-names: "Lan"
+  - family-names: "Liwang"
+    given-names: "Minghui"
+  - family-names: "Zhu"
+    given-names: "Wenbo"
+  - family-names: "Yi"
+    given-names: "Xinlei"
+  - family-names: "Gong"
+    given-names: "Wei"
+  - family-names: "Hong"
+    given-names: "Yiguang"
+  - family-names: "Hosseinalipour"
+    given-names: "Seyyedali"
+preferred-citation:
+  type: unpublished
+  title: "TRACER: Adaptive Multi-Robot Social Navigation via Joint Human-Response Prediction and Interaction-Aware Replanning"
+  authors:
+    - family-names: "Hu"
+      given-names: "Lan"
+    - family-names: "Liwang"
+      given-names: "Minghui"
+    - family-names: "Zhu"
+      given-names: "Wenbo"
+    - family-names: "Yi"
+      given-names: "Xinlei"
+    - family-names: "Gong"
+      given-names: "Wei"
+    - family-names: "Hong"
+      given-names: "Yiguang"
+    - family-names: "Hosseinalipour"
+      given-names: "Seyyedali"
+  notes: "Author manuscript; see paper/README.md for exact version identity."

@@ -1,0 +1,80 @@
+formal_protocol:
+  version: formal-v2-tracer-bounded-effect
+  stage: H2
+  status: bounded_confirmatory_validation
+  gate_file: experiments/formal_v2/gates/h1_tracer_effect_passed.json
+  independent_unit: episode
+  model_seed_role: nuisance_block
+  confirmatory_splits: [test, ood]
+  primary_contrasts:
+    - reset_minus_persistent_predictive_trajectory_nll
+    - shuffled_id_minus_persistent_predictive_trajectory_nll
+    - recurrent_minus_persistent_predictive_trajectory_nll
+  exclusion_rules:
+    - exclude_only_nonfinite_or_structurally_invalid_episodes
+    - retain_collisions_deadlocks_and_reentries
+  claim_boundary:
+    - report_closed_loop_adaptation_and_predictive_response_only
+    - do_not_claim_real_human_causality_or_long_term_persistence
+    - do_not_claim_uniform_joint_nll_superiority_over_matched_additive
+
+dataset:
+  train_episodes: 8192
+  val_episodes: 256
+  test_episodes: 256
+  ood_episodes: 256
+  windows: 8
+  history: 8
+  horizon: 12
+  num_robots: 3
+  num_entities: 10
+  active_entities: 3
+  shared_team_actions: true
+  dt: 0.4
+  seed: 2027
+  data_seed: 418731
+  response_noise: 0.18
+  influence_radius: 4.0
+  execute_steps: 3
+  entity_max_speed: 3.0
+  cache_samples: true
+  ood_action_policy: correlated
+
+model:
+  hidden_dim: 96
+  recurrent_hidden_dim: 112
+  recurrent_use_entity_history: true
+  architecture: tracer
+  num_heads: 4
+  graph_layers: 2
+  dropout: 0.05
+
+training:
+  epochs: 40
+  response_epochs: 20
+  recurrent_epochs: 40
+  batch_size: 8
+  lr: 0.0003
+  recurrent_lr: 0.001
+  weight_decay: 0.0001
+  mode_discrimination_weight: 0.1
+  mode_temperature: 0.2
+  prefix_loss_weight: 1.0
+  num_workers: 0
+  num_threads: 4
+  checkpoint_rule: fixed_frozen_epochs_from_pilot
+
+evaluation:
+  id_split: test
+  likelihood_scale: 0.05
+  confidence_threshold: 0.8
+
+analysis:
+  bootstrap_samples: 10000
+  seed: 20270810
+
+output_dir: experiments/formal_v2/h2/persistent_trajectory_tracer_effect
+
+suite:
+  seeds: [2027, 2028, 2029, 2030, 2031]
+  output_dir: experiments/formal_v2/h2/persistent_trajectory_suite_tracer_effect

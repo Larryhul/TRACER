@@ -1,0 +1,100 @@
+dataset:
+  name: eth_ucy_mid_adapter
+  dt: 0.4
+  history: 8
+  horizon: 12
+  max_entities: 8
+  pseudo_roles:
+    strategy: speed_threshold
+    slow_speed: 0.15
+    fast_speed: 1.8
+    slow_quantile: 0.33
+    fast_quantile: 0.67
+  note: 'ETH/UCY does not provide true heterogeneous robot/entity categories. The
+    MID adapter treats the target node as the controllable robot and nearby nodes
+    as entities, with pseudo roles inferred from speed. Replace these fields with
+    real PHAs/HNAAs/SSAAs when heterogeneous annotations are ready.
+
+    '
+  num_robot_proxies: 1
+  perception:
+    mode: role_radius
+    base_radius: 3.6
+    max_radius: 8.0
+    speed_scale: 0.8
+    geometry_scale: 0.0
+    fallback_to_nearest: true
+    role_radius:
+      pha: 3.6
+      hnaa: 5.0
+      ssaa: 6.0
+      unknown_entity: 4.0
+model:
+  encoder:
+    state_dim: 2
+    hidden_dim: 128
+    context_dim: 128
+    num_layers: 2
+    num_heads: 4
+    dropout: 0.1
+    use_goal_conditioning: true
+    goal_dim: 2
+    robot_state_dim: 4
+    geometry_dim: 2
+    use_robot_current_state: true
+    use_geometry_embedding: true
+    use_entity_entity_edges: false
+    relation_attention_type: hgt
+    history_encoder_type: lstm
+    feature_fusion: concat
+    relation_granularity: semantic
+  diffusion:
+    horizon: 12
+    point_dim: 2
+    hidden_dim: 128
+    num_layers: 4
+    num_heads: 4
+    ff_mult: 4
+    num_steps: 100
+    beta_1: 0.0001
+    beta_T: 0.05
+    denoiser_type: transformer
+    use_agent_attention: true
+    guidance_update: mean
+    use_graph_context_token: true
+  guidance:
+    guidance_scale: 0.03
+    collision_margin: 0.45
+    collision_sigma: 0.8
+    max_speed: 2.5
+    w_collision: 2.0
+    w_social: 1.0
+    w_kinematic: 0.1
+    w_goal: 0.3
+    goal_tolerance: 0.5
+    guidance_grad_clip_norm: 1.0
+    guidance_step_clip_norm: 0.05
+    guidance_velocity_clip_factor: 1.25
+    project_guided_velocity: true
+    max_lateral_speed: 0.15
+    max_angular_speed: 1.2
+training:
+  batch_size: 128
+  lr: 0.0003
+  epochs: 100
+  checkpoint_dir: experiments/sage/eth_ucy/goal
+evaluation:
+  batch_size: 128
+  stride: 10
+  samples: 1
+  guided: true
+  metrics:
+  - robot_ade
+  - robot_fde
+  - entity_ade
+  - entity_fde
+  - goal_fde
+  - goal_success_rate
+  - collision_rate
+  - min_distance
+  - energy

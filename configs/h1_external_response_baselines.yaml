@@ -1,0 +1,50 @@
+# H1 外部动作条件响应基线的统一协议；所有方法共享 paired 干预与 split。
+dataset:
+  source: causal_response
+  history: 8
+  horizon: 12
+  dt: 0.4
+  causal_response:
+    train_base_scenes: 4096
+    val_base_scenes: 256
+    test_base_scenes: 256
+    interventions_per_scene: 4
+    num_robots: 2
+    num_entities: 12
+    seed: 318731
+    area_size: 10.0
+    influence_radius: 4.0
+    individual_gain: 1.0
+    joint_gain: 3.0
+    joint_slowdown: 1.0
+    joint_lateral_gain: 1.25
+    entity_noise: 0.015
+    entity_max_speed: 3.0
+    scene_family: radial
+    response_family: pincer
+    cache_samples: true
+model:
+  num_robots: 2
+  hidden_dim: 96
+  num_heads: 4
+  dropout: 0.1
+  min_log_std: -4.0
+  max_log_std: 2.0
+training:
+  variants: [history, nearest, additive, eiffert2019-style, team-concat, matched-additive, joint]
+  batch_size: 64
+  epochs: 40
+  lr: 0.0003
+  weight_decay: 0.0001
+  num_workers: 0
+  nested_residual_training: true
+  checkpoint_rule: best_val_nll
+evaluation:
+  interaction_radius: 4.0
+  bootstrap_resamples: 10000
+protocol:
+  name: h1-external-response-baselines-v1
+  normalization: shared EntityResponseBatch preprocessing
+  split_unit: base_scene
+  test_selection: validation-only
+  official_reproduction_claim: false

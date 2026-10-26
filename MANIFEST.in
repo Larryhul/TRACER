@@ -1,0 +1,2 @@
+include LICENSE THIRD_PARTY_NOTICES.md CITATION.cff
+recursive-include third_party/notices *
