@@ -26,6 +26,6 @@ include = ["sage*", "models*", "dataset*", "environment*", "evaluation*", "utils
 exclude = ["tests*", "third_party*", "data", "data.*", "paper*", "results*"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests/test_response_experiment.py", "tests/test_belief_experiment.py", "tests/test_closed_loop_correctness.py"]
 addopts = "-ra"
 

@@ -31,3 +31,5 @@ python -m pytest tests/test_response_experiment.py tests/test_belief_experiment.
 ```
 
 The CPU check exercises response prediction, belief filtering and closed-loop correctness. It does not retrain the paper's models or replace external simulator evaluation.
+
+`python -m pytest -q` selects the same three-file core suite by default. Run additional research test files explicitly after preparing their required assets.
