@@ -6,7 +6,7 @@
   <a href="docs/installation.md">Installation</a> ·
   <a href="docs/reproduction.md">Reproduction</a> ·
   <a href="results/README.md">Results</a> ·
-  <a href="paper/README.md">Paper versions</a> ·
+  <a href="https://arxiv.org/abs/2609.18776">Paper (arXiv)</a> ·
   <a href="README.zh-CN.md">中文</a>
 </p>
 
@@ -58,7 +58,7 @@ The manuscript's SocialGym2 comparison evaluates TRACER against GoAlone; its rep
 | [Reproduction](docs/reproduction.md) | Core commands, formal configs and evaluation requirements |
 | [Result index](results/README.md) | 14 selected CSVs, manuscript tables and evidence boundaries |
 | [Assets](docs/assets.md) | External simulator inventory and missing training artifacts |
-| [Paper versions](paper/README.md) | Anonymous 8-page submission and separate named 9-page preprint |
+| [Paper on arXiv](https://arxiv.org/abs/2609.18776) | Public preprint and version history |
 
 ```text
 sage/response/  Joint-action response models, candidate selection and execution
@@ -66,7 +66,6 @@ sage/belief/    Persistent entity beliefs and filtering
 configs/       Formal protocols and labeled development configurations
 tests/         Core regressions and extended research checks
 results/       Selected tables and paired statistics
-paper/         Submission and preprint as distinct versions
 docs/          Setup, reproduction, assets and architecture
 ```
 
@@ -74,6 +73,6 @@ The internal Python package remains `sage` for checkpoint and import compatibili
 
 ## Citation and acknowledgments
 
-Use [CITATION.cff](CITATION.cff) or [BibTeX](docs/citation.bib). The preprint file is a local named manuscript; no arXiv identifier or acceptance status is asserted.
+Use [CITATION.cff](CITATION.cff) or [BibTeX](docs/citation.bib). The associated preprint is available as [arXiv:2609.18776](https://arxiv.org/abs/2609.18776).
 
 This work builds on SAGE and MID compatibility modules and evaluates against external navigation systems. See [third-party notices](THIRD_PARTY_NOTICES.md), [license status](LICENSE), [contributing](CONTRIBUTING.md) and [changelog](CHANGELOG.md).

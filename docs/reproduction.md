@@ -29,7 +29,7 @@ Inspect each entry point's `--help` before launching a run. Formal configuration
 
 ## 4. Interpret the evidence
 
-The manuscript's frozen tables live in `paper/arxiv/figures/*.tex` and the corresponding anonymous source package. The selected CSV index also includes important reanalysis and external extensions; use the correct protocol for each comparison.
+The paper and its reported tables are available in the [arXiv preprint](https://arxiv.org/abs/2609.18776). The selected CSV index also includes important reanalysis and external extensions; use the correct protocol for each comparison.
 
 H1 compares response predictions under controlled joint-action interventions. H2 isolates identity and persistent memory within the response model. Controlled ungated replanning and repaired matched-gate attribution answer different questions. SocialGym2 uses a binary GoAlone/Halt adapter; its results are simulation evidence alongside real trajectory data, rather than autonomous physical-robot validation.
 

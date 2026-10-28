@@ -43,3 +43,6 @@ logs/
 *.fls
 *.synctex.gz
 *.xdv
+
+# Manuscripts are distributed through arXiv.
+/paper/

@@ -2,7 +2,7 @@
 
 ## Included
 
-Research code, retained tests, configurations, 14 selected CSVs, distinct submission/preprint source packages and a small causal-response training example.
+Research code, retained tests, configurations, 14 selected CSVs and a small causal-response training example.
 
 ## External dependencies
 
@@ -20,6 +20,6 @@ The original archive retained additional raw data and training weights. This rep
 
 ## Result identity
 
-The exact paper tables remain in the manuscript source packages. Selected CSVs also contain formal reanalysis and later external checks, with their status labels preserved. Large raw `runs.json` files, training weights and full third-party snapshots are outside this source repository.
+The paper and its tables are available in the [arXiv preprint](https://arxiv.org/abs/2609.18776). Selected CSVs also contain formal reanalysis and later external checks, with their status labels preserved. Large raw `runs.json` files, training weights and full third-party snapshots are outside this source repository.
 
-Machine-specific source paths have portable aliases in executable defaults and CSV metadata. Every changed source is identified by original and distributed hash in [source_files.csv](../provenance/source_files.csv); manuscript packages remain byte-identical.
+Machine-specific source paths have portable aliases in executable defaults and CSV metadata. Every changed source is identified by original and distributed hash in [source_files.csv](../provenance/source_files.csv).

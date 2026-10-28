@@ -22,7 +22,7 @@ authors:
   - family-names: "Hosseinalipour"
     given-names: "Seyyedali"
 preferred-citation:
-  type: unpublished
+  type: article
   title: "TRACER: Adaptive Multi-Robot Social Navigation via Joint Human-Response Prediction and Interaction-Aware Replanning"
   authors:
     - family-names: "Hu"
@@ -39,4 +39,6 @@ preferred-citation:
       given-names: "Yiguang"
     - family-names: "Hosseinalipour"
       given-names: "Seyyedali"
-  notes: "Author manuscript; see paper/README.md for exact version identity."
+  year: 2026
+  journal: "arXiv preprint arXiv:2609.18776"
+  url: "https://arxiv.org/abs/2609.18776"

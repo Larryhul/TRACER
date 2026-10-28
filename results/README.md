@@ -13,7 +13,7 @@ The 14 CSVs in [tables](tables) preserve important numerical results, paired con
 
 All file names above have the `.csv` extension. Original `use_status`, source identifiers and numerical fields are preserved. Known machine-specific storage prefixes use portable aliases recorded in [provenance](../provenance/source_files.csv).
 
-The exact manuscript tables are versioned in [paper/arxiv/figures](../paper/arxiv/figures), including `TRACER_table_forward.tex`, `TRACER_table_identity.tex`, `TRACER_table_recorded.tex` and `TRACER_external_v19.tex`. The anonymous package is separately preserved in [paper/submission](../paper/submission).
+The paper and its reported tables are available in the [arXiv preprint](https://arxiv.org/abs/2609.18776).
 
 The SocialGym2 v19 table reports 320 paired episodes and collision-free completion of 22.5% for GoAlone and 31.6% for TRACER. Component ablations in that table have comparable completion; use the table's actual values when discussing component attribution.
 

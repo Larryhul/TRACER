@@ -18,6 +18,7 @@ legacy = ["ncls", "orjson", "h5py", "tensorboardX"]
 
 [project.urls]
 Repository = "https://github.com/Larryhul/TRACER"
+Paper = "https://arxiv.org/abs/2609.18776"
 Issues = "https://github.com/Larryhul/TRACER/issues"
 
 [tool.setuptools.packages.find]
