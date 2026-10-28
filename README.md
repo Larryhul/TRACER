@@ -69,10 +69,8 @@ results/       Selected tables and paired statistics
 docs/          Setup, reproduction, assets and architecture
 ```
 
-The internal Python package remains `sage` for checkpoint and import compatibility. Install SAGE and TRACER in separate environments. External simulators, datasets and trained weights are not bundled in this source repository; [asset availability](docs/assets.md) lists what is required.
+Dataset sources, simulator requirements and model availability are listed in the [asset guide](docs/assets.md).
 
-## Citation and acknowledgments
+## Citation
 
-Use [CITATION.cff](CITATION.cff) or [BibTeX](docs/citation.bib). The associated preprint is available as [arXiv:2609.18776](https://arxiv.org/abs/2609.18776).
-
-This work builds on SAGE and MID compatibility modules and evaluates against external navigation systems. See [third-party notices](THIRD_PARTY_NOTICES.md), [license status](LICENSE), [contributing](CONTRIBUTING.md) and [changelog](CHANGELOG.md).
+If you use TRACER in your research, please cite the [paper](https://arxiv.org/abs/2609.18776). Citation details: [BibTeX](docs/citation.bib) · [CITATION.cff](CITATION.cff).

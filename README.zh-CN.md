@@ -23,4 +23,4 @@ python -m pytest tests/test_response_experiment.py tests/test_belief_experiment.
 - SocialGym2 的 320 个配对回合中，相对 GoAlone，无碰撞完成率从 22.5% 提高至 31.6%；该实验使用 GoAlone/Halt 二元执行适配器。
 - 论文与版本记录：[arXiv:2609.18776](https://arxiv.org/abs/2609.18776)。
 
-[14 份精选结果 CSV](results/README.md)和论文内嵌表分别标记证据范围。数据、权重和外部模拟器见[资产说明](docs/assets.md)。内部沿用 `sage` 包名，需与 SAGE 分别使用独立环境。
+[14 份精选结果 CSV](results/README.md)和论文内嵌表分别标记证据范围。数据、权重和外部模拟器见[资产说明](docs/assets.md)。

@@ -1,6 +1,6 @@
 # Contributing
 
-Use a separate environment for TRACER. Both SAGE and TRACER retain the Python package name `sage`; install only one in each environment.
+Use a dedicated environment for TRACER and run commands from this repository's root.
 
 1. Install the development dependencies in [the installation guide](docs/installation.md).
 2. Make changes on a focused branch and explain the expected behavior.

@@ -21,8 +21,6 @@ For GPU training, install a PyTorch build compatible with the machine's CUDA run
 
 Run experiment commands from the repository root because configurations and artifacts use relative paths. An editable install makes Python imports available; it does not download data or weights.
 
-SAGE and TRACER each expose `sage`. Use separate environments and working directories for them.
-
 ## Check the installation
 
 ```bash
