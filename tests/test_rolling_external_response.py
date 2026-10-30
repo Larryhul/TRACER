@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 
-from sage.experiments.train_rolling_external_response import aligned_history, prediction_loss, response_group_batches
+from tracer.experiments.train_rolling_external_response import aligned_history, prediction_loss, response_group_batches
 
 
 def test_rolling_history_includes_actual_current_position():

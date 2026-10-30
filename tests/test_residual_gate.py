@@ -4,7 +4,7 @@ import unittest
 
 import torch
 
-from sage.response.residual_gate import (
+from tracer.response.residual_gate import (
     ResidualGateConfig,
     apply_joint_residual_gate,
     compute_belief_confidence,

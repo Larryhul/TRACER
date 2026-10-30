@@ -4,16 +4,16 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.eval_component_factorial import FACTORIAL_POLICIES, audit_shared_emissions
-from sage.experiments.eval_persistent_closed_loop import _evaluate_policy, _select_response_costs
-from sage.experiments.train_component_value import fit_value_head, value_error
-from sage.experiments.calibrate_component_value import choose_value_weight
-from sage.experiments.component_value_protocol import load_value_weight
-from sage.experiments.calibrate_component_memory import component_protocol_id, load_component_calibration
-from sage.experiments.formal_manifest import sha256_file
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig, SyntheticClosedLoopSimulator
-from sage.response.continuation_value import FrozenContinuationValue, add_continuation_value, observable_value_features, predicted_next_value_features
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.eval_component_factorial import FACTORIAL_POLICIES, audit_shared_emissions
+from tracer.experiments.eval_persistent_closed_loop import _evaluate_policy, _select_response_costs
+from tracer.experiments.train_component_value import fit_value_head, value_error
+from tracer.experiments.calibrate_component_value import choose_value_weight
+from tracer.experiments.component_value_protocol import load_value_weight
+from tracer.experiments.calibrate_component_memory import component_protocol_id, load_component_calibration
+from tracer.experiments.formal_manifest import sha256_file
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig, SyntheticClosedLoopSimulator
+from tracer.response.continuation_value import FrozenContinuationValue, add_continuation_value, observable_value_features, predicted_next_value_features
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 def test_value_features_match_executed_prefix_and_ignore_unexecuted_tail():

@@ -6,20 +6,20 @@ from types import SimpleNamespace
 import pytest
 import torch
 
-from sage.experiments.eval_component_factorial import (
+from tracer.experiments.eval_component_factorial import (
     FACTORIAL_POLICIES, METRICS, audit_shared_emissions, residual_weight,
     summarize_factorial,
 )
-from sage.experiments.eval_persistent_closed_loop import _evaluate_policy, _prefix_objective_with_full_safety, _select_response_costs
-from sage.experiments.planner_sensitivity import candidate_score_decomposition
-from sage.experiments.train_component_residual import collect_uniform_rollouts, flatten_rollouts, freeze_noninteraction_parameters, prefix_cost_loss, residual_training_loss
-from sage.experiments.calibrate_component_memory import component_protocol_id, load_component_calibration, memory_decision_beliefs, score_scales
-from sage.experiments.formal_manifest import sha256_file
-from sage.experiments.audit_h2_memory_strata import memory_strata
-from sage.experiments.calibrate_component_residual_weight import choose_residual_weight, load_residual_weight
-from sage.experiments.train_component_mode_contrast import grouped_prefix_costs, mode_candidate_contrast
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.eval_persistent_closed_loop import _evaluate_policy, _prefix_objective_with_full_safety, _select_response_costs
+from tracer.experiments.planner_sensitivity import candidate_score_decomposition
+from tracer.experiments.train_component_residual import collect_uniform_rollouts, flatten_rollouts, freeze_noninteraction_parameters, prefix_cost_loss, residual_training_loss
+from tracer.experiments.calibrate_component_memory import component_protocol_id, load_component_calibration, memory_decision_beliefs, score_scales
+from tracer.experiments.formal_manifest import sha256_file
+from tracer.experiments.audit_h2_memory_strata import memory_strata
+from tracer.experiments.calibrate_component_residual_weight import choose_residual_weight, load_residual_weight
+from tracer.experiments.train_component_mode_contrast import grouped_prefix_costs, mode_candidate_contrast
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 @pytest.mark.parametrize("retain_previous_plan", [False, True])
@@ -101,7 +101,7 @@ def test_navigation_metrics_are_explicit_and_reject_nonfinite_task_mixing():
 
 
 def test_source_manifest_includes_the_actual_runpy_entrypoint(tmp_path, monkeypatch):
-    from sage.experiments.eval_component_factorial import _local_sources
+    from tracer.experiments.eval_component_factorial import _local_sources
 
     entrypoint = tmp_path / "entrypoint.py"
     entrypoint.write_text("pass\n")
@@ -357,7 +357,7 @@ def test_mode_candidate_contrast_removes_mode_and_candidate_only_offsets():
 
 
 def test_executable_regret_respects_safety_and_ignores_mode_only_cost_offsets():
-    from sage.experiments.train_component_mode_contrast import executable_candidate_regret
+    from tracer.experiments.train_component_mode_contrast import executable_candidate_regret
 
     truth = torch.tensor([[[0., 1., -10.], [0., 2., -20.]]])
     prediction = torch.tensor([[[0., 1., -100.], [0., 2., -100.]]], requires_grad=True)

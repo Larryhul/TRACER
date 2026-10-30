@@ -1,26 +1,43 @@
 # TRACER
 
-**TRACER 用联合机器人动作预测周围实体的响应，执行短时计划后，将实际观察用于更新身份绑定的持续信念，再进行下一轮规划。** 响应模型区分单机器人效应和机器人对之间的非加性交互。
+**TRACER 预测周围实体对联合机器人动作的响应，执行短时计划后，用实际观察更新身份绑定的持续信念，再进行下一轮规划。**
 
-![TRACER 方法概览](docs/assets/hero.png)
+[English](README.md) · [论文](https://arxiv.org/abs/2609.18776) · [实验说明](docs/reproduction.md) · [模型](docs/models.md) · [结果](results/README.md)
 
-[English](README.md) · [安装](docs/installation.md) · [复现实验](docs/reproduction.md) · [结果索引](results/README.md) · [论文（arXiv）](https://arxiv.org/abs/2609.18776)
+## 快速开始
 
-## 开始运行
-
-使用 Python 3.10 以上版本，按[安装说明](docs/installation.md)建立独立环境，然后运行：
+推荐 Python 3.12。按[安装说明](docs/installation.md)建立环境，在仓库根目录运行：
 
 ```bash
-python -m pytest tests/test_response_experiment.py tests/test_belief_experiment.py tests/test_closed_loop_correctness.py -q
+python -m pip install -e ".[dev]"
+python -m tracer.demo --output outputs/demo
 ```
 
-三组核心测试覆盖响应预测、信念更新和闭环正确性。扩展测试可能需要外部模拟器或历史实验资产，不能把核心测试通过等同于全部实验复现。
+示例使用生成数据训练一个小型响应模型，执行七个决策窗口，展示机器人轨迹与持续信念的更新。输出动画、演示模型和决策记录。
 
-## 结果与论文
+![TRACER CPU 演示](docs/assets/demo.gif)
 
-- 配对交互 RMSE 相对容量匹配的加性预测器下降 23.94%。
-- 持续信念的实验比较同一模型内的记忆和身份机制。
-- SocialGym2 的 320 个配对回合中，相对 GoAlone，无碰撞完成率从 22.5% 提高至 31.6%；该实验使用 GoAlone/Halt 二元执行适配器。
-- 论文与版本记录：[arXiv:2609.18776](https://arxiv.org/abs/2609.18776)。
+示例的输入与输出说明见[演示指南](docs/demo.md)。
 
-[14 份精选结果 CSV](results/README.md)和论文内嵌表分别标记证据范围。数据、权重和外部模拟器见[资产说明](docs/assets.md)。
+## 模型与结果
+
+提供轻量的合成演示检查点；正式导航模型的资产状态见下载说明。
+
+```bash
+python tools/download_models.py
+```
+
+下载完成后自动校验文件。[模型说明](docs/models.md)给出模型身份与使用方式。[14 份精选结果](results/README.md)按实验协议组织；数据准备、训练和评估命令见[实验指南](docs/reproduction.md)。
+
+## 开发检查
+
+```bash
+python tools/check_repository.py
+python -m pytest -q
+```
+
+Linux 与 Windows 均运行 CPU 检查。依赖归档实验资产或 CUDA 的测试会明确报告跳过原因。
+
+## 引用
+
+使用 TRACER 开展研究时，请引用[论文](https://arxiv.org/abs/2609.18776)。[BibTeX](docs/citation.bib) · [CITATION.cff](CITATION.cff)。

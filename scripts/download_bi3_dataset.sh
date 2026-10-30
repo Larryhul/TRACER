@@ -14,4 +14,4 @@ if [[ -n "$ARCHIVE" ]]; then
 fi
 
 export PYTHONPATH="$REPO_ROOT${PYTHONPATH:+:$PYTHONPATH}"
-exec "$PYTHON" -m sage.data.real_response_download_bi3 "${ARGS[@]}"
+exec "$PYTHON" -m tracer.data.real_response_download_bi3 "${ARGS[@]}"

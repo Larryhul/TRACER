@@ -4,7 +4,7 @@ import numpy as np
 import torch
 from types import SimpleNamespace
 
-from sage.experiments.run_socialgym2_tracer_loop import (
+from tracer.experiments.run_socialgym2_tracer_loop import (
     HumanTrack,
     _action_lattice,
     _candidate_geometry,
@@ -145,7 +145,7 @@ def test_socialgym2_episode_seed_stream_is_disjoint() -> None:
 
 
 def test_socialgym2_external_action_projection_is_explicit() -> None:
-    from sage.experiments.run_socialgym2_tracer_loop import EXTERNAL_ACTION_TO_BINARY
+    from tracer.experiments.run_socialgym2_tracer_loop import EXTERNAL_ACTION_TO_BINARY
 
     assert EXTERNAL_ACTION_TO_BINARY == {0: 0, 1: 1, 2: 0, 3: 0}
 

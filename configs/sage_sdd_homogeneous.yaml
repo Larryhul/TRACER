@@ -108,7 +108,7 @@ training:
   batch_size: 128
   lr: 0.0003
   epochs: 100
-  checkpoint_dir: experiments/sage/sdd/homogeneous/single
+  checkpoint_dir: experiments/tracer/sdd/homogeneous/single
 evaluation:
   batch_size: 128
   stride: 10

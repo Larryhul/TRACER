@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CHECKPOINT=${CHECKPOINT:-experiments/sage/socialgym/nr6_ne40_bs64/socialgym_sage_epoch60.pt}
+CHECKPOINT=${CHECKPOINT:-experiments/tracer/socialgym/nr6_ne40_bs64/socialgym_sage_epoch60.pt}
 CSV=${CSV:-results/sage_socialgym_scale_seeds_k20.csv}
 SUMMARY=${SUMMARY:-results/sage_socialgym_scale_seed_summary_k20.csv}
 CONFIG=${CONFIG:-configs/sage_socialgym.yaml}
@@ -26,7 +26,7 @@ run_eval() {
   local nr=$2
   local ne=$3
   local mode=$4
-  local cmd=(python -m sage.experiments.eval_socialgym_sage
+  local cmd=(python -m tracer.experiments.eval_socialgym_sage
     --config "${CONFIG}"
     --split test
     --source style
@@ -63,4 +63,4 @@ for seed in ${SEEDS}; do
   done
 done
 
-python -m sage.experiments.summarize_synthetic_seed_results   --input "${CSV}"   --output "${SUMMARY}"
+python -m tracer.experiments.summarize_synthetic_seed_results   --input "${CSV}"   --output "${SUMMARY}"

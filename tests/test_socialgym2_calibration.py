@@ -6,8 +6,8 @@ import hashlib
 import json
 from types import SimpleNamespace
 
-from sage.experiments.calibrate_socialgym2_belief import _score, calibrate
-from sage.experiments.run_socialgym2_tracer_loop import _validate_calibration_artifact
+from tracer.experiments.calibrate_socialgym2_belief import _score, calibrate
+from tracer.experiments.run_socialgym2_tracer_loop import _validate_calibration_artifact
 
 
 def test_calibration_compares_the_same_unscaled_predictive_density() -> None:

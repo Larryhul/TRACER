@@ -4,14 +4,14 @@ import zipfile
 import numpy as np
 import pytest
 
-from sage.data.real_response import (
+from tracer.data.real_response import (
     build_real_response_dataset,
     load_bi3_positions,
     load_navware_positions,
 )
-from sage.data.real_response_download_bi3 import install_bi3_archive
-from sage.experiments.run_external_response_benchmark import _validate_protocol_arrays
-from sage.experiments.summarize_real_h1 import summarize
+from tracer.data.real_response_download_bi3 import install_bi3_archive
+from tracer.experiments.run_external_response_benchmark import _validate_protocol_arrays
+from tracer.experiments.summarize_real_h1 import summarize
 
 
 def test_navware_pose_csv_loader(tmp_path):
@@ -154,7 +154,7 @@ def test_bi3_archive_merge_preflights_conflicts(tmp_path):
     install_bi3_archive(first, destination)
     with pytest.raises(ValueError, match="conflicting JSON"):
         install_bi3_archive(second, destination, merge=True)
-    assert (destination / "jsons/um/um1/cv.json").read_text() == "one"
+    assert (destination / "jsons/um/um1/cv.json").read_text(encoding="utf-8") == "one"
     assert not (destination / "jsons/laas/laas1/cv.json").exists()
 
 
@@ -167,7 +167,7 @@ def test_bi3_invalid_archive_does_not_destroy_existing_data(tmp_path):
     source.write_text("[]")
     with pytest.raises(FileNotFoundError):
         install_bi3_archive(archive, tmp_path / "installed", overwrite=True)
-    assert source.read_text() == "[]"
+    assert source.read_text(encoding="utf-8") == "[]"
 
 
 def test_bi3_wrapped_archive_preserves_unrelated_files(tmp_path):
@@ -180,7 +180,7 @@ def test_bi3_wrapped_archive_preserves_unrelated_files(tmp_path):
     marker = destination / "unrelated.txt"
     marker.write_text("keep")
     install_bi3_archive(archive, destination, overwrite=True)
-    assert marker.read_text() == "keep"
+    assert marker.read_text(encoding="utf-8") == "keep"
     assert (destination / "jsons/um/um1/condition.json").is_file()
     assert not (destination / "Bi3").exists()
 
@@ -256,7 +256,7 @@ def test_summary_keeps_matched_action_ablation(tmp_path):
             (directory / f"{split}_metrics.json").write_text(json.dumps(metrics))
     summary = summarize("fixture", roots, [1, 2], tmp_path / "summary")
     assert summary["splits"]["test"]["no-belief"]["mean"] == [1.5, 1.5, 1.5]
-    assert "changes both action conditioning and belief" in (tmp_path / "summary.md").read_text()
+    assert "changes both action conditioning and belief" in (tmp_path / "summary.md").read_text(encoding="utf-8")
 
 
 def test_bi3_nearest_timestamp_sampling_preserves_missing_human(tmp_path):

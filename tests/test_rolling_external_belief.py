@@ -4,17 +4,17 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.run_sicnav_tracer_loop import (
+from tracer.experiments.run_sicnav_tracer_loop import (
     _belief_observation_due, _update_belief, _validate_external_belief_cases,
 )
-from sage.belief.adaptive_persistent import AdaptivePersistentBelief
-from sage.experiments.train_rolling_external_belief import (
+from tracer.belief.adaptive_persistent import AdaptivePersistentBelief
+from tracer.experiments.train_rolling_external_belief import (
     first_prefix_rows,
     prefix_mode_discrimination_loss,
     speed_thresholds,
     track_tensors,
 )
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 @pytest.mark.parametrize("candidate_uncertainty", [False, True])

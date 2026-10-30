@@ -6,9 +6,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sage.experiments.audit_external_validation import audit
-from sage.experiments.run_external_sdd_multiseed import aggregate
-from sage.experiments.summarize_external_sdd_baselines import summarize, write_outputs
+from tracer.experiments.audit_external_validation import audit
+from tracer.experiments.run_external_sdd_multiseed import aggregate
+from tracer.experiments.summarize_external_sdd_baselines import summarize, write_outputs
 
 
 class ExternalValidationAuditTest(unittest.TestCase):
@@ -115,7 +115,7 @@ class ExternalValidationAuditTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             baseline = root / "cv.csv"
-            sage = root / "sage.csv"
+            sage = root / "tracer.csv"
             learned = root / "mid.csv"
             for path, discriminator in (
                 (baseline, {"baseline": "constant_velocity"}),

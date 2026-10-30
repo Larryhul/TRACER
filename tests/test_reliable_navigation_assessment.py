@@ -1,4 +1,4 @@
-from sage.experiments.assess_reliable_navigation import assess_reliable_navigation
+from tracer.experiments.assess_reliable_navigation import assess_reliable_navigation
 
 
 def rows():

@@ -2,7 +2,7 @@
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 PYTHON="${PYTHON:-.conda/envs/hulan/bin/python}"
-exec "$PYTHON" -m sage.experiments.run_sicnav_tracer_loop \
+exec "$PYTHON" -m tracer.experiments.run_sicnav_tracer_loop \
   --response-backend crowdsimplus-paired \
   --candidate-profile sage-recovery \
   --recovery-activation always --recovery-candidates 16 --recovery-directions 48 \

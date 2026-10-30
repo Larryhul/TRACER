@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from sage.experiments.audit_h2_belief_protocol import _ece, _row_summary
+from tracer.experiments.audit_h2_belief_protocol import _ece, _row_summary
 
 
 class H2BeliefProtocolAuditTest(unittest.TestCase):

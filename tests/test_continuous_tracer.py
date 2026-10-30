@@ -1,15 +1,15 @@
 import numpy as np
 import torch
 
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.independent_social_force import (
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.independent_social_force import (
     MultiEntityIndependentSocialForceSimulator,
 )
-from sage.response.persistent_models import (
+from tracer.response.persistent_models import (
     BeliefConditionedTeamResponseModel,
     PersistentTrajectoryModelConfig,
 )
-from sage.response.joint_cost import (
+from tracer.response.joint_cost import (
     JointCandidateCostConfig,
     JointCandidateCostModel,
 )
@@ -97,7 +97,7 @@ def test_joint_candidate_cost_is_entity_permutation_invariant():
 
 
 def test_planning_cost_can_penalize_risk_and_first_action_jump():
-    from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+    from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
 
     mode_means = torch.zeros(2, 1, 2, 2)
     reference = torch.zeros_like(mode_means)
@@ -163,7 +163,7 @@ def test_planning_cost_can_penalize_risk_and_first_action_jump():
 
 
 def test_planning_cost_accepts_explicit_robot_task_direction():
-    from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+    from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
 
     mode_means = torch.zeros(2, 1, 2, 2)
     reference = torch.zeros_like(mode_means)
@@ -196,7 +196,7 @@ def test_planning_cost_accepts_explicit_robot_task_direction():
 
 
 def test_soft_risk_weight_is_active_without_hard_risk_filter():
-    from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+    from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
 
     mode_means = torch.zeros(2, 1, 2, 2)
     reference = torch.zeros_like(mode_means)

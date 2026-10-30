@@ -6,8 +6,8 @@ from types import SimpleNamespace
 import matplotlib.pyplot as plt
 import numpy as np
 
-from sage.experiments.plot_reference_trajectories import compact_grid, integrate, path_markers, scene_limits, square_limits
-from sage.experiments.replay_paper_trajectories import environment_arrays, write_json
+from tracer.experiments.plot_reference_trajectories import compact_grid, integrate, path_markers, scene_limits, square_limits
+from tracer.experiments.replay_paper_trajectories import environment_arrays, write_json
 
 
 def test_integrate_keeps_initial_position_and_physical_time():
@@ -70,4 +70,4 @@ def test_environment_arrays_exclude_warmup_and_include_terminal():
 def test_json_maps_missing_metrics_to_null(tmp_path):
     path = tmp_path / "metrics.json"
     write_json(path, {"valid": 1.0, "missing": float("nan"), "nested": [float("inf")]})
-    assert json.loads(path.read_text()) == {"valid": 1.0, "missing": None, "nested": [None]}
+    assert json.loads(path.read_text(encoding="utf-8")) == {"valid": 1.0, "missing": None, "nested": [None]}

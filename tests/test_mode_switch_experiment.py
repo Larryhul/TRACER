@@ -4,7 +4,7 @@ import unittest
 
 import torch
 
-from sage.experiments.eval_mode_switch_benchmark import _adaptation_delay
+from tracer.experiments.eval_mode_switch_benchmark import _adaptation_delay
 
 
 class ModeSwitchExperimentTest(unittest.TestCase):

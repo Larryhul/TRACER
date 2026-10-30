@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sage.experiments.prepare_external_sdd_split import prepare
+from tracer.experiments.prepare_external_sdd_split import prepare
 
 
 class PrepareExternalSDDSplitTest(unittest.TestCase):

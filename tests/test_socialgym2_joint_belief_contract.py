@@ -6,9 +6,9 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 
-import sage.experiments.run_socialgym2_tracer_loop as socialgym_loop
-from sage.experiments.run_socialgym2_tracer_loop import HumanTrack
-from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+import tracer.experiments.run_socialgym2_tracer_loop as socialgym_loop
+from tracer.experiments.run_socialgym2_tracer_loop import HumanTrack
+from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
 
 
 def _human_costs(

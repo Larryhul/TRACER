@@ -1,76 +1,80 @@
-<p align="center"><img src="docs/assets/hero.png" alt="TRACER: predict responses, adapt beliefs and replan" width="100%"></p>
+<p align="center"><img src="docs/assets/hero.png" alt="TRACER" width="100%"></p>
 
 <h3 align="center">Adaptive Multi-Robot Social Navigation via Joint Human-Response Prediction and Interaction-Aware Replanning</h3>
 
 <p align="center">
-  <a href="docs/installation.md">Installation</a> ·
-  <a href="docs/reproduction.md">Reproduction</a> ·
-  <a href="results/README.md">Results</a> ·
-  <a href="https://arxiv.org/abs/2609.18776">Paper (arXiv)</a> ·
-  <a href="README.zh-CN.md">中文</a>
+  <a href="https://github.com/Larryhul/TRACER/actions/workflows/cpu-checks.yml"><img alt="CPU checks" src="https://github.com/Larryhul/TRACER/actions/workflows/cpu-checks.yml/badge.svg"></a>
+  <a href="https://arxiv.org/abs/2609.18776"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2609.18776-b31b1b.svg"></a>
+  <a href="LICENSE"><img alt="Code license: MIT" src="https://img.shields.io/badge/code-MIT-0d9488.svg"></a>
 </p>
 
-**TRACER evaluates joint robot plans through predicted human responses, executes a short prefix, and uses the observed response to adapt the next decision.** Its response model separates individual-robot effects from non-additive pairwise interactions. Identity-bound beliefs retain evidence across replanning windows.
+<p align="center"><a href="#quick-start">Quick start</a> · <a href="docs/reproduction.md">Experiments</a> · <a href="docs/models.md">Models</a> · <a href="results/README.md">Results</a> · <a href="https://arxiv.org/abs/2609.18776">Paper</a> · <a href="README.zh-CN.md">中文</a></p>
 
-## Method
+**TRACER predicts how people respond to joint robot actions, executes a short plan, and updates persistent beliefs from the observed response before replanning.**
 
-<p align="center"><img src="docs/assets/method.png" alt="TRACER closed loop: joint-action response prediction, feasibility and chance constraints, prefix execution, synchronized observation and identity-bound posterior update" width="100%"></p>
-
-| Stage | Implementation | Contract |
-| --- | --- | --- |
-| Predict | [`sage/response/models.py`](sage/response/models.py) | Condition each entity's response on candidate joint robot actions |
-| Remember | [`sage/belief/`](sage/belief) · [`persistent_models.py`](sage/response/persistent_models.py) | Bind response-mode evidence to entity identity |
-| Select and execute | [`sage/response/closed_loop.py`](sage/response/closed_loop.py) | Rank feasible candidates and execute a synchronized prefix |
-| Update and replan | [`sage/experiments/`](sage/experiments) | Update from executed interactions and observed responses |
+- **Predict joint-action responses:** individual-robot effects and non-additive pairwise interactions.
+- **Remember interactions:** identity-bound beliefs updated from executed-prefix observations.
+- **Replan online:** response-aware candidate evaluation and synchronized execution.
 
 ## Quick start
 
-Use Python 3.10 or newer; the local core regression environment uses Python 3.12. After [installation](docs/installation.md), run from this repository root:
+Use Python 3.12 and follow the [installation guide](docs/installation.md) to create an environment. From this repository:
 
 ```bash
-python -m pytest tests/test_response_experiment.py tests/test_belief_experiment.py tests/test_closed_loop_correctness.py -q
+python -m pip install -e ".[dev]"
+python -m tracer.demo --output outputs/demo
 ```
 
-These three test files cover response learning, belief updates and closed-loop correctness. The repository also retains broader tests, some of which require external simulators or archived experiment assets. The core suite is the default CI check.
+The CPU example trains a small response model on generated data, then runs seven decision windows with persistent belief updates. It writes an animation, a checkpoint and the decision trace.
 
-For a small data-free training run on robot-caused synthetic responses:
+![TRACER CPU demonstration](docs/assets/demo.gif)
 
-```bash
-python -m sage.experiments.train_response_baselines --config configs/quickstart.yaml --device cpu --epochs 1 --limit-train-batches 1 --limit-val-batches 1 --variants joint --output-dir experiments/quickstart
-```
+See [the demo guide](docs/demo.md) for inputs, outputs and interpretation.
 
-This example verifies the training path. The formal evaluation uses separate protocol configurations and multiple seeds.
+## Method
 
-## Research evidence
+<p align="center"><img src="docs/assets/method.png" alt="TRACER method overview" width="100%"></p>
 
-| Question | Manuscript evidence | Scope |
-| --- | --- | --- |
-| Do joint robot effects matter? | Pair-effect RMSE decreases **23.94%** against the capacity-matched additive predictor | Controlled factorial response experiments |
-| Does identity-consistent memory help? | Persistent beliefs improve prediction under ID and OOD settings | Within-model identity and memory ablations |
-| Does the closed loop help navigation? | SocialGym2 collision-free completion: **22.5% → 31.6%** against GoAlone | 320 paired episodes, binary GoAlone/Halt execution adapter |
+## Experiments and results
 
-The manuscript's SocialGym2 comparison evaluates TRACER against GoAlone; its reported completion rate does not establish that every component ablation is worse. Controlled ungated replanning, conditional safety-gate attribution, development scenes and later external checks have separate interpretations. See [the result index](results/README.md).
-
-## Reproduce and inspect
-
-| Entry | Contents |
+| Experiment | Reported result |
 | --- | --- |
-| [Reproduction](docs/reproduction.md) | Core commands, formal configs and evaluation requirements |
-| [Result index](results/README.md) | 14 selected CSVs, manuscript tables and evidence boundaries |
-| [Assets](docs/assets.md) | External simulator inventory and missing training artifacts |
-| [Paper on arXiv](https://arxiv.org/abs/2609.18776) | Public preprint and version history |
+| Controlled joint-action response | Pair-effect RMSE decreases 23.94% relative to the capacity-matched additive predictor |
+| Identity and memory | Persistent beliefs evaluated under ID/OOD identity and memory ablations |
+| SocialGym2 navigation | Collision-free completion rises from 22.5% to 31.6% against GoAlone over 320 paired episodes |
+
+The [result index](results/README.md) identifies the protocols and status of 14 retained CSV files. Commands and required inputs are in the [experiment guide](docs/reproduction.md).
+
+## Models
+
+A lightweight synthetic demonstration checkpoint is available. The [model guide](docs/models.md) describes its scope and the additional assets required for formal experiments.
+
+```bash
+python tools/download_models.py
+```
+
+Downloads are verified against the release checksum. See [model details](docs/models.md) for checkpoint identity and use.
+
+## Development
+
+```bash
+python tools/check_repository.py
+python -m pytest -q
+```
+
+CPU checks run on Linux and Windows. Tests requiring archived experiment outputs or CUDA report their prerequisites through explicit skips. See [verification](docs/verification.md).
+
+## Repository layout
 
 ```text
-sage/response/  Joint-action response models, candidate selection and execution
-sage/belief/    Persistent entity beliefs and filtering
-configs/       Formal protocols and labeled development configurations
-tests/         Core regressions and extended research checks
+tracer/        Response models, belief updates and planning
+tracer/legacy/ Archived-data compatibility modules
+configs/       Indexed formal, ablation and development protocols
+tests/         CPU regressions and asset-dependent checks
 results/       Selected tables and paired statistics
-docs/          Setup, reproduction, assets and architecture
+provenance/    File origins and checksums
 ```
-
-Dataset sources, simulator requirements and model availability are listed in the [asset guide](docs/assets.md).
 
 ## Citation
 
-If you use TRACER in your research, please cite the [paper](https://arxiv.org/abs/2609.18776). Citation details: [BibTeX](docs/citation.bib) · [CITATION.cff](CITATION.cff).
+Please cite the [paper](https://arxiv.org/abs/2609.18776) when using TRACER in research. [BibTeX](docs/citation.bib) · [CITATION.cff](CITATION.cff).

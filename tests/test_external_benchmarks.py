@@ -3,17 +3,17 @@ from __future__ import annotations
 import unittest
 
 import numpy as np
-from sage.experiments.run_crowdnav_tracer import _update_beliefs
+from tracer.experiments.run_crowdnav_tracer import _update_beliefs
 
-from sage.experiments.run_candidate_policy_shift_benchmark import _policy_actions
-from sage.experiments.run_external_response_benchmarks import (
+from tracer.experiments.run_candidate_policy_shift_benchmark import _policy_actions
+from tracer.experiments.run_external_response_benchmarks import (
     _bootstrap_ci,
     _paired_summary,
     _sign_flip_pvalue,
     _trajectory_metrics,
 )
-from sage.experiments.run_eth_ucy_portability_benchmark import _aggregate
-from sage.response.causal_synthetic import CausalResponseSpec, CausalTeamResponseDataset
+from tracer.experiments.run_eth_ucy_portability_benchmark import _aggregate
+from tracer.response.causal_synthetic import CausalResponseSpec, CausalTeamResponseDataset
 
 
 class ExternalBenchmarkTest(unittest.TestCase):

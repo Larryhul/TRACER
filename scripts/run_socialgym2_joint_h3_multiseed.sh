@@ -82,7 +82,7 @@ for scenario in "${SCENARIOS[@]}"; do
                 inputs+=("$output_dir")
                 continue
             fi
-            "$PYTHON" -m sage.experiments.run_socialgym2_tracer_loop \
+            "$PYTHON" -m tracer.experiments.run_socialgym2_tracer_loop \
                 --source "$SOURCE" \
                 --output-dir "$output_dir" \
                 --response-checkpoint "$RESPONSE_CHECKPOINT" \
@@ -109,7 +109,7 @@ for scenario in "${SCENARIOS[@]}"; do
     done
 done
 
-"$PYTHON" -m sage.experiments.aggregate_socialgym2_tracer \
+"$PYTHON" -m tracer.experiments.aggregate_socialgym2_tracer \
     --output-dir "$OUTPUT_ROOT/aggregate" \
     --expected-policies "${POLICIES[@]}" \
     --expected-seeds "${SEEDS[@]}" \

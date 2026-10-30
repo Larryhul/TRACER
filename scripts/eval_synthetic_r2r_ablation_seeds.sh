@@ -14,7 +14,7 @@ BATCH_SIZE=${BATCH_SIZE:-256}
 NUM_WORKERS=${NUM_WORKERS:-8}
 LIMIT_SAMPLES=${LIMIT_SAMPLES:-0}
 GUIDANCE_SCALE=${GUIDANCE_SCALE:-0.05}
-CHECKPOINT_TEMPLATE=${CHECKPOINT_TEMPLATE:-"experiments/sage/synthetic/nrNR_neNE/synthetic_sage_epoch50.pt"}
+CHECKPOINT_TEMPLATE=${CHECKPOINT_TEMPLATE:-"experiments/tracer/synthetic/nrNR_neNE/synthetic_sage_epoch50.pt"}
 
 mkdir -p "$(dirname "${CSV}")"
 
@@ -39,7 +39,7 @@ run_variant() {
     return 1
   fi
 
-  local cmd=(python -m sage.experiments.eval_synthetic_sage
+  local cmd=(python -m tracer.experiments.eval_synthetic_sage
     --config "${CONFIG}"
     --split test
     --checkpoint "${ckpt}"
@@ -74,4 +74,4 @@ for seed in ${SEEDS}; do
   done
 done
 
-python -m sage.experiments.summarize_synthetic_seed_results   --input "${CSV}"   --output "${SUMMARY}"
+python -m tracer.experiments.summarize_synthetic_seed_results   --input "${CSV}"   --output "${SUMMARY}"

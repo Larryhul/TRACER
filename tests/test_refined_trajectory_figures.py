@@ -5,7 +5,7 @@ import json
 import numpy as np
 import pytest
 
-from sage.experiments.plot_refined_trajectories import POLICIES, interaction, select_h3
+from tracer.experiments.plot_refined_trajectories import POLICIES, interaction, select_h3
 
 
 def test_additive_factorial_effect_is_zero():
@@ -67,7 +67,7 @@ def test_incomplete_screen_cannot_be_silently_selected(tmp_path):
 def test_mismatched_initial_scene_is_rejected(tmp_path):
     screening_fixture(tmp_path, {144: [(True, 8)] * 4})
     path = tmp_path / "h3_data/case144_sicnav-np.json"
-    metadata = json.loads(path.read_text())
+    metadata = json.loads(path.read_text(encoding="utf-8"))
     metadata["metrics"]["initial_scene_hash"] = "another-scene"
     path.write_text(json.dumps(metadata))
     with pytest.raises(ValueError, match="scene mismatch"):

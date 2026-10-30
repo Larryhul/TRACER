@@ -18,7 +18,7 @@ if [[ -z "${CONFIG}" ]]; then
   fi
 fi
 
-CMD=(python -m sage.experiments.eval_social_force_baseline \
+CMD=(python -m tracer.experiments.eval_social_force_baseline \
   --benchmark "${BENCHMARK}" \
   --config "${CONFIG}" \
   --split test \

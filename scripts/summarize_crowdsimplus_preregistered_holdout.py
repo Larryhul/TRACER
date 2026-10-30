@@ -99,7 +99,7 @@ def run(root: Path, protocol_path: Path) -> dict[str, Any]:
         raise ValueError("Official simulator commit differs from protocol")
     if tracer_meta["source_hashes"]["experiments/run_sicnav_tracer_loop.py"] != protocol["tracer"]["runner_sha256"]:
         raise ValueError("TRACER runner differs from frozen source")
-    official_runner = official_meta["source_hashes"]["sage/experiments/run_sicnav_official_benchmark.py"]
+    official_runner = official_meta["source_hashes"]["tracer/experiments/run_sicnav_official_benchmark.py"]
     if official_runner != protocol["official_baselines"]["runner_sha256"]:
         raise ValueError("Official runner differs from frozen source")
     if int(tracer_meta["parameters"]["case_start"]) != cases[0] or int(tracer_meta["parameters"]["cases"]) != len(cases):

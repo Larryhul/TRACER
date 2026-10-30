@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from sage.experiments.live_response_audit import choose_audit_branches, collect_live_responses, save_response_audit
-from sage.experiments.pack_live_response_data import partition_records
-from sage.experiments.eval_live_response_models import paired_response_effects
+from tracer.experiments.live_response_audit import choose_audit_branches, collect_live_responses, save_response_audit
+from tracer.experiments.pack_live_response_data import partition_records
+from tracer.experiments.eval_live_response_models import paired_response_effects
 
 
 class Agent:

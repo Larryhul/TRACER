@@ -24,7 +24,7 @@ run_social_force() {
   local nr=$3
   local ne=$4
   local config=$5
-  local cmd=(python -m sage.experiments.eval_social_force_baseline
+  local cmd=(python -m tracer.experiments.eval_social_force_baseline
     --benchmark "${benchmark}"
     --config "${config}"
     --split test
@@ -56,4 +56,4 @@ for seed in ${SOCIALGYM_SEEDS}; do
   run_social_force socialgym "${seed}" "${SOCIALGYM_NUM_ROBOTS}" "${SOCIALGYM_NUM_ENTITIES}" "${SOCIALGYM_CONFIG}"
 done
 
-python -m sage.experiments.summarize_synthetic_seed_results   --input "${CSV}"   --output "${SUMMARY}"
+python -m tracer.experiments.summarize_synthetic_seed_results   --input "${CSV}"   --output "${SUMMARY}"

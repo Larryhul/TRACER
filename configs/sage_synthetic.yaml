@@ -94,7 +94,7 @@ training:
   batch_size: 128
   lr: 0.0003
   epochs: 60
-  checkpoint_dir: experiments/sage/synthetic/default
+  checkpoint_dir: experiments/tracer/synthetic/default
 
 evaluation:
   batch_size: 128

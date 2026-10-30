@@ -33,13 +33,13 @@ from scripts.run_final_socialgym2_confirmation import (
 
 
 def verify_run(directory: Path, episodes: int) -> dict:
-    manifest = json.loads((directory / "manifest.json").read_text())
+    manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
     if manifest["status"] != "COMPLETED" or manifest["records"] != episodes:
         raise ValueError(f"incomplete navigation run: {directory}")
     for name, expected in manifest["artifacts"].items():
         if _sha256(directory / name) != expected:
             raise ValueError(f"artifact hash mismatch: {directory / name}")
-    diagnosis = json.loads(directory.with_suffix(".diagnosis.json").read_text())
+    diagnosis = json.loads(directory.with_suffix(".diagnosis.json").read_text(encoding="utf-8"))
     if diagnosis["status"] != "COMPLETED" or len(diagnosis["episodes"]) != episodes:
         raise ValueError(f"incomplete execution audit: {directory}")
     if diagnosis["stream_sha256"] != _sha256(directory / "execution_diagnostics.jsonl"):
@@ -127,20 +127,20 @@ def adoption_decision(results: dict) -> dict:
 
 
 def validated_profile(path: Path) -> dict:
-    profile = json.loads(path.read_text())
+    profile = json.loads(path.read_text(encoding="utf-8"))
     if profile.get("schema") != "socialgym2-selected-navigation-profile-v1":
         raise ValueError("unsupported navigation profile")
     snapshot = Path(profile["frozen_source"])
     manifest_path = snapshot / "source_manifest.json"
     if _sha256(manifest_path) != profile["source_manifest_sha256"]:
         raise ValueError("selected profile source manifest changed")
-    _verify_snapshot(snapshot, json.loads(manifest_path.read_text()))
+    _verify_snapshot(snapshot, json.loads(manifest_path.read_text(encoding="utf-8")))
     comparison_path = Path(profile["comparison"])
     if _sha256(comparison_path) != profile["comparison_sha256"]:
         raise ValueError("selected profile comparison changed")
-    if not adoption_decision(json.loads(comparison_path.read_text()))["adopt"]:
+    if not adoption_decision(json.loads(comparison_path.read_text(encoding="utf-8")))["adopt"]:
         raise ValueError("selected profile does not satisfy adoption rules")
-    protocol = json.loads(comparison_path.with_name("protocol.json").read_text())
+    protocol = json.loads(comparison_path.with_name("protocol.json").read_text(encoding="utf-8"))
     if (
         protocol["source_manifest_sha256"] != profile["source_manifest_sha256"]
         or protocol["input_hashes"] != profile["input_hashes"]
@@ -202,7 +202,7 @@ def run(args):
     snapshot = output / "source_snapshot"
     origin = args.frozen_source.resolve() if args.frozen_source else root
     if args.frozen_source:
-        _verify_snapshot(origin, json.loads((origin / "source_manifest.json").read_text()))
+        _verify_snapshot(origin, json.loads((origin / "source_manifest.json").read_text(encoding="utf-8")))
     source_manifest = _snapshot_source(origin, snapshot)
     workers = root / "experiments" / f".{output.name}_workers"
     _clone_workers(root / "experiments/socialgym2_joint_workers_20260906", workers, len(args.seeds))
@@ -266,7 +266,7 @@ def run(args):
                     target = output / f"{scenario}_{condition}_seed{seed}"
                     settings = protocol["conditions"][condition]
                     command = [
-                        str(python), "-u", "-m", "sage.experiments.run_socialgym2_tracer_loop",
+                        str(python), "-u", "-m", "tracer.experiments.run_socialgym2_tracer_loop",
                         "--source", str(source), "--output-dir", str(target),
                         "--response-checkpoint", str(inputs["response"]), "--sage-checkpoint", str(inputs["sage"]),
                         "--runtime-manifest", str(inputs["runtime"]), "--calibration-artifact", str(inputs["calibration"]),
@@ -288,7 +288,7 @@ def run(args):
                     with target.with_suffix(".log").open("x") as log:
                         subprocess.run(command, cwd=snapshot, env=environment, stdout=log, stderr=subprocess.STDOUT, check=True)
                         subprocess.run([
-                            str(python), "-m", "sage.experiments.analyze_socialgym2_execution",
+                            str(python), "-m", "tracer.experiments.analyze_socialgym2_execution",
                             "--input", str(target), "--output", str(target.with_suffix(".diagnosis.json")),
                         ], cwd=snapshot, env=environment, stdout=log, stderr=subprocess.STDOUT, check=True)
                     verify_run(target, args.episodes)
@@ -320,7 +320,7 @@ def run(args):
                 for condition in collected:
                     target = output / f"{scenario}_{condition}_seed{seed}"
                     collected[condition].extend(verify_run(target, args.episodes)["episodes"])
-                    metadata.append(json.loads((target / "metadata.json").read_text()))
+                    metadata.append(json.loads((target / "metadata.json").read_text(encoding="utf-8")))
                 for field in ("algorithm_sources", "checkpoint_hashes", "runtime_contract"):
                     if metadata[0][field] != metadata[1][field]:
                         raise ValueError(f"unmatched {field}: {scenario}, {seed}")

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from sage.experiments.socialgym2_joint_geometry import (
+from tracer.experiments.socialgym2_joint_geometry import (
     add_observed_human_clearances,
     constant_twist_prefix,
     executable_candidate_prefix,

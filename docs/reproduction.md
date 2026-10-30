@@ -1,17 +1,17 @@
 # Reproducing TRACER
 
-## 1. Core regression
+## 1. Public regressions
 
 ```bash
-python -m pytest tests/test_response_experiment.py tests/test_belief_experiment.py tests/test_closed_loop_correctness.py -q
+python -m pytest -q
 ```
 
-The core checks cover response-model behavior, posterior updates, candidate/state consistency, executed-prefix handling and chance-constrained selection. Broader tests are retained for research workflows; some require original experiment artifacts or external simulators.
+The suite covers response models, posterior updates, candidate/state consistency, executed-prefix handling and chance-constrained selection. Checks requiring CUDA or archived formal summaries report explicit skips when their inputs are absent. Run `python -m tracer.demo --output outputs/demo` for an animated CPU example.
 
 ## 2. Data-free training example
 
 ```bash
-python -m sage.experiments.train_response_baselines --config configs/quickstart.yaml --device cpu --epochs 1 --limit-train-batches 1 --limit-val-batches 1 --variants joint --output-dir experiments/quickstart
+python -m tracer.experiments.train_response_baselines --config configs/quickstart.yaml --device cpu --epochs 1 --limit-train-batches 1 --limit-val-batches 1 --variants joint --output-dir experiments/quickstart
 ```
 
 `quickstart.yaml` uses the causal-response generator, with a small corpus and fixed data seed. Outputs are written to the ignored `experiments/` directory. This intentionally small run checks training and serialization; it does not reproduce formal multi-seed estimates.
@@ -23,9 +23,9 @@ python -m sage.experiments.train_response_baselines --config configs/quickstart.
 | H1 factorial response prediction | `configs/h1_paired_enhanced_formal_train.yaml`, `configs/h1_paired_enhanced_formal_eval.yaml` | Fixed corpus seeds, separate model seeds, matched additive control and paired base scenes |
 | H2 identity continuity | `configs/belief_h2.yaml`, persistent trajectory modules | Matched model, identity/memory ablations and update timing |
 | H3 gate attribution | `configs/h3_belief_attribution_repaired_20260906.yaml` | Conditional attribution protocol; distinguish from ungated replanning |
-| External navigation | `sage/experiments/` external adapters and SocialGym2 scripts | Original simulator versions, response checkpoints, maps and execution adapter |
+| External navigation | `tracer/experiments/` external adapters and SocialGym2 scripts | Original simulator versions, response checkpoints, maps and execution adapter |
 
-Inspect each entry point's `--help` before launching a run. Formal configurations reference earlier gates or training artifacts that must be restored or regenerated; the repository does not claim a one-command reconstruction of those external assets.
+The [configuration index](../configs/README.md) groups formal protocols, ablations and development runs. Each entry point's `--help` lists its overrides. Formal protocols require the matching gates, checkpoints, datasets and simulator versions listed in the asset guide.
 
 ## 4. Interpret the evidence
 

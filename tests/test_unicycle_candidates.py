@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from sage.response.unicycle_candidates import UnicycleLimits, braking_after_prefix, project_unicycle_candidates
+from tracer.response.unicycle_candidates import UnicycleLimits, braking_after_prefix, project_unicycle_candidates
 
 
 def test_unicycle_projection_enforces_clock_acceleration_and_turn_rate():
@@ -60,7 +60,7 @@ def test_braking_envelope_extends_prefix_until_physically_stopped():
 
 def test_braking_envelope_rejects_safe_first_step_with_unsafe_stop():
     from types import SimpleNamespace
-    from sage.experiments.run_sicnav_tracer_loop import _static_obstacle_safe_mask
+    from tracer.experiments.run_sicnav_tracer_loop import _static_obstacle_safe_mask
     robot = SimpleNamespace(radius=.25, get_position=lambda: (0., 0.))
     candidate = np.array([[[.225, 0., .9, 0.]]])
     wall = [[(.6, -1.), (.6, 1.)]]

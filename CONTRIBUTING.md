@@ -1,12 +1,12 @@
-# Contributing
+# Contributing to TRACER
 
-Use a dedicated environment for TRACER and run commands from this repository's root.
+Create a dedicated environment using the [installation guide](docs/installation.md). Describe the intended behavior and include the configuration and input needed to reproduce a change.
 
-1. Install the development dependencies in [the installation guide](docs/installation.md).
-2. Make changes on a focused branch and explain the expected behavior.
-3. Run the documented CPU check and any affected tests.
-4. For numerical changes, record the config, seeds, checkpoint-selection rule, data split and independent statistical unit.
+```bash
+python tools/check_repository.py
+python -m pytest -q
+```
 
-Keep generated weights, datasets, caches and private documents out of commits. Preserve upstream notices when changing compatibility modules. Mark exploratory experiments as development results and keep them separate from frozen manuscript evidence.
+For numerical changes, record seeds, data split, checkpoint-selection rule and the independent statistical unit. Keep development runs labeled and retain source notices. Dataset files, model outputs and private documents belong outside commits.
 
-Use the issue templates for bug reports and reproduction questions. Include the Python/PyTorch versions and the exact command; remove credentials and personal data from logs.
+Use the issue forms for bugs or reproduction questions. Include the command, environment and relevant logs with credentials removed.

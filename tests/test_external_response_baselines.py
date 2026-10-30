@@ -4,9 +4,9 @@ import torch
 import yaml
 from pathlib import Path
 
-from sage.response.data import EntityResponseBatch
-from sage.response.external_baselines import METHOD_TAXONOMY, external_method_metadata
-from sage.response.models import (
+from tracer.response.data import EntityResponseBatch
+from tracer.response.external_baselines import METHOD_TAXONOMY, external_method_metadata
+from tracer.response.models import (
     Eiffert2019StyleResponsePredictor,
     KediaStyleResponsePredictor,
     ResponseModelConfig,
@@ -75,7 +75,7 @@ def test_kedia_style_uses_masked_latent_hypotheses_and_gaussian_contract() -> No
 
 def test_external_protocol_contains_required_methods_and_validation_only_selection() -> None:
     config = yaml.safe_load(
-        (Path(__file__).resolve().parents[1] / "configs/h1_external_response_baselines.yaml").read_text()
+        (Path(__file__).resolve().parents[1] / "configs/h1_external_response_baselines.yaml").read_text(encoding="utf-8")
     )
     variants = config["training"]["variants"]
     assert "eiffert2019-style" in variants

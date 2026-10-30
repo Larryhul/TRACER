@@ -4,8 +4,8 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.train_rolling_external_belief import matched_mode_effect_loss, matched_mode_probe_groups, validate_mode_probe_data
-from sage.experiments.train_rolling_external_response import branch_response
+from tracer.experiments.train_rolling_external_belief import matched_mode_effect_loss, matched_mode_probe_groups, validate_mode_probe_data
+from tracer.experiments.train_rolling_external_response import branch_response
 
 
 def _probe_data():
@@ -82,7 +82,7 @@ class _Environment:
 
 
 def test_mode_intervention_changes_only_cloned_focal_human(monkeypatch):
-    module = "sage.experiments.train_rolling_external_response"
+    module = "tracer.experiments.train_rolling_external_response"
     monkeypatch.setattr(f"{module}._velocity_action", lambda robot, kind, velocity, heading: velocity)
     monkeypatch.setattr(f"{module}._action_velocity", lambda robot, action: action)
     env = _Environment()

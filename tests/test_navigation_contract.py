@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from sage.experiments.navigation_contract import navigation_outcome, validate_response_clock
+from tracer.experiments.navigation_contract import navigation_outcome, validate_response_clock
 
 
 def test_budget_exhaustion_is_timeout_without_environment_event():

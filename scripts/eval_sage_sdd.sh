@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CHECKPOINT="${1:-experiments/sage/sdd/goal/sdd_sage_epoch80.pt}"
+CHECKPOINT="${1:-experiments/tracer/sdd/goal/sdd_sage_epoch80.pt}"
 DEVICE="${2:-cuda}"
 CONFIG="${3:-configs/sage_sdd.yaml}"
 SOURCE="${4:-}"
 SDD_ROOT="${5:-}"
 
-CMD=(python -m sage.experiments.eval_sdd_sage
+CMD=(python -m tracer.experiments.eval_sdd_sage
   --config "${CONFIG}"
   --data-dir raw_data/stanford
   --split test

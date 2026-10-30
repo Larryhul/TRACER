@@ -14,7 +14,7 @@ simulation:
 
 candidate_source:
   type: sage
-  checkpoint: experiments/sage/eth_ucy/goal/eth_sage_epoch100.pt
+  checkpoint: experiments/tracer/eth_ucy/goal/eth_sage_epoch100.pt
   checkpoint_scope: single_robot_proxy_pilot_only
   guided: true
   step_stride: 10

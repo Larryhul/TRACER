@@ -14,7 +14,7 @@ run_eval() {
   local ne=$2
   local mode=$3
 
-  local cmd=(python -m sage.experiments.eval_socialgym_sage
+  local cmd=(python -m tracer.experiments.eval_socialgym_sage
     --config "${CONFIG}"
     --split test
     --checkpoint "${CHECKPOINT}"

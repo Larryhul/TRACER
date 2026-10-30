@@ -4,14 +4,14 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from sage.experiments.socialgym2_execution_diagnostics import (
+from tracer.experiments.socialgym2_execution_diagnostics import (
     ExecutionDiagnostics,
     load_vector_map,
     observed_tick,
     point_segment_distances,
     sample_planned_prefix,
 )
-from sage.experiments.analyze_socialgym2_execution import analyze
+from tracer.experiments.analyze_socialgym2_execution import analyze
 
 
 def response(position=(0.0, 0.0, 0.0), velocity=(0.0, 0.0, 0.0), collision=False, humans=()):
@@ -92,14 +92,14 @@ def test_short_window_uses_actual_elapsed_time_and_records_no_fabricated_update(
     diagnostics.end_window(0.05, [], [])
     diagnostics.end_episode({"team_success": 0.0, "initial_collision": 0.0, "collision": 0.0, "terminal_reached": False, "executed_sim_ticks": 2})
     diagnostics.close(True)
-    records = [json.loads(line) for line in (tmp_path / "execution_diagnostics.jsonl").read_text().splitlines()]
+    records = [json.loads(line) for line in (tmp_path / "execution_diagnostics.jsonl").read_text(encoding="utf-8").splitlines()]
     update = next(record for record in records if record["kind"] == "update")
     assert update["complete_model_step"] is False
     assert update["evidence_rows"] == []
     np.testing.assert_allclose(update["executed_mean_robot_velocity"], [[0.4, 0]])
     ticks = [record for record in records if record["kind"] == "tick"]
     np.testing.assert_allclose(ticks[-1]["position_error"], [0.03])
-    manifest = json.loads((tmp_path / "execution_diagnostics_manifest.json").read_text())
+    manifest = json.loads((tmp_path / "execution_diagnostics_manifest.json").read_text(encoding="utf-8"))
     assert manifest["status"] == "COMPLETED"
     assert manifest["counts"]["tick"] == 2
     analysis = analyze(tmp_path)
@@ -120,7 +120,7 @@ def test_duplicate_tick_and_duplicate_evidence_are_rejected(tmp_path):
     with pytest.raises(ValueError, match="more than once"):
         diagnostics.end_window(0.025, [], [{"track_id": 1}, {"track_id": 1}])
     diagnostics.close(False)
-    manifest = json.loads((tmp_path / "execution_diagnostics_manifest.json").read_text())
+    manifest = json.loads((tmp_path / "execution_diagnostics_manifest.json").read_text(encoding="utf-8"))
     assert manifest["status"] == "INTERRUPTED"
 
 
@@ -143,7 +143,7 @@ def test_waypoint_angle_uses_robot_local_frame(tmp_path):
     diagnostics.end_window(0.025, [], [])
     diagnostics.end_episode({})
     diagnostics.close(True)
-    rows = [json.loads(line) for line in (tmp_path / "execution_diagnostics.jsonl").read_text().splitlines()]
+    rows = [json.loads(line) for line in (tmp_path / "execution_diagnostics.jsonl").read_text(encoding="utf-8").splitlines()]
     tick = next(row for row in rows if row["kind"] == "tick")
     np.testing.assert_allclose(tick["waypoint_goal_angle"], [0], atol=1e-10)
     assert tick["waypoint_target_valid"] == [True]

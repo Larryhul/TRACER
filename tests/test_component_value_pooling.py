@@ -1,9 +1,9 @@
 import pytest
 import torch
 
-from sage.experiments.refine_component_value_pooling import choose_pooled_value_head, pooled_value_coefficients
-from sage.experiments.train_component_value import value_error
-from sage.response.continuation_value import FrozenContinuationValue
+from tracer.experiments.refine_component_value_pooling import choose_pooled_value_head, pooled_value_coefficients
+from tracer.experiments.train_component_value import value_error
+from tracer.response.continuation_value import FrozenContinuationValue
 
 
 def test_partial_pooling_uses_train_only_normalization_and_preserves_parent_option():

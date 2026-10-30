@@ -6,7 +6,7 @@ CONFIG="${2:-configs/sage_sdd.yaml}"
 SOURCE="${3:-}"
 SDD_ROOT="${4:-}"
 
-CMD=(python -m sage.experiments.check_sdd_data
+CMD=(python -m tracer.experiments.check_sdd_data
   --config "${CONFIG}"
   --data-dir raw_data/stanford
   --split "${SPLIT}"

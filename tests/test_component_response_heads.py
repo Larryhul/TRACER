@@ -1,11 +1,11 @@
 import pytest
 import torch
 
-from sage.experiments.train_component_response_heads import mean_reference_effect_loss, response_head_loss, select_response_head_parameters
-from sage.experiments.train_component_mode_contrast import grouped_prefix_costs
-from sage.response.closed_loop import PlanningCostConfig
-from sage.response.persistent_models import stationary_reference_candidates
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.train_component_response_heads import mean_reference_effect_loss, response_head_loss, select_response_head_parameters
+from tracer.experiments.train_component_mode_contrast import grouped_prefix_costs
+from tracer.response.closed_loop import PlanningCostConfig
+from tracer.response.persistent_models import stationary_reference_candidates
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 def test_reference_supervision_detects_hidden_reference_error():

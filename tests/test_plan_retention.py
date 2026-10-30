@@ -1,9 +1,9 @@
 import pytest
 import torch
 
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig, SyntheticClosedLoopSimulator
-from sage.response.closed_loop_contract import validate_candidate_state
-from sage.response.plan_retention import plan_context_sha256, retain_plan_candidate, shifted_plan_candidate
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig, SyntheticClosedLoopSimulator
+from tracer.response.closed_loop_contract import validate_candidate_state
+from tracer.response.plan_retention import plan_context_sha256, retain_plan_candidate, shifted_plan_candidate
 
 
 def test_retained_controls_reanchor_to_actual_state_and_preserve_future_world_path():

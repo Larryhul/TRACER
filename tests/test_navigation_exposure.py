@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from sage.experiments.navigation_exposure import NavigationExposure
+from tracer.experiments.navigation_exposure import NavigationExposure
 
 
 def test_exposure_uses_observed_velocity_changes_and_actual_time():

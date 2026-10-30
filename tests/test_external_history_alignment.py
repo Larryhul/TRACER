@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 import numpy as np
 
-from sage.experiments.run_sicnav_tracer_loop import _histories
+from tracer.experiments.run_sicnav_tracer_loop import _histories
 
 
 def _human(position, velocity):

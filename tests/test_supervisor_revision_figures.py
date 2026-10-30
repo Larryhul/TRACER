@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from sage.experiments.plot_supervisor_revision import (
+from tracer.experiments.plot_supervisor_revision import (
     METHODS,
     WINDOWS,
     build_fig3,

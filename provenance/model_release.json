@@ -1,0 +1,16 @@
+{
+  "project": "TRACER",
+  "version": "0.2.0",
+  "purpose": "Small generated-data demonstration checkpoint; formal navigation checkpoints are not included.",
+  "filename": "tracer-demo-checkpoint-v0.2.0.zip",
+  "url": "https://github.com/Larryhul/TRACER/releases/download/v0.2.0/tracer-demo-checkpoint-v0.2.0.zip",
+  "bytes": 238539,
+  "sha256": "6b4e18502b89a10a361f0f32de8b50539cc1bbe90dc433aa83746e40cdbd8c66",
+  "files": [
+    {
+      "name": "tracer-synthetic-demo.pt",
+      "bytes": 294249,
+      "sha256": "c0d3d8ee76386e792446fbc4c6bc76e3d9533e8f9658ad260412f2f6e178f0ca"
+    }
+  ]
+}

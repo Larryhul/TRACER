@@ -2,11 +2,11 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments import eval_persistent_closed_loop as loop
-from sage.belief.adaptive_persistent import AdaptivePersistentBelief, AdaptivePersistentBeliefConfig
-from sage.belief.filter import categorical_bayes_update
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.persistent_models import (
+from tracer.experiments import eval_persistent_closed_loop as loop
+from tracer.belief.adaptive_persistent import AdaptivePersistentBelief, AdaptivePersistentBeliefConfig
+from tracer.belief.filter import categorical_bayes_update
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.persistent_models import (
     BeliefConditionedTeamResponseModel,
     PersistentTrajectoryModelConfig,
 )

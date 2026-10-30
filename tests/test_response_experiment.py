@@ -12,27 +12,27 @@ import torch
 import yaml
 from torch.utils.data import DataLoader
 
-from sage.data.heterogeneous_scene import AgentRole, HeterogeneousSceneBatch
-from sage.response.data import (
+from tracer.data.heterogeneous_scene import AgentRole, HeterogeneousSceneBatch
+from tracer.response.data import (
     build_entity_response_batch,
     shuffle_robot_candidates,
     shuffle_robot_candidates_within_groups,
 )
-from sage.response.causal_synthetic import CausalResponseSpec, CausalTeamResponseDataset
-from sage.response.closed_loop import (
+from tracer.response.causal_synthetic import CausalResponseSpec, CausalTeamResponseDataset
+from tracer.response.closed_loop import (
     ClosedLoopSpec,
     PlanningCostConfig,
     SyntheticClosedLoopSimulator,
     expected_candidate_costs,
 )
-from sage.response.factorial import (
+from tracer.response.factorial import (
     factorial_second_difference,
     interaction_recovery_metrics,
     pairwise_factorial_interactions,
 )
-from sage.response.metrics import gaussian_nll_per_sample, response_metrics
-from sage.response.models import ResponseModelConfig, TeamResponsePredictor
-from sage.response.persistent_models import (
+from tracer.response.metrics import gaussian_nll_per_sample, response_metrics
+from tracer.response.models import ResponseModelConfig, TeamResponsePredictor
+from tracer.response.persistent_models import (
     BeliefConditionedTeamResponseModel,
     PersistentTrajectoryModelConfig,
     TrajectoryRecurrentBelief,
@@ -43,24 +43,24 @@ from sage.response.persistent_models import (
     stationary_reference_candidates,
     trajectory_mode_log_likelihood,
 )
-from sage.response.persistent_trajectory import (
+from tracer.response.persistent_trajectory import (
     MultiEntityPersistentTrajectoryEpisodeDataset,
     MultiEntityPersistentTrajectorySpec,
     PersistentTrajectoryEpisodeDataset,
     PersistentTrajectorySpec,
     candidate_independent_active_mask,
 )
-from sage.response.sage_candidate_adapter import (
+from tracer.response.sage_candidate_adapter import (
     SAGECandidateAdapter,
     SAGECandidateAdapterConfig,
 )
-from sage.experiments.train_response_baselines import main as train_response_main
-from sage.experiments.train_persistent_trajectory_response import (
+from tracer.experiments.train_response_baselines import main as train_response_main
+from tracer.experiments.train_persistent_trajectory_response import (
     _flatten_entities,
     _shuffled_identity_filter,
 )
-from sage.experiments.formal_manifest import candidate_pool_sha256
-from sage.experiments.eval_persistent_closed_loop import (
+from tracer.experiments.formal_manifest import candidate_pool_sha256
+from tracer.experiments.eval_persistent_closed_loop import (
     _candidate_and_reference_outputs,
     _kendall_tau_b,
 )
@@ -505,7 +505,7 @@ class ResponseModelTest(unittest.TestCase):
             with patch("sys.argv", [*arguments, "--resume-existing"]):
                 train_response_main()
 
-            metadata = yaml.safe_load((output_dir / "run_metadata.json").read_text())
+            metadata = yaml.safe_load((output_dir / "run_metadata.json").read_text(encoding="utf-8"))
             self.assertEqual(metadata["checkpoint_rule"], "best_val_nll")
             self.assertTrue(metadata["resume_existing"])
 

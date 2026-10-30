@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from sage.experiments.audit_external_mode_separation import mode_effect_metrics
+from tracer.experiments.audit_external_mode_separation import mode_effect_metrics
 
 
 def test_mode_audit_distinguishes_truthful_effects_from_artificial_spread():

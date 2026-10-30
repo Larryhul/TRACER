@@ -32,7 +32,7 @@ if [[ -z "$MODEL" ]]; then
 fi
 
 if [[ ! -f "$OUTPUT/parent/summary.json" ]]; then
-    "$PYTHON" -u -m sage.experiments.eval_external_information_value \
+    "$PYTHON" -u -m tracer.experiments.eval_external_information_value \
         --checkpoint "$CHECKPOINT" --calibration "$CALIBRATION" --source-metadata "$METADATA" \
         --output-dir "$OUTPUT/parent" \
         --case-subset $(seq 1340 1371) --audit-stride 4 --navigation-only \
@@ -55,7 +55,7 @@ PY
 fi
 
 if [[ ! -f "$IDENTITY_OUTPUT/candidate/summary.json" ]]; then
-    "$PYTHON" -u -m sage.experiments.eval_external_information_value \
+    "$PYTHON" -u -m tracer.experiments.eval_external_information_value \
         --checkpoint "$CHECKPOINT" --calibration "$CALIBRATION" --source-metadata "$METADATA" \
         --output-dir "$IDENTITY_OUTPUT/candidate" --case-splits "$SPLITS" \
         --case-subset 1340 --audit-stride 4 --navigation-only \
@@ -63,14 +63,14 @@ if [[ ! -f "$IDENTITY_OUTPUT/candidate/summary.json" ]]; then
 fi
 
 if [[ ! -f "$IDENTITY_OUTPUT/summary.json" ]]; then
-    "$PYTHON" -m sage.experiments.verify_executable_reference_identity \
+    "$PYTHON" -m tracer.experiments.verify_executable_reference_identity \
         --parent-csv "$OUTPUT/parent/episodes.csv" \
         --candidate-csv "$IDENTITY_OUTPUT/candidate/episodes.csv" \
         --output "$IDENTITY_OUTPUT/summary.json"
 fi
 
 if [[ ! -f "$OUTPUT/candidate/summary.json" ]]; then
-    "$PYTHON" -u -m sage.experiments.eval_external_information_value \
+    "$PYTHON" -u -m tracer.experiments.eval_external_information_value \
         --checkpoint "$CHECKPOINT" --calibration "$CALIBRATION" --source-metadata "$METADATA" \
         --output-dir "$OUTPUT/candidate" --case-splits "$SPLITS" \
         --case-subset $(seq 1340 1371) --audit-stride 4 --navigation-only \
@@ -78,7 +78,7 @@ if [[ ! -f "$OUTPUT/candidate/summary.json" ]]; then
 fi
 
 if [[ ! -f "$OUTPUT/comparison.json" ]]; then
-    "$PYTHON" "$REPO/sage/experiments/summarize_executable_value_navigation.py" \
+    "$PYTHON" "$REPO/tracer/experiments/summarize_executable_value_navigation.py" \
         --parent-csv "$OUTPUT/parent/episodes.csv" --candidate-dir "$OUTPUT/candidate" \
         --output "$OUTPUT/comparison.json"
 fi
@@ -90,7 +90,7 @@ import json
 import os
 from pathlib import Path
 
-from sage.experiments.assess_reliable_navigation import assess_reliable_navigation
+from tracer.experiments.assess_reliable_navigation import assess_reliable_navigation
 
 root = Path(os.environ["DEVELOPMENT_ROOT"])
 parent = list(csv.DictReader((root / "parent/episodes.csv").open()))

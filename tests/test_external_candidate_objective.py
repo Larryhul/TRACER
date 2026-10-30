@@ -2,9 +2,9 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.train_rolling_external_belief import grouped_candidate_costs
-from sage.response.candidate_ranking import pairwise_ranking_loss
-from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+from tracer.experiments.train_rolling_external_belief import grouped_candidate_costs
+from tracer.response.candidate_ranking import pairwise_ranking_loss
+from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
 
 
 def _group():

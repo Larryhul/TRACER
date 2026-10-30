@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from sage.experiments.aggregate_socialgym2_tracer import _holm_adjust, _two_sided_sign_test, _wilson_interval
+from tracer.experiments.aggregate_socialgym2_tracer import _holm_adjust, _two_sided_sign_test, _wilson_interval
 
 
 def test_binary_all_success_interval_retains_uncertainty() -> None:

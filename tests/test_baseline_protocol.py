@@ -4,9 +4,9 @@ from argparse import Namespace
 
 import torch
 
-from sage.config import load_sage_config
-from sage.data.synthetic_navigation import collate_synthetic_scene_batch, make_synthetic_dataset_from_config
-from sage.experiments.eval_baseline_comparison import (
+from tracer.config import load_sage_config
+from tracer.data.synthetic_navigation import collate_synthetic_scene_batch, make_synthetic_dataset_from_config
+from tracer.experiments.eval_baseline_comparison import (
     build_dataset,
     constant_acceleration_baseline,
     constant_velocity_baseline,

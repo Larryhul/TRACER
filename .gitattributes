@@ -8,3 +8,4 @@
 *.svg text eol=lf
 *.pdf binary
 *.png binary
+*.gif binary

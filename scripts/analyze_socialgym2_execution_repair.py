@@ -12,8 +12,8 @@ from typing import Any
 
 import numpy as np
 
-from sage.experiments.aggregate_socialgym2_tracer import _cluster_bootstrap
-from sage.experiments.paired_binary_uncertainty import paired_binary_jeffreys
+from tracer.experiments.aggregate_socialgym2_tracer import _cluster_bootstrap
+from tracer.experiments.paired_binary_uncertainty import paired_binary_jeffreys
 
 
 BINARY_METRICS = (

@@ -8,7 +8,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from sage.experiments.paired_binary_uncertainty import paired_binary_jeffreys
+from tracer.experiments.paired_binary_uncertainty import paired_binary_jeffreys
 
 
 BINARY_METRICS = ("success", "team_success", "collision_free_team_success", "collision")

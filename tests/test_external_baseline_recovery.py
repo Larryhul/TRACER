@@ -128,7 +128,7 @@ def test_full_summary_uses_case_average_and_separate_kinematics(tmp_path, monkey
     contrast = result["persistent_minus_official"]["sicnav-p"]["total_time"]
     assert contrast["mean"] == pytest.approx(0.5)
     assert contrast["case_count"] == 2
-    assert json.loads((tmp_path / "manifest.json").read_text())["status"] == "COMPLETED"
+    assert json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))["status"] == "COMPLETED"
 
 
 def test_artifact_change_rejected(tmp_path):

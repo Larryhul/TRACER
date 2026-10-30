@@ -5,12 +5,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sage.experiments.build_submission_artifacts import build
+import pytest
+
+from tracer.experiments.build_submission_artifacts import build
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+ARCHIVED_SUMMARY = PROJECT_ROOT / "experiments/formal_v2/h1_tracer_formal/evaluation/summary.json"
 
 
+@pytest.mark.archived_assets
+@pytest.mark.skipif(not ARCHIVED_SUMMARY.is_file(), reason="Restore archived formal-run outputs to build manuscript tables.")
 class SubmissionArtifactTest(unittest.TestCase):
     def test_builder_recreates_all_claim_tables_from_frozen_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

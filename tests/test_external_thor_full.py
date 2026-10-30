@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from sage.experiments.run_thor_magni_full_audit import (
+from tracer.experiments.run_thor_magni_full_audit import (
     _condition,
     _gaze_columns,
     _recording_pair_key,

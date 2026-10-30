@@ -10,25 +10,25 @@ import numpy as np
 import torch
 import yaml
 
-from sage.experiments.eval_persistent_closed_loop import (
+from tracer.experiments.eval_persistent_closed_loop import (
     POLICIES,
     _aggregate_runs,
     _configured_policies,
 )
-from sage.experiments.audit_formal_h2_data import audit_h2_data
-from sage.experiments.formal_manifest import (
+from tracer.experiments.audit_formal_h2_data import audit_h2_data
+from tracer.experiments.formal_manifest import (
     prepare_formal_run,
     require_formal_gate,
     sha256_file,
     validate_formal_config,
 )
-from sage.experiments.review_h3_formal import review_formal_h3
-from sage.experiments.paired_statistics import (
+from tracer.experiments.review_h3_formal import review_formal_h3
+from tracer.experiments.paired_statistics import (
     blocked_paired_bootstrap,
     validate_formal_episode_analysis,
     validate_formal_episode_records,
 )
-from sage.experiments.review_h1_rescue import (
+from tracer.experiments.review_h1_rescue import (
     EXPECTED_METHODS,
     EXPECTED_MODES,
     EXPECTED_SEEDS,

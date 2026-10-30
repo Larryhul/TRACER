@@ -66,14 +66,14 @@ def test_verifier_rejects_changed_artifact(tmp_path):
 
 def test_source_snapshot_is_isolated_from_concurrent_edits(tmp_path):
     origin = tmp_path / "origin"
-    (origin / "sage").mkdir(parents=True)
-    (origin / "sage/policy.py").write_text("value = 1\n")
+    (origin / "tracer").mkdir(parents=True)
+    (origin / "tracer/policy.py").write_text("value = 1\n")
     frozen = tmp_path / "frozen"
     manifest = _snapshot_source(origin, frozen)
-    (origin / "sage/policy.py").write_text("value = 2\n")
+    (origin / "tracer/policy.py").write_text("value = 2\n")
     _verify_snapshot(frozen, manifest)
-    assert (frozen / "sage/policy.py").read_text() == "value = 1\n"
-    (frozen / "sage/policy.py").write_text("value = 3\n")
+    assert (frozen / "tracer/policy.py").read_text(encoding="utf-8") == "value = 1\n"
+    (frozen / "tracer/policy.py").write_text("value = 3\n")
     with pytest.raises(RuntimeError, match="hash mismatch"):
         _verify_snapshot(frozen, manifest)
 
@@ -105,8 +105,8 @@ def test_adoption_does_not_hide_one_map_regression_in_pooled_gain():
 
 def test_profile_requires_frozen_sources_and_passing_evidence(tmp_path):
     origin = tmp_path / "origin"
-    (origin / "sage").mkdir(parents=True)
-    (origin / "sage/policy.py").write_text("value = 1\n")
+    (origin / "tracer").mkdir(parents=True)
+    (origin / "tracer/policy.py").write_text("value = 1\n")
     frozen = tmp_path / "frozen"
     _snapshot_source(origin, frozen)
     comparison_path = tmp_path / "comparison.json"

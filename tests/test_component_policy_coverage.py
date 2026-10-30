@@ -3,12 +3,12 @@ import json
 import pytest
 import torch
 
-from sage.experiments.collect_component_policy_coverage import collect_policy_coverage
-from sage.experiments.train_component_residual import collect_uniform_rollouts, trace_to_rollouts
-from sage.experiments.train_component_mode_contrast import grouped_training_inputs
-from sage.experiments.formal_manifest import sha256_file
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.collect_component_policy_coverage import collect_policy_coverage
+from tracer.experiments.train_component_residual import collect_uniform_rollouts, trace_to_rollouts
+from tracer.experiments.train_component_mode_contrast import grouped_training_inputs
+from tracer.experiments.formal_manifest import sha256_file
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 @pytest.mark.parametrize("retention", [False, True])

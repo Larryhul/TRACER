@@ -4,17 +4,17 @@ import numpy as np
 import pytest
 import torch
 
-from sage.belief.filter import adaptive_categorical_update
-from sage.experiments.eval_persistent_closed_loop import Policy, _evaluate_policy
-from sage.experiments.run_sicnav_tracer_loop import _update_belief, _response_predictions
-from sage.response.planning_support import (
+from tracer.belief.filter import adaptive_categorical_update
+from tracer.experiments.eval_persistent_closed_loop import Policy, _evaluate_policy
+from tracer.experiments.run_sicnav_tracer_loop import _update_belief, _response_predictions
+from tracer.response.planning_support import (
     aggregate_entity_costs,
     diverse_candidate_indices,
     swept_surface_clearance,
     goal_return_trajectories,
 )
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
-from sage.response.closed_loop import (
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.response.closed_loop import (
     ClosedLoopSpec,
     _independent_trajectory_noise,
     PlanningCostConfig,
@@ -247,7 +247,7 @@ def test_attention_evidence_cannot_read_unexecuted_suffix():
 
 
 def test_ranking_dataset_stores_only_executed_prefix_for_every_entity():
-    from sage.experiments.run_continuous_ranking_pilot import CounterfactualRankingDataset
+    from tracer.experiments.run_continuous_ranking_pilot import CounterfactualRankingDataset
 
     args = Namespace(
         windows=2, history=4, horizon=4, num_robots=2, num_entities=4, active_entities=2,
@@ -309,7 +309,7 @@ def test_lower_tail_robot_progress_ignores_finished_robot_when_masked():
 
 
 def test_crowdnav_fallback_maximizes_clearance_and_respects_official_support():
-    from sage.experiments.run_crowdnav_tracer import _select_candidate
+    from tracer.experiments.run_crowdnav_tracer import _select_candidate
 
     beliefs = np.zeros((1, 1), dtype=np.float32)
     means = np.zeros((1, 3, 1, 2, 2), dtype=np.float32)
@@ -327,7 +327,7 @@ def test_crowdnav_fallback_maximizes_clearance_and_respects_official_support():
 
 
 def test_crowdnav_checks_third_executed_step_not_xy_dimension():
-    from sage.experiments.run_crowdnav_tracer import _select_candidate
+    from tracer.experiments.run_crowdnav_tracer import _select_candidate
 
     paths = np.array([[[2.0, 0.0], [2.0, 0.0], [0.1, 0.0]]], dtype=np.float32)
     _, _, diagnostic = _select_candidate(

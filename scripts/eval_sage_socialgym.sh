@@ -8,7 +8,7 @@ CONFIG=${4:-configs/sage_socialgym.yaml}
 NUM_ROBOTS=${5:-}
 NUM_ENTITIES=${6:-}
 
-CMD=(python -m sage.experiments.eval_socialgym_sage \
+CMD=(python -m tracer.experiments.eval_socialgym_sage \
   --config "${CONFIG}" \
   --split test \
   --checkpoint "${CHECKPOINT}" \

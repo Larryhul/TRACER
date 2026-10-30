@@ -12,7 +12,7 @@ WEIGHTS="${WEIGHTS:-0.5 1.0 2.0 5.0}"
 
 for weight in ${WEIGHTS}; do
   for seed in ${SEEDS}; do
-    PYTHONPATH=. "${PYTHON}" -u -m sage.experiments.run_external_response_benchmark \
+    PYTHONPATH=. "${PYTHON}" -u -m tracer.experiments.run_external_response_benchmark \
       --dataset thor_magni \
       --data-dir experiments/external_response_data \
       --output-dir "${OUTPUT_ROOT}/weight${weight}" \

@@ -5,8 +5,8 @@ import json
 import numpy as np
 import torch
 
-from sage.data.external_trajectory import UnifiedTrajectoryDataset, collate_unified_trajectory_batch
-from sage.experiments.build_external_sage_dataset import _make_windows
+from tracer.data.external_trajectory import UnifiedTrajectoryDataset, collate_unified_trajectory_batch
+from tracer.experiments.build_external_sage_dataset import _make_windows
 
 
 def test_external_windows_keep_robot_entity_contract() -> None:

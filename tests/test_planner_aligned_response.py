@@ -4,14 +4,14 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.collect_external_planner_supervision import collection_cases, expanded_case_splits
-from sage.experiments.eval_external_information_value import information_evaluation_cases, summarize_information
-from sage.experiments.merge_planner_supervision import merge
-from sage.experiments.run_sicnav_tracer_loop import _differentiable_response_predictions, _response_predictions
-from sage.experiments.train_executable_value import continuation_cases
-from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
-from sage.response.planner_supervision import (
+from tracer.experiments.collect_external_planner_supervision import collection_cases, expanded_case_splits
+from tracer.experiments.eval_external_information_value import information_evaluation_cases, summarize_information
+from tracer.experiments.merge_planner_supervision import merge
+from tracer.experiments.run_sicnav_tracer_loop import _differentiable_response_predictions, _response_predictions
+from tracer.experiments.train_executable_value import continuation_cases
+from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.response.planner_supervision import (
     add_action_conditioned_uncertainty, configure_planner_finetuning, entity_risk_calibration_loss, group_regret,
     expected_prefix_regret_loss, planner_gap_calibration_loss, prefix_equivalence, top_prefix_ranking_loss,
 )
@@ -105,8 +105,8 @@ def test_merge_requires_complete_disjoint_immutable_shards(tmp_path):
         merge(tmp_path / "duplicate", [shards[0], shards[0]], splits, "train")
     output = tmp_path / "complete"
     merge(output, shards, splits, "train")
-    assert json.loads((output / "manifest.json").read_text())["groups"] == 2
-    assert (output / "inputs/seed2027_case0_window0.npz").is_symlink()
+    assert json.loads((output / "manifest.json").read_text(encoding="utf-8"))["groups"] == 2
+    assert (output / "inputs/seed2027_case0_window0.npz").read_bytes() == (shards[0] / "inputs/seed2027_case0_window0.npz").read_bytes()
 
 
 def test_paired_checkpoint_summary_uses_cases_and_requires_common_support():

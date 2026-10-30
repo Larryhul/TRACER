@@ -22,7 +22,7 @@ if [[ "${DATASET}" == "sdd" ]]; then
   EXTRA_METRIC_ARGS=(--use-geometry-margin --role-metrics)
 fi
 
-python -m sage.experiments.eval_learned_baseline \
+python -m tracer.experiments.eval_learned_baseline \
   --baseline "${BASELINE}" \
   --config "${CONFIG}" \
   --dataset "${DATASET}" \

@@ -4,22 +4,22 @@ import unittest
 
 import torch
 
-from sage.belief.baselines import RecurrentBeliefBaseline, RecurrentBeliefConfig
-from sage.belief.filter import (
+from tracer.belief.baselines import RecurrentBeliefBaseline, RecurrentBeliefConfig
+from tracer.belief.filter import (
     PersistentBeliefStore,
     categorical_bayes_update,
     lagged_reset_beliefs,
     run_categorical_filter,
 )
-from sage.belief.metrics import belief_classification_metrics, predictive_mixture_nll
-from sage.belief.likelihood import ModeConditionedResponseLikelihood, ModeLikelihoodConfig
-from sage.belief.related_work import (
+from tracer.belief.metrics import belief_classification_metrics, predictive_mixture_nll
+from tracer.belief.likelihood import ModeConditionedResponseLikelihood, ModeLikelihoodConfig
+from tracer.belief.related_work import (
     UKFBeliefConfig,
     UKFParameterBelief,
     categorical_pomdp_update,
     run_ukf_filter,
 )
-from sage.belief.synthetic import (
+from tracer.belief.synthetic import (
     BeliefSequenceSpec,
     PersistentBeliefSequenceDataset,
     mode_log_likelihood,
