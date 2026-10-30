@@ -5,8 +5,8 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments import refine_real_h1
-from sage.response.persistent_models import (
+from tracer.experiments import refine_real_h1
+from tracer.response.persistent_models import (
     BeliefConditionedTeamResponseModel,
     PersistentTrajectoryModelConfig,
     TrajectoryRecurrentBelief,
@@ -75,7 +75,7 @@ def test_refinement_preserves_pairing_and_accesses_only_requested_splits(tmp_pat
         assert len(trained) == 2
         assert trained[0] == trained[1]
         assert trained[0][1]["mean_trajectory_weight"] == 10.
-    result = json.loads((tmp_path / "out" / "val_metrics.json").read_text())
+    result = json.loads((tmp_path / "out" / "val_metrics.json").read_text(encoding="utf-8"))
     assert "history-only" in result
     with pytest.raises(FileExistsError):
         refine_real_h1.run(args)

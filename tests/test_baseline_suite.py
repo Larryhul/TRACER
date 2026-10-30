@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sage.experiments.summarize_baseline_suite import summarize
+from tracer.experiments.summarize_baseline_suite import summarize
 
 
 class BaselineSuiteSummaryTest(unittest.TestCase):

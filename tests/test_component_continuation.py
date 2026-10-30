@@ -3,11 +3,11 @@ import copy
 import pytest
 import torch
 
-from sage.experiments.audit_component_continuation import compare_continuation, continuation_seed_sequences, first_eligible_disagreements
-from sage.experiments.eval_component_factorial import FACTORIAL_POLICIES
-from sage.experiments.eval_persistent_closed_loop import _evaluate_policy
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.audit_component_continuation import compare_continuation, continuation_seed_sequences, first_eligible_disagreements
+from tracer.experiments.eval_component_factorial import FACTORIAL_POLICIES
+from tracer.experiments.eval_persistent_closed_loop import _evaluate_policy
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 def test_first_disagreement_selection_has_no_outcome_based_filtering():

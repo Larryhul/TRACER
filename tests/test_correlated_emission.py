@@ -3,15 +3,15 @@ import json
 import pytest
 import torch
 
-from sage.belief.correlated_emission import CorrelatedEmission, sequence_emission_likelihoods
-from sage.experiments.calibrate_component_memory import component_protocol_id, load_component_calibration
-from sage.experiments.component_emission_protocol import load_emission_noise
-from sage.experiments.eval_component_factorial import FACTORIAL_POLICIES, audit_shared_emissions
-from sage.experiments.eval_persistent_closed_loop import _evaluate_policy
-from sage.experiments.formal_manifest import sha256_file
-from sage.experiments.train_component_emission_noise import factual_emission_dataset, fit_emission_noise
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig, trajectory_mode_log_likelihood
+from tracer.belief.correlated_emission import CorrelatedEmission, sequence_emission_likelihoods
+from tracer.experiments.calibrate_component_memory import component_protocol_id, load_component_calibration
+from tracer.experiments.component_emission_protocol import load_emission_noise
+from tracer.experiments.eval_component_factorial import FACTORIAL_POLICIES, audit_shared_emissions
+from tracer.experiments.eval_persistent_closed_loop import _evaluate_policy
+from tracer.experiments.formal_manifest import sha256_file
+from tracer.experiments.train_component_emission_noise import factual_emission_dataset, fit_emission_noise
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig, trajectory_mode_log_likelihood
 
 
 def test_diagonal_limit_matches_original_likelihood():

@@ -8,9 +8,9 @@ import json
 import numpy as np
 import pytest
 
-from sage.experiments.aggregate_socialgym2_tracer import METRICS, aggregate, factual_memory_contrasts
-from sage.experiments.socialgym2_physics_contract import verify_physics_audits
-from sage.experiments.socialgym2_policy_roles import POLICY_ROLE_SCHEMA, socialgym2_policy_roles
+from tracer.experiments.aggregate_socialgym2_tracer import METRICS, aggregate, factual_memory_contrasts
+from tracer.experiments.socialgym2_physics_contract import verify_physics_audits
+from tracer.experiments.socialgym2_policy_roles import POLICY_ROLE_SCHEMA, socialgym2_policy_roles
 
 
 RUNTIME = {"protocol": "socialgym2-joint-synchronous-runtime-v5", "sha256": "frozen"}
@@ -51,7 +51,7 @@ def inputs(tmp_path):
                                    "post_step_observation", "clock_verified_every_window",
                                    "pedestrian_rng_seeded_per_episode", "all_controllable_robots_exposed_to_pedestrians",
                                )}},
-            "runtime_contract": RUNTIME, "algorithm_sources": {"sage/core.py": "fixed"},
+            "runtime_contract": RUNTIME, "algorithm_sources": {"tracer/core.py": "fixed"},
             "checkpoint_hashes": {"response": "response-fixed", "sage": "sage-fixed"},
             "calibration_contract": {"artifact_sha256": "calibration-fixed"},
         }
@@ -131,7 +131,7 @@ def test_aggregate_rejects_tampered_trace(inputs, tmp_path):
 def test_legacy_policy_roles_are_flagged_for_hash_bound_correction(inputs, tmp_path):
     for path in inputs:
         metadata_path = path / "metadata.json"
-        metadata = json.loads(metadata_path.read_text())
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
         contract = metadata["joint_response_contract"]
         contract.pop("policy_role_schema")
         contract.pop("policy_roles_by_policy")
@@ -151,7 +151,7 @@ def test_legacy_policy_roles_are_flagged_for_hash_bound_correction(inputs, tmp_p
 def test_corrected_official_control_is_not_labelled_as_joint_response(inputs, tmp_path):
     path = inputs[1]
     metadata_path = path / "metadata.json"
-    metadata = json.loads(metadata_path.read_text())
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
     metadata["parameters"]["policies"] = ["official-goalone"]
     roles = socialgym2_policy_roles(["official-goalone"], True)
     contract = metadata["joint_response_contract"]
@@ -180,9 +180,9 @@ def test_corrected_official_control_is_not_labelled_as_joint_response(inputs, tm
 def test_native_external_policy_has_independent_provenance_and_action_usage(inputs, tmp_path):
     path = inputs[1]
     metadata_path = path / "metadata.json"
-    metadata = json.loads(metadata_path.read_text())
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
     metadata["parameters"]["policies"] = ["social-ref"]
-    metadata["algorithm_sources"] = {"sage/external_adapter.py": "external-fixed"}
+    metadata["algorithm_sources"] = {"tracer/external_adapter.py": "external-fixed"}
     metadata["external_controller"] = {
         "policy": "social-ref",
         "source_hashes": {"submodules/pips/src/policy/social_ref.cpp": "pips-fixed"},
@@ -226,7 +226,7 @@ def test_aggregate_rejects_tampered_result_before_writing(inputs, tmp_path):
 @pytest.mark.parametrize("field", ["runtime_contract", "algorithm_sources", "checkpoint_hashes"])
 def test_aggregate_rejects_mixed_frozen_inputs(inputs, tmp_path, field):
     path = inputs[-1] / "metadata.json"
-    metadata = json.loads(path.read_text())
+    metadata = json.loads(path.read_text(encoding="utf-8"))
     metadata[field]["changed"] = "different"
     path.write_text(json.dumps(metadata))
     seal(inputs[-1])
@@ -266,7 +266,7 @@ def physics_path(tmp_path):
 def test_physics_contract_recomputes_actual_trajectories(physics_path):
     verified = verify_physics_audits([physics_path], RUNTIME, ["intersection"], minimum_ticks=2)
     assert verified[0]["max_repeat_human_distance"] == 0
-    artifact = json.loads(physics_path.read_text())
+    artifact = json.loads(physics_path.read_text(encoding="utf-8"))
     artifact["records"][0]["branches"][-1]["human_trajectory"][0][0][0] += 0.02
     physics_path.write_text(json.dumps(artifact))
     with pytest.raises(ValueError, match="repeatability"):
@@ -279,7 +279,7 @@ def test_physics_contract_rejects_short_smoke(physics_path):
 
 
 def test_physics_contract_rejects_duplicate_seed(physics_path):
-    artifact = json.loads(physics_path.read_text())
+    artifact = json.loads(physics_path.read_text(encoding="utf-8"))
     artifact["records"][1]["seed"] = artifact["records"][0]["seed"]
     physics_path.write_text(json.dumps(artifact))
     with pytest.raises(ValueError, match="episode seed"):

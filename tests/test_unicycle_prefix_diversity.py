@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from sage.response.unicycle_candidates import UnicycleLimits, diversify_unicycle_prefixes, project_unicycle_candidates
+from tracer.response.unicycle_candidates import UnicycleLimits, diversify_unicycle_prefixes, project_unicycle_candidates
 
 
 @pytest.mark.parametrize("velocity", [[0.0, 0.0], [0.45, 0.0], [-0.45, 0.0]])

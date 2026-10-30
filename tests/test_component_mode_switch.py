@@ -1,17 +1,17 @@
 import pytest
 import torch
 
-from sage.experiments.audit_component_mode_switch import aggregate_switch_contrasts
-from sage.experiments.eval_mode_switch_benchmark import _evaluate_split, _switch_sample
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig, TrajectoryRecurrentBelief, TrajectoryRecurrentConfig
-from sage.response.persistent_trajectory import PersistentTrajectorySpec
+from tracer.experiments.audit_component_mode_switch import aggregate_switch_contrasts
+from tracer.experiments.eval_mode_switch_benchmark import _evaluate_split, _switch_sample
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig, TrajectoryRecurrentBelief, TrajectoryRecurrentConfig
+from tracer.response.persistent_trajectory import PersistentTrajectorySpec
 
 
 def test_mode_switch_raw_scores_reproduce_method_means(monkeypatch):
     torch.manual_seed(91)
     model = BeliefConditionedTeamResponseModel(PersistentTrajectoryModelConfig(history=4, horizon=4, num_robots=2, hidden_dim=16, dropout=0.)).eval()
     recurrent = TrajectoryRecurrentBelief(TrajectoryRecurrentConfig(horizon=4, num_robots=2, execute_steps=1, hidden_dim=16)).eval()
-    monkeypatch.setattr("sage.experiments.eval_mode_switch_benchmark._load_models", lambda *_: (model, recurrent))
+    monkeypatch.setattr("tracer.experiments.eval_mode_switch_benchmark._load_models", lambda *_: (model, recurrent))
     spec = PersistentTrajectorySpec(history=4, horizon=4, windows=4, num_robots=2, execute_steps=1)
     first = _switch_sample(spec, 0, 2)
     later = _switch_sample(spec, 0, 3)

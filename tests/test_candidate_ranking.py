@@ -3,7 +3,7 @@ import math
 import pytest
 import torch
 
-from sage.response.candidate_ranking import candidate_ranking_metrics, pairwise_ranking_loss
+from tracer.response.candidate_ranking import candidate_ranking_metrics, pairwise_ranking_loss
 
 
 def test_perfect_ranking_has_low_loss_and_perfect_metrics():

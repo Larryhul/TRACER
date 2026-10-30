@@ -1,6 +1,6 @@
 import torch
 
-from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
 
 
 def _inputs(mode_means):

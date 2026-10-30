@@ -5,20 +5,20 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.closed_loop_protocol import audit_candidate_protocol, prepare_manifest
-from sage.experiments.eval_persistent_closed_loop import (
+from tracer.experiments.closed_loop_protocol import audit_candidate_protocol, prepare_manifest
+from tracer.experiments.eval_persistent_closed_loop import (
     Policy, _blend_gated_response_outputs, _evaluate_policy, _realized_total_cost,
     _write_csv, _write_episode_csv,
 )
-from sage.response.closed_loop import (
+from tracer.response.closed_loop import (
     CandidatePool, ClosedLoopSpec, PlanningCostConfig, SyntheticClosedLoopSimulator,
     expected_candidate_costs,
 )
-from sage.response.closed_loop_contract import task_goals, validate_candidate_state
-from sage.response.persistent_models import (
+from tracer.response.closed_loop_contract import task_goals, validate_candidate_state
+from tracer.response.persistent_models import (
     BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig,
 )
-from sage.response.persistent_trajectory import (
+from tracer.response.persistent_trajectory import (
     MultiEntityPersistentTrajectoryEpisodeDataset,
     MultiEntityPersistentTrajectorySpec,
     PersistentTrajectoryEpisodeDataset,

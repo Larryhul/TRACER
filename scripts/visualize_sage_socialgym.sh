@@ -7,7 +7,7 @@ DEVICE=${3:-cuda}
 CONFIG=${4:-configs/sage_socialgym.yaml}
 INDICES=${5:-0,1,2,3}
 
-python -m sage.experiments.visualize_socialgym_qualitative \
+python -m tracer.experiments.visualize_socialgym_qualitative \
   --config "${CONFIG}" \
   --split test \
   --checkpoint "${CHECKPOINT}" \

@@ -42,7 +42,7 @@ def main():
     source = workers / "worker0/social_gym"
     environment = _worker_environment(root, snapshot, source, 0, args.port, output / "ros_state")
     command = [
-        sys.executable, "-u", "-m", "sage.experiments.run_socialgym2_tracer_loop",
+        sys.executable, "-u", "-m", "tracer.experiments.run_socialgym2_tracer_loop",
         "--source", str(source), "--output-dir", str(output / "run"),
         "--response-checkpoint", str(root / "experiments/formal_v2/h2/persistent_trajectory_suite_tracer_effect/seed2027/response.pt"),
         "--sage-checkpoint", str(root / "experiments/pilot/h3_sage_generator_p0_seed2027/synthetic_sage_epoch20.pt"),

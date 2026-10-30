@@ -1,12 +1,12 @@
 import numpy as np
 import pytest
 
-from sage.response.reliable_executable_value import DEFAULT_MINIMUM_GAINS, reliable_action, reliability_targets
-from sage.response.reliable_executable_value import (
+from tracer.response.reliable_executable_value import DEFAULT_MINIMUM_GAINS, reliable_action, reliability_targets
+from tracer.response.reliable_executable_value import (
     PAIRWISE_EFFECT_OBJECTIVE, PAIRWISE_RELIABILITY_OBJECTIVE, RELIABILITY_TARGETS,
     pairwise_reliable_model_action, reliable_model_action,
 )
-from sage.experiments.train_reliable_executable_value import evaluate_reliable_value
+from tracer.experiments.train_reliable_executable_value import evaluate_reliable_value
 
 
 def test_safety_improvement_is_not_itself_a_deployment_gain():

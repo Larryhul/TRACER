@@ -7,23 +7,23 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.external_controller_state import ExternalControllerState, FirstActionOverride, RandomState
-from sage.experiments.external_replanning_supervision import ContinuationTrace, ReplanningSupervisionAudit, distinct_prefix_candidates
-from sage.experiments.external_information_value import simulator_snapshot
-from sage.response.executable_value import FEATURE_VERSION, executable_value_features, fit_paired_value, value_action
-from sage.experiments.train_executable_value import evaluate_value
-from sage.experiments.summarize_executable_value_navigation import paired_navigation
-from sage.response.executable_value import value_representation
-from sage.response.executable_value import prefix_value_feature_indices
-from sage.response.executable_value import response_risk_admissible
-from sage.experiments.merge_planner_supervision import merge
-from sage.experiments.audit_replanning_target_alignment import prefix_cost_alignment
-from sage.experiments.confirm_executable_value import confirmation_acceptance, confirmation_cases, confirmation_reference_model
-from sage.experiments.collect_external_planner_supervision import parse_case_windows
-from sage.experiments.train_executable_value_ensemble import resample_scene_groups
-from sage.experiments.external_replanning_supervision import continuation_candidates
-from sage.experiments.external_value_policy import value_policy_active, value_policy_digest, validate_value_runtime, select_value_policy, select_scheduled_value_policy, value_policy_stages
-from sage.experiments.verify_executable_reference_identity import verify_reference_identity
+from tracer.experiments.external_controller_state import ExternalControllerState, FirstActionOverride, RandomState
+from tracer.experiments.external_replanning_supervision import ContinuationTrace, ReplanningSupervisionAudit, distinct_prefix_candidates
+from tracer.experiments.external_information_value import simulator_snapshot
+from tracer.response.executable_value import FEATURE_VERSION, executable_value_features, fit_paired_value, value_action
+from tracer.experiments.train_executable_value import evaluate_value
+from tracer.experiments.summarize_executable_value_navigation import paired_navigation
+from tracer.response.executable_value import value_representation
+from tracer.response.executable_value import prefix_value_feature_indices
+from tracer.response.executable_value import response_risk_admissible
+from tracer.experiments.merge_planner_supervision import merge
+from tracer.experiments.audit_replanning_target_alignment import prefix_cost_alignment
+from tracer.experiments.confirm_executable_value import confirmation_acceptance, confirmation_cases, confirmation_reference_model
+from tracer.experiments.collect_external_planner_supervision import parse_case_windows
+from tracer.experiments.train_executable_value_ensemble import resample_scene_groups
+from tracer.experiments.external_replanning_supervision import continuation_candidates
+from tracer.experiments.external_value_policy import value_policy_active, value_policy_digest, validate_value_runtime, select_value_policy, select_scheduled_value_policy, value_policy_stages
+from tracer.experiments.verify_executable_reference_identity import verify_reference_identity
 
 
 def test_branch_random_state_restores_parent_and_replays_all_generators():
@@ -321,7 +321,7 @@ def value_feature_example():
     candidates = np.zeros((4, 3, 4))
     candidates[:, :, 2] = np.arange(4)[:, None] * .2
     candidates[..., :2] = np.cumsum(candidates[..., 2:] * .25, axis=1)
-    from sage.response.executable_value import COMPONENTS
+    from tracer.response.executable_value import COMPONENTS
     return dict(
         candidates=candidates, headings=np.zeros((4, 3)), robot_position=np.zeros(2),
         robot_velocity=np.array([.1, 0.]), robot_goal=np.array([3., 0.]), robot_heading=0.,
@@ -504,13 +504,13 @@ def test_continuation_shard_merge_requires_consistent_horizon_and_preserves_live
         shards.append(shard)
     merge(tmp_path/'merged',shards,splits,'train')
     merge(tmp_path/'subset',[shards[0]],splits,'train',[0])
-    subset=json.loads((tmp_path/'subset/protocol.json').read_text())
+    subset=json.loads((tmp_path/'subset/protocol.json').read_text(encoding="utf-8"))
     assert subset['cases']==[0] and subset['case_splits']==splits
     with pytest.raises(ValueError,match='original declared split'):
         merge(tmp_path/'invalid_subset',[shards[0]],splits,'train',[64])
-    manifest=json.loads((tmp_path/'merged/manifest.json').read_text())
+    manifest=json.loads((tmp_path/'merged/manifest.json').read_text(encoding="utf-8"))
     assert manifest['continuation_groups']==2 and manifest['factual_continuation_checks']==20
-    assert (tmp_path/'merged/continuations/seed2027_case1_window0.json').is_symlink()
+    assert (tmp_path/'merged/continuations/seed2027_case1_window0.json').read_bytes() == (tmp_path/'shard1/continuations/seed2027_case1_window0.json').read_bytes()
     protocol['continuation_windows']=8
     (shards[1]/'protocol.json').write_text(json.dumps(protocol))
     with pytest.raises(ValueError,match='continuation mismatch'):
@@ -685,7 +685,7 @@ def test_value_ensemble_abstains_when_time_gain_is_disputed():
 
 
 def test_pairwise_reliability_network_accepts_a_small_capacity_width():
-    from sage.experiments.train_pairwise_reliable_value import PairwiseReliabilityNetwork
+    from tracer.experiments.train_pairwise_reliable_value import PairwiseReliabilityNetwork
 
     model = PairwiseReliabilityNetwork(12, width=8)
     predictions = model(torch.zeros(3, 12))

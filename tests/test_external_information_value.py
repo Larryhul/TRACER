@@ -6,8 +6,8 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.eval_external_information_value import summarize_information
-from sage.experiments.external_information_value import (
+from tracer.experiments.eval_external_information_value import summarize_information
+from tracer.experiments.external_information_value import (
     DecisionInformationAudit,
     factual_candidate_costs,
     ranking_information,
@@ -15,8 +15,8 @@ from sage.experiments.external_information_value import (
     simulator_snapshot,
     true_speed_log_beliefs,
 )
-from sage.response.closed_loop import PlanningCostConfig
-from sage.response.unicycle_candidates import UnicycleLimits
+from tracer.response.closed_loop import PlanningCostConfig
+from tracer.response.unicycle_candidates import UnicycleLimits
 
 
 class Agent:

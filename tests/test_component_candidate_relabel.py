@@ -4,14 +4,14 @@ import json
 import pytest
 import torch
 
-from sage.experiments.collect_component_candidate_relabel import GROUP_FIELDS, relabel_observed_states, response_labels, validate_relabel_protocol
-from sage.experiments.eval_component_factorial import FACTORIAL_POLICIES
-from sage.experiments.eval_persistent_closed_loop import _evaluate_policy
-from sage.experiments.formal_manifest import sha256_file
-from sage.experiments.train_component_mode_contrast import grouped_training_inputs
-from sage.experiments.train_component_residual import trace_to_rollouts
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig, SyntheticClosedLoopSimulator
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.collect_component_candidate_relabel import GROUP_FIELDS, relabel_observed_states, response_labels, validate_relabel_protocol
+from tracer.experiments.eval_component_factorial import FACTORIAL_POLICIES
+from tracer.experiments.eval_persistent_closed_loop import _evaluate_policy
+from tracer.experiments.formal_manifest import sha256_file
+from tracer.experiments.train_component_mode_contrast import grouped_training_inputs
+from tracer.experiments.train_component_residual import trace_to_rollouts
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig, SyntheticClosedLoopSimulator
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 @pytest.fixture

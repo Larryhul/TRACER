@@ -5,15 +5,15 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 
-from sage.belief.filter import (
+from tracer.belief.filter import (
     adaptive_categorical_update,
     apply_belief_forgetting,
     detect_change_point,
     hazard_belief_update,
     uniform_log_belief,
 )
-from sage.experiments.run_tracer_gap_closure import _static_safe_mask
-from sage.response.closed_loop import CandidatePool
+from tracer.experiments.run_tracer_gap_closure import _static_safe_mask
+from tracer.response.closed_loop import CandidatePool
 
 
 def test_forgetting_rate_one_returns_uniform_belief() -> None:

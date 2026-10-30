@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import torch
 
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.independent_social_force import (
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.independent_social_force import (
     IndependentSocialForceDataset,
     IndependentSocialForceDatasetSpec,
     MultiEntityIndependentSocialForceSimulator,

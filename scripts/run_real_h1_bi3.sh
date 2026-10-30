@@ -13,7 +13,7 @@ read -r -a SEED_LIST <<< "$SEEDS"
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$REPO_ROOT"
 
-"$PYTHON" -m sage.data.real_response \
+"$PYTHON" -m tracer.data.real_response \
   --dataset bi3 \
   --root "$DATASET_ROOT" \
   --output-dir "$OUTPUT_DIR" \
@@ -23,7 +23,7 @@ cd "$REPO_ROOT"
 BENCHMARK_ROOTS=()
 for seed in "${SEED_LIST[@]}"; do
   BENCHMARK_ROOTS+=("${BENCHMARK_PREFIX}_seed${seed}")
-  "$PYTHON" -m sage.experiments.run_external_response_benchmark \
+  "$PYTHON" -m tracer.experiments.run_external_response_benchmark \
     --dataset bi3 \
     --data-dir "$OUTPUT_DIR" \
     --output-dir "${BENCHMARK_PREFIX}_seed${seed}" \
@@ -38,6 +38,6 @@ for seed in "${SEED_LIST[@]}"; do
     --evaluation-splits both
 done
 
-"$PYTHON" -m sage.experiments.summarize_real_h1 \
+"$PYTHON" -m tracer.experiments.summarize_real_h1 \
   --dataset Bi3 --output "$REPORT_PREFIX" \
   --benchmark-root "${BENCHMARK_ROOTS[@]}" --seed "${SEED_LIST[@]}"

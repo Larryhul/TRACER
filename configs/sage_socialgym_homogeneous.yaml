@@ -98,7 +98,7 @@ training:
   batch_size: 128
   lr: 0.0003
   epochs: 60
-  checkpoint_dir: experiments/sage/socialgym/homogeneous
+  checkpoint_dir: experiments/tracer/socialgym/homogeneous
 evaluation:
   batch_size: 128
   stride: 10

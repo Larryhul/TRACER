@@ -10,22 +10,41 @@ concurrency:
   cancel-in-progress: true
 jobs:
   core:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    name: CPU / ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: "3.12"
+          - os: windows-latest
+            python: "3.12"
+          - os: ubuntu-latest
+            python: "3.11"
     env:
       MPLBACKEND: Agg
       PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUTF8: "1"
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python }}
           cache: pip
       - name: Install CPU PyTorch
         run: python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
       - name: Install project
         run: python -m pip install -e ".[dev]"
-      - name: Verify repository assets
+      - name: Verify assets and documentation
         run: python tools/check_repository.py
-      - name: Run core check
-        run: python -m pytest tests/test_response_experiment.py tests/test_belief_experiment.py tests/test_closed_loop_correctness.py -q
+      - name: Run public regressions
+        run: python -m pytest -q
+      - name: Run CPU demonstration
+        run: python -m tracer.demo --output outputs/demo
+      - name: Build distributions
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
+        run: python -m build

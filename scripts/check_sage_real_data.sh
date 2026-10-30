@@ -3,9 +3,9 @@ set -euo pipefail
 
 DATASET="${1:-eth}"
 SPLIT="${2:-train}"
-CONFIG="${3:-configs/sage.yaml}"
+CONFIG="${3:-configs/tracer.yaml}"
 
-python -m sage.experiments.check_real_data \
+python -m tracer.experiments.check_real_data \
   --config "${CONFIG}" \
   --dataset "${DATASET}" \
   --split "${SPLIT}" \

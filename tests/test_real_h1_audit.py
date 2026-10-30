@@ -2,9 +2,9 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments.audit_real_h1 import prediction_metrics, summarize_recordings
-from sage.experiments.train_persistent_trajectory_response import constant_velocity_target, mixture_mean_trajectory_loss
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.audit_real_h1 import prediction_metrics, summarize_recordings
+from tracer.experiments.train_persistent_trajectory_response import constant_velocity_target, mixture_mean_trajectory_loss
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 def test_recording_macro_mean_does_not_treat_windows_as_independent_recordings():

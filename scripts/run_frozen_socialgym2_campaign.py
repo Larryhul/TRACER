@@ -31,16 +31,16 @@ def run(args) -> None:
     output = args.output_root.resolve()
     output.mkdir(parents=True, exist_ok=False)
     sys.path.insert(0, str(root))
-    from sage.experiments.socialgym2_physics_contract import verify_physics_audits
+    from tracer.experiments.socialgym2_physics_contract import verify_physics_audits
 
-    analysis_paths = [root / "sage/experiments" / name for name in (
+    analysis_paths = [root / "tracer/experiments" / name for name in (
         "aggregate_socialgym2_tracer.py", "socialgym2_physics_contract.py",
     )]
     analysis_hashes = {str(path): sha256(path) for path in analysis_paths}
     response = root / "experiments/formal_v2/h2/persistent_trajectory_suite_tracer_effect/seed2027/response.pt"
     sage = root / "experiments/pilot/h3_sage_generator_p0_seed2027/synthetic_sage_epoch20.pt"
     runtime_path = args.runtime_manifest.resolve()
-    runtime = json.loads(runtime_path.read_text())
+    runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
     runtime_contract = {"sha256": sha256(runtime_path), "protocol": runtime["protocol"], "boundary": runtime["boundary"]}
     calibration_path = output / "validation_calibration.json"
     inputs = [args.calibration_input_root.resolve() / Path(scenario).name for scenario in SCENARIOS]
@@ -70,7 +70,7 @@ def run(args) -> None:
         status_path.write_text(json.dumps({"status": state, "updated_at_utc": datetime.now(timezone.utc).isoformat(), **values}, indent=2) + "\n")
 
     try:
-        for filename, expected in json.loads((frozen / "source_manifest.json").read_text()).items():
+        for filename, expected in json.loads((frozen / "source_manifest.json").read_text(encoding="utf-8")).items():
             if sha256(frozen / filename) != expected:
                 raise ValueError(f"frozen source hash mismatch: {filename}")
         required = audits + [path / "manifest.json" for path in inputs]
@@ -83,17 +83,17 @@ def run(args) -> None:
         verified = verify_physics_audits(audits, runtime_contract, list(SCENARIOS), minimum_ticks=960)
         (output / "physics_verification.json").write_text(json.dumps(verified, indent=2) + "\n")
         for path in inputs:
-            metadata = json.loads((path / "metadata.json").read_text())
-            manifest = json.loads((path / "manifest.json").read_text())
+            metadata = json.loads((path / "metadata.json").read_text(encoding="utf-8"))
+            manifest = json.loads((path / "manifest.json").read_text(encoding="utf-8"))
             if manifest.get("status") != "COMPLETED" or manifest.get("records") != 16:
                 raise ValueError("validation does not contain 16 completed episode records")
             if (metadata["parameters"]["seed"] in SEEDS or metadata["parameters"]["max_steps"] != 60
                     or metadata["parameters"]["episodes"] != 16):
                 raise ValueError("validation overlaps evaluation or uses a different horizon")
         status("CALIBRATING")
-        subprocess.run([sys.executable, "-m", "sage.experiments.calibrate_socialgym2_belief",
+        subprocess.run([sys.executable, "-m", "tracer.experiments.calibrate_socialgym2_belief",
                         "--output", str(calibration_path), *map(str, inputs)], cwd=frozen, check=True)
-        scale = json.loads(calibration_path.read_text())["selected"]["likelihood_scale"]
+        scale = json.loads(calibration_path.read_text(encoding="utf-8"))["selected"]["likelihood_scale"]
         jobs = Queue()
         for scenario in SCENARIOS:
             for seed in SEEDS:
@@ -118,7 +118,7 @@ def run(args) -> None:
                         return
                     target = output / f"{Path(scenario).name}_seed{seed}" / policy
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    command = [sys.executable, "-u", "-m", "sage.experiments.run_socialgym2_tracer_loop",
+                    command = [sys.executable, "-u", "-m", "tracer.experiments.run_socialgym2_tracer_loop",
                                "--source", str(source), "--output-dir", str(target),
                                "--response-checkpoint", str(response), "--sage-checkpoint", str(sage),
                                "--runtime-manifest", str(runtime_path), "--calibration-artifact", str(calibration_path),
@@ -146,7 +146,7 @@ def run(args) -> None:
         all_inputs = [output / f"{Path(scenario).name}_seed{seed}" / policy
                       for scenario in SCENARIOS for seed in SEEDS for policy in POLICIES]
         status("AGGREGATING")
-        subprocess.run([sys.executable, "-m", "sage.experiments.aggregate_socialgym2_tracer",
+        subprocess.run([sys.executable, "-m", "tracer.experiments.aggregate_socialgym2_tracer",
                         "--output-dir", str(output / "aggregate"), "--expected-policies", *POLICIES,
                         "--expected-seeds", *map(str, SEEDS), "--expected-scenarios", *SCENARIOS,
                         "--expected-episodes", "16", "--physics-audits", *map(str, audits), "--", *map(str, all_inputs)],

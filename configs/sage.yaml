@@ -82,7 +82,7 @@ training:
   batch_size: 128
   lr: 0.0003
   epochs: 100
-  checkpoint_dir: experiments/sage/eth_ucy/goal
+  checkpoint_dir: experiments/tracer/eth_ucy/goal
 evaluation:
   batch_size: 128
   stride: 10

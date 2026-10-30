@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from sage.experiments.paired_binary_uncertainty import paired_binary_jeffreys
+from tracer.experiments.paired_binary_uncertainty import paired_binary_jeffreys
 
 
 def test_all_ties_retain_population_uncertainty() -> None:

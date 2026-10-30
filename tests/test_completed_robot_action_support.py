@@ -1,12 +1,12 @@
 import numpy as np
 import pytest
 
-from sage.experiments.run_socialgym2_tracer_loop import (
+from tracer.experiments.run_socialgym2_tracer_loop import (
     _action_lattice,
     _candidate_geometry,
     _completed_robot_action_lattice,
 )
-from sage.experiments.socialgym2_joint_geometry import joint_prefix_clearances
+from tracer.experiments.socialgym2_joint_geometry import joint_prefix_clearances
 
 
 def test_completed_action_support_keeps_all_unfinished_choices():

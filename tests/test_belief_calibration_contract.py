@@ -7,16 +7,16 @@ import pytest
 import torch
 import yaml
 
-from sage.experiments import calibrate_persistent_belief as calibration_module
-from sage.experiments.calibrate_persistent_belief import (
+from tracer.experiments import calibrate_persistent_belief as calibration_module
+from tracer.experiments.calibrate_persistent_belief import (
     _calibration_prediction,
     calibrate_checkpoint,
     calibration_scores,
     load_belief_calibration,
     validate_belief_calibration,
 )
-from sage.experiments.formal_manifest import sha256_file
-from sage.response.persistent_models import (
+from tracer.experiments.formal_manifest import sha256_file
+from tracer.response.persistent_models import (
     BeliefConditionedTeamResponseModel,
     PersistentTrajectoryModelConfig,
 )

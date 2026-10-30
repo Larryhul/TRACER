@@ -10,7 +10,7 @@ BASELINE="$1"
 DATASET="$2"
 EPOCHS="$3"
 DEVICE="$4"
-CONFIG="${5:-configs/sage.yaml}"
+CONFIG="${5:-configs/tracer.yaml}"
 shift 4
 if [[ $# -gt 0 ]]; then
   shift 1
@@ -25,7 +25,7 @@ if [[ "${DATASET}" == "sdd" ]]; then
   EXTRA_DATA_ARGS=(--source official --sdd-root data/external/sdd/annotations)
 fi
 
-python -m sage.experiments.train_learned_baseline \
+python -m tracer.experiments.train_learned_baseline \
   --baseline "${BASELINE}" \
   --config "${CONFIG}" \
   --dataset "${DATASET}" \

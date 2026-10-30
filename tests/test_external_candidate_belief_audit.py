@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 
-from sage.experiments.audit_external_candidate_belief import causal_row_beliefs, paired_case_interval
+from tracer.experiments.audit_external_candidate_belief import causal_row_beliefs, paired_case_interval
 
 
 def _observations():

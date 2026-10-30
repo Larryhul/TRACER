@@ -2,9 +2,9 @@ import numpy as np
 
 import pytest
 
-from sage.experiments.audit_reliable_value_opportunity import audit_opportunity, parse_reference_actions
-from sage.response.executable_value import FEATURE_VERSION
-from sage.response.reliable_executable_value import DEFAULT_MINIMUM_GAINS, RELIABILITY_TARGETS
+from tracer.experiments.audit_reliable_value_opportunity import audit_opportunity, parse_reference_actions
+from tracer.response.executable_value import FEATURE_VERSION
+from tracer.response.reliable_executable_value import DEFAULT_MINIMUM_GAINS, RELIABILITY_TARGETS
 
 
 def model():

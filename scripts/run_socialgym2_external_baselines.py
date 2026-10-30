@@ -297,7 +297,7 @@ def run(args: argparse.Namespace) -> None:
                     str(python),
                     "-u",
                     "-m",
-                    "sage.experiments.run_socialgym2_tracer_loop",
+                    "tracer.experiments.run_socialgym2_tracer_loop",
                     "--source",
                     str(source),
                     "--output-dir",
@@ -406,7 +406,7 @@ def run(args: argparse.Namespace) -> None:
     aggregate_command = [
         str(python),
         "-m",
-        "sage.experiments.aggregate_socialgym2_tracer",
+        "tracer.experiments.aggregate_socialgym2_tracer",
         "--output-dir",
         str(output / "aggregate"),
         "--expected-policies",

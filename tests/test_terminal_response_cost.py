@@ -3,8 +3,8 @@ import pytest
 import torch
 from types import SimpleNamespace
 
-from sage.experiments.run_sicnav_tracer_loop import _fallback_tiebreak, _goal_response_mask
-from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+from tracer.experiments.run_sicnav_tracer_loop import _fallback_tiebreak, _goal_response_mask
+from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
 
 
 def test_goal_response_mask_includes_arrival_and_ignores_later_departure():
@@ -27,7 +27,7 @@ def test_fallback_task_tiebreak_only_changes_equal_primary_safety_scores():
 
 @pytest.mark.parametrize("fallback", [False, True])
 def test_terminal_scorer_aligns_long_generator_with_short_response_horizon(monkeypatch, fallback):
-    import sage.experiments.run_sicnav_tracer_loop as runner
+    import tracer.experiments.run_sicnav_tracer_loop as runner
     class Robot:
         radius = .25
         v_pref = .95

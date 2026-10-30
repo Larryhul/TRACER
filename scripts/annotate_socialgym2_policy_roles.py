@@ -8,7 +8,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from sage.experiments.socialgym2_policy_roles import EXTERNAL_POLICIES, socialgym2_policy_role
+from tracer.experiments.socialgym2_policy_roles import EXTERNAL_POLICIES, socialgym2_policy_role
 
 
 EXPECTED_POLICIES = (

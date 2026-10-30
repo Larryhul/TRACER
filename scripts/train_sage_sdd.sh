@@ -7,7 +7,7 @@ CONFIG="${3:-configs/sage_sdd.yaml}"
 SOURCE="${4:-}"
 SDD_ROOT="${5:-}"
 
-CMD=(python -m sage.experiments.train_sdd_sage
+CMD=(python -m tracer.experiments.train_sdd_sage
   --config "${CONFIG}"
   --data-dir raw_data/stanford
   --epochs "${EPOCHS}"

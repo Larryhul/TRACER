@@ -1,4 +1,4 @@
-from sage.experiments.audit_external_baselines import _finite_csv
+from tracer.experiments.audit_external_baselines import _finite_csv
 
 
 def test_finite_csv_accepts_required_numeric_rows(tmp_path):

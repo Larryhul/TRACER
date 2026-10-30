@@ -4,7 +4,7 @@ import unittest
 
 import torch
 
-from sage.belief.adaptive_persistent import (
+from tracer.belief.adaptive_persistent import (
     AdaptivePersistentBelief,
     AdaptivePersistentBeliefConfig,
 )

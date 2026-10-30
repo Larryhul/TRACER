@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import torch
 
-from sage.response.sage_candidate_adapter import (
+from tracer.response.sage_candidate_adapter import (
     SAGECandidateAdapter,
     SAGECandidateAdapterConfig,
 )

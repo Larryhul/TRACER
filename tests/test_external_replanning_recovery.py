@@ -3,7 +3,7 @@ import copy
 import numpy as np
 import pytest
 
-from sage.experiments.recover_external_replanning import require_equal, verify_completed_episode
+from tracer.experiments.recover_external_replanning import require_equal, verify_completed_episode
 
 
 def recovery_episode():

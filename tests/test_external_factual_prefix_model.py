@@ -2,8 +2,8 @@ import pytest
 import torch
 from dataclasses import replace
 
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
-from sage.experiments.train_rolling_external_belief import prefix_mode_discrimination_loss
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.train_rolling_external_belief import prefix_mode_discrimination_loss
 
 
 def _model(**overrides):

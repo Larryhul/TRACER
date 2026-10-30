@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from sage.experiments.plot_paper_evidence import (
+from tracer.experiments.plot_paper_evidence import (
     H3_POLICIES,
     bootstrap_weights,
     cumulative_safe_completion,

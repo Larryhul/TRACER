@@ -1,15 +1,17 @@
 # Verification
 
-The standalone publication directory was checked locally on 2026-10-27.
+The release checks cover installation, model serialization, the public CPU regression suite and the [demonstration](demo.md). CI runs on Linux and Windows.
 
-| Check | Outcome |
-| --- | --- |
-| `test_response_experiment.py`, `test_belief_experiment.py`, `test_closed_loop_correctness.py` | **110 passed**, CPU, Python 3.12 |
-| Causal-response quickstart training | Passed; one epoch, validation metrics and checkpoint saved |
-| Wheel build and separate-target installation | Passed; installed response and belief modules import successfully |
-| Retained source identity and numerical CSV preservation | Passed for 611 copied source/asset files |
-| Credential-pattern, internal-material and file-size scan | Passed for the publication candidate files |
+The local v0.2.0 run on Windows/Python 3.12 collected 889 tests: 887 passed and two were skipped, for CUDA availability and an archived formal-run summary. Both navigation packages were installed together with zero shared Python file paths. The installed TRACER demo ran outside the source directory using the downloaded synthetic checkpoint.
 
-The default `pytest` target is the three-file core suite above. The full extended test collection was not run; invoke extended test files explicitly when their external simulators and archived inputs are available. Core regression and quickstart success do not reproduce the complete formal multi-seed or external navigation experiments; required assets are listed in [assets](assets.md).
+```bash
+python tools/check_repository.py
+python -m pytest -q
+python -m tracer.demo --output outputs/demo
+```
 
-The GitHub workflow runs the asset check and these three core test files on push and pull request. A live GitHub workflow result is separate from the local results above.
+The asset check verifies retained file hashes and local documentation links. Test output reports its passed and skipped cases. Tests requiring CUDA or archived formal-run assets carry explicit prerequisites.
+
+The release process also builds a wheel, installs it in a separate directory and checks imports and the demo outside the source tree. Compatibility checks cover old class paths and coexistence with other Python packages without registering global aliases.
+
+These are CPU software checks. Full benchmark reruns and physical-robot validation are separate research workflows.

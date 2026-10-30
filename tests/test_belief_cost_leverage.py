@@ -4,8 +4,8 @@ import numpy as np
 import pytest
 import torch
 
-from sage.response.planning_support import belief_cost_adjustment
-from sage.experiments.planner_sensitivity import PLANNER_COMPONENTS
+from tracer.response.planning_support import belief_cost_adjustment
+from tracer.experiments.planner_sensitivity import PLANNER_COMPONENTS
 
 
 @pytest.mark.parametrize("leverage", [0.5, 1.0, 2.0, 4.0])
@@ -33,7 +33,7 @@ def test_adjustment_never_operates_on_masked_infinities():
 
 @pytest.mark.parametrize("admissible", [[True, True], [True, False]])
 def test_external_leverage_changes_only_scores_not_safety(monkeypatch, admissible):
-    import sage.experiments.run_sicnav_tracer_loop as runner
+    import tracer.experiments.run_sicnav_tracer_loop as runner
 
     class Robot:
         radius = 0.25

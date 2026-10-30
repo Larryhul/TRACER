@@ -4,14 +4,14 @@ import numpy as np
 import pytest
 import torch
 
-from sage.data.external_response import (
+from tracer.data.external_response import (
     assign_response_modes,
     build_sequence_episodes,
     fit_response_modes,
     stable_entity_id,
 )
-from sage.response.external_checkpoint_adapter import ExternalResponseCheckpointAdapter
-from sage.response.models import ResponseModelConfig, TeamResponsePredictor
+from tracer.response.external_checkpoint_adapter import ExternalResponseCheckpointAdapter
+from tracer.response.models import ResponseModelConfig, TeamResponsePredictor
 
 
 def _positions(time: int = 72, entities: int = 3) -> np.ndarray:

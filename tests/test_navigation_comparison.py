@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from sage.experiments.compare_navigation_validation import METRICS, compare
+from tracer.experiments.compare_navigation_validation import METRICS, compare
 
 
 def fixtures(tmp_path, missing=False, duplicate=False):

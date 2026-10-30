@@ -40,7 +40,7 @@ then
 fi
 
 if [[ ! -f "$OUTPUT/summary.json" ]]; then
-    "$PYTHON" -u "$REPO/sage/experiments/confirm_executable_value.py" \
+    "$PYTHON" -u "$REPO/tracer/experiments/confirm_executable_value.py" \
         --checkpoint "$CHECKPOINT" --calibration "$CALIBRATION" --source-metadata "$METADATA" \
         --value-model "$MODEL" --output-dir "$OUTPUT" --case-start 1400 --cases 64 \
         --excluded-cases $(seq 628 755) --device cuda

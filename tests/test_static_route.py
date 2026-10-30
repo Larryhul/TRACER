@@ -1,7 +1,7 @@
 import numpy as np
 
-from sage.response.static_route import static_route
-from sage.response.unicycle_candidates import UnicycleLimits
+from tracer.response.static_route import static_route
+from tracer.response.unicycle_candidates import UnicycleLimits
 
 
 def test_static_route_uses_doorway_instead_of_walking_into_wall():

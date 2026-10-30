@@ -2,17 +2,17 @@ import pytest
 import torch
 from torch.utils.data import DataLoader
 
-from sage.belief.filter import run_categorical_filter
-from sage.experiments.audit_h2_scale_calibration import _brier_from_rows
-from sage.experiments.audit_component_identity_replay import METRICS, METHODS, aggregate_contrasts, recording_scores
-from sage.experiments.train_persistent_trajectory_response import _evaluate, _shuffled_identity_filter, causal_training_beliefs, mixture_mean_trajectory_loss
-from sage.response.persistent_models import (
+from tracer.belief.filter import run_categorical_filter
+from tracer.experiments.audit_h2_scale_calibration import _brier_from_rows
+from tracer.experiments.audit_component_identity_replay import METRICS, METHODS, aggregate_contrasts, recording_scores
+from tracer.experiments.train_persistent_trajectory_response import _evaluate, _shuffled_identity_filter, causal_training_beliefs, mixture_mean_trajectory_loss
+from tracer.response.persistent_models import (
     BeliefConditionedTeamResponseModel,
     PersistentTrajectoryModelConfig,
     TrajectoryRecurrentBelief,
     TrajectoryRecurrentConfig,
 )
-from sage.response.persistent_trajectory import MultiEntityPersistentTrajectoryEpisodeDataset, MultiEntityPersistentTrajectorySpec
+from tracer.response.persistent_trajectory import MultiEntityPersistentTrajectoryEpisodeDataset, MultiEntityPersistentTrajectorySpec
 
 
 @pytest.mark.parametrize("entities", [2, 3, 4])
@@ -117,7 +117,7 @@ def test_belief_weighted_trajectory_loss_preserves_uniform_default_and_gradients
 
 
 def test_frozen_training_support_preserves_deployed_least_risk_fallback():
-    from sage.experiments.train_component_mode_contrast import frozen_executable_support
+    from tracer.experiments.train_component_mode_contrast import frozen_executable_support
 
     model = BeliefConditionedTeamResponseModel(PersistentTrajectoryModelConfig(history=4, horizon=4, hidden_dim=16)).eval()
     current = torch.zeros(2, 4, 2, 4)

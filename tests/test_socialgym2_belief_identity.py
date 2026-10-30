@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from sage.experiments.run_socialgym2_tracer_loop import HumanTrack, _scene_from_responses, _update_beliefs
+from tracer.experiments.run_socialgym2_tracer_loop import HumanTrack, _scene_from_responses, _update_beliefs
 
 
 def _track(track_id):

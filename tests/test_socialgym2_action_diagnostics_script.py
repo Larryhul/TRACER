@@ -58,7 +58,7 @@ def test_action_diagnostics_deduplicate_tracks_and_preserve_maps(tmp_path: Path)
 
 def test_action_diagnostics_reject_tampered_trace(tmp_path: Path) -> None:
     aggregate = _fixture(tmp_path)
-    metadata = json.loads((aggregate / "metadata.json").read_text())
+    metadata = json.loads((aggregate / "metadata.json").read_text(encoding="utf-8"))
     source = Path(metadata["source_artifacts"][0]["path"])
     with (source / "belief_trace.csv").open("a") as handle:
         handle.write("tampered\n")

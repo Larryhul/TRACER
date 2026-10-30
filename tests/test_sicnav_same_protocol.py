@@ -2,8 +2,8 @@ import numpy as np
 import pytest
 from collections import namedtuple
 
-from sage.experiments.run_sicnav_same_protocol import _case_means, _normalise
-from sage.experiments.run_sicnav_tracer_loop import (
+from tracer.experiments.run_sicnav_same_protocol import _case_means, _normalise
+from tracer.experiments.run_sicnav_tracer_loop import (
     _candidate_pool,
     _augment_with_safe_recovery_candidates,
     _counterfactual_candidate_costs,
@@ -147,7 +147,7 @@ def test_candidate_pool_can_include_an_external_proposal_without_changing_shape(
 
 
 def test_executor_safe_mask_preserves_projected_unicycle_heading(monkeypatch):
-    from sage.experiments import run_sicnav_tracer_loop as runner
+    from tracer.experiments import run_sicnav_tracer_loop as runner
 
     robot = type("UnicycleRobot", (), {"kinematics": "unicycle"})()
     candidates = np.asarray(
@@ -209,7 +209,7 @@ def test_sage_hybrid_keeps_generator_horizon_when_response_horizon_is_shorter(mo
         return current, sage_relative, sage_global, None
 
     monkeypatch.setattr(
-        "sage.experiments.run_sicnav_tracer_loop._sage_candidate_pool",
+        "tracer.experiments.run_sicnav_tracer_loop._sage_candidate_pool",
         fake_sage_pool,
     )
     _, relative, global_candidates, _ = _sage_hybrid_candidate_pool(

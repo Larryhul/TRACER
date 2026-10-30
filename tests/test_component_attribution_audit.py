@@ -5,12 +5,12 @@ import shutil
 import pytest
 import torch
 
-from sage.experiments.audit_component_attribution import audit_directory, compare_inference_only, compare_inference_settings, decision_contribution, paired_pipeline_contrasts
-from sage.experiments.eval_component_factorial import FACTORIAL_POLICIES, summarize_factorial
-from sage.experiments.eval_persistent_closed_loop import _evaluate_policy
-from sage.experiments.merge_component_factorial import compatible_shard_configuration, merge_factorial_shards
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.audit_component_attribution import audit_directory, compare_inference_only, compare_inference_settings, decision_contribution, paired_pipeline_contrasts
+from tracer.experiments.eval_component_factorial import FACTORIAL_POLICIES, summarize_factorial
+from tracer.experiments.eval_persistent_closed_loop import _evaluate_policy
+from tracer.experiments.merge_component_factorial import compatible_shard_configuration, merge_factorial_shards
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
 
 
 def policies():
@@ -111,7 +111,7 @@ def test_audit_reconstructs_evidence_and_rejects_unsupported_summary(factorial_e
     with pytest.raises(ValueError, match="planning_checkpoint"):
         compare_inference_settings(result, changed)
     path = factorial_evidence / "summary.json"
-    summary = json.loads(path.read_text())
+    summary = json.loads(path.read_text(encoding="utf-8"))
     summary["results"]["closed_loop"]["id"]["policy_means"]["persistent-joint"]["realized_total_cost"] -= 1
     path.write_text(json.dumps(summary))
     with pytest.raises(ValueError, match="reconstructed episode evidence"):
@@ -120,7 +120,7 @@ def test_audit_reconstructs_evidence_and_rejects_unsupported_summary(factorial_e
 
 def test_audit_rejects_unused_runtime_weight(factorial_evidence):
     path = factorial_evidence / "seed99_id_closed_loop.json"
-    data = json.loads(path.read_text())
+    data = json.loads(path.read_text(encoding="utf-8"))
     data["persistent-joint"]["window_records"][0][0]["response_gate_weight"] = 1.
     path.write_text(json.dumps(data))
     with pytest.raises(ValueError, match="runtime Joint weight"):

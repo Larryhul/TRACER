@@ -1,25 +1,19 @@
-# External assets and reproducibility
+# TRACER assets
 
-## Included
+## Available in the repository
 
-Research code, retained tests, configurations, 14 selected CSVs and a small causal-response training example.
+Source code, indexed configurations, selected numerical results, method graphics and a runnable CPU demonstration.
 
-## External dependencies
+## Model downloads
 
-| Asset | Role | Availability |
-| --- | --- | --- |
-| SocialGym2 | Multi-robot social-navigation evaluation | Install from its upstream project; requires simulator/runtime setup |
-| SICNav / CrowdSimPlus | External navigation and held-out scenes | Separate solver and simulator environment |
-| CrowdNav / Python-RVO2 | Navigation baselines | Separate upstream dependencies |
-| SACSoN / Bi3 | Real-trajectory and external response evaluation | Dataset and model terms apply |
-| Response checkpoints and original per-episode runs | Frozen formal estimates and reanalysis | Retained outside this Git source release; no hosted download is advertised |
+Small generated-data demonstration checkpoint; formal navigation checkpoints are not included.
 
-[External-source inventory](../third_party/README.md) identifies the upstream projects. [Snapshot hashes](../provenance/external_snapshots.csv) fingerprint the local source snapshots used during recovery; they are not upstream Git commit identifiers. Pin a verified upstream revision or restore the matching original snapshot before claiming exact simulator reproduction.
+Use [the model guide](models.md) to download and verify the release archive. File identities are recorded in [model_release.json](../provenance/model_release.json).
 
-The original archive retained additional raw data and training weights. This repository does not imply that the entire historical asset set has been unpacked or made downloadable. CPU core checks and the quickstart use generated data and work without those assets.
+## Dataset and simulator inputs
 
-## Result identity
+External navigation uses SocialGym2, SICNav/CrowdSimPlus and their solver/runtime dependencies. Real-trajectory studies use the corresponding dataset inputs. Install these from the [upstream source index](../third_party/README.md).
 
-The paper and its tables are available in the [arXiv preprint](https://arxiv.org/abs/2609.18776). Selected CSVs also contain formal reanalysis and later external checks, with their status labels preserved. Large raw `runs.json` files, training weights and full third-party snapshots are outside this source repository.
+[Snapshot hashes](../provenance/external_snapshots.csv) identify the retained local source snapshots. A fresh installation should record the actual upstream commit alongside its runtime environment. Formal protocols also require matching response checkpoints, calibration files and per-episode records.
 
-Machine-specific source paths have portable aliases in executable defaults and CSV metadata. Every changed source is identified by original and distributed hash in [source_files.csv](../provenance/source_files.csv).
+Dataset files, trained outputs and full simulator trees stay outside source control. Copied source identities are recorded in [provenance](../provenance/README.md).

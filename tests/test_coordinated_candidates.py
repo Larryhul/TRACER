@@ -6,8 +6,8 @@ import numpy as np
 import pytest
 import torch
 
-from sage.response.closed_loop import CandidatePool
-from sage.response.coordinated_candidates import CoordinatedCandidateAdapter, complete_joint_speed_candidates
+from tracer.response.closed_loop import CandidatePool
+from tracer.response.coordinated_candidates import CoordinatedCandidateAdapter, complete_joint_speed_candidates
 
 
 def original_pool(robots=3, count=16):
@@ -78,8 +78,8 @@ def test_adapter_single_and_batch_have_identical_observable_completion():
 
 
 def test_completion_configuration_is_opt_in(monkeypatch):
-    from sage.experiments.finetune_h3_response_ranking import _adapter_from_config
-    from sage.response.sage_candidate_adapter import SAGECandidateAdapter
+    from tracer.experiments.finetune_h3_response_ranking import _adapter_from_config
+    from tracer.response.sage_candidate_adapter import SAGECandidateAdapter
 
     generator = SimpleNamespace()
     monkeypatch.setattr(SAGECandidateAdapter, "from_checkpoint", lambda *args, **kwargs: generator)

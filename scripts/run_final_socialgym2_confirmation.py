@@ -50,7 +50,7 @@ def _snapshot_source(root: Path, destination: Path) -> dict[str, str]:
     def ignore(_directory: str, names: list[str]) -> set[str]:
         return {name for name in names if name == "__pycache__" or name.endswith((".pyc", ".pyo"))}
 
-    shutil.copytree(root / "sage", destination / "sage", ignore=ignore)
+    shutil.copytree(root / "tracer", destination / "tracer", ignore=ignore)
     manifest = {
         str(path.relative_to(destination)): _sha256(path)
         for path in sorted(destination.rglob("*"))
@@ -425,7 +425,7 @@ def run(args: argparse.Namespace) -> None:
     ros_state_root = Path("/tmp/h3_ros_overlay") / f"{output.name}_runner"
     try:
         sys.path.insert(0, str(snapshot))
-        from sage.experiments.socialgym2_physics_contract import verify_physics_audits
+        from tracer.experiments.socialgym2_physics_contract import verify_physics_audits
 
         verification = verify_physics_audits(
             [physics / "intersection.json", physics / "open.json"],
@@ -464,7 +464,7 @@ def run(args: argparse.Namespace) -> None:
                     target = output / f"{Path(scenario).name}_seed{seed}" / policy
                     target.parent.mkdir(parents=True, exist_ok=True)
                     command = [
-                        str(python), "-u", "-m", "sage.experiments.run_socialgym2_tracer_loop",
+                        str(python), "-u", "-m", "tracer.experiments.run_socialgym2_tracer_loop",
                         "--source", str(source),
                         "--output-dir", str(target),
                         "--response-checkpoint", str(response),
@@ -542,7 +542,7 @@ def run(args: argparse.Namespace) -> None:
         ]
         set_status("AGGREGATING")
         aggregate_command = [
-            str(python), "-u", "-m", "sage.experiments.aggregate_socialgym2_tracer",
+            str(python), "-u", "-m", "tracer.experiments.aggregate_socialgym2_tracer",
             "--output-dir", str(output / "aggregate"),
             "--expected-policies", *POLICIES,
             "--expected-seeds", *map(str, SEEDS),

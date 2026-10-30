@@ -4,7 +4,7 @@ import math
 import pytest
 import torch
 
-from sage.experiments.calibrate_external_belief_cadence import (
+from tracer.experiments.calibrate_external_belief_cadence import (
     DEFAULT_SCALES,
     _controller_args,
     build_track_tensors,
@@ -179,7 +179,7 @@ def test_reject_noncontiguous_track_masks():
 
 
 def test_response_calibration_scores_predictions_before_current_observation():
-    from sage.belief.filter import run_categorical_filter
+    from tracer.belief.filter import run_categorical_filter
     likelihoods = torch.tensor([[[2., 0., -1.], [1., 0., -1.], [-2., 2., 0.]]])
     active = torch.ones(1, 3, dtype=torch.bool)
     arguments = {"phase": "validation", "split": "val", "cases": _splits()["val"], "case_splits": _splits(),

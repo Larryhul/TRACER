@@ -4,14 +4,14 @@ import numpy as np
 import pytest
 import torch
 
-from sage.experiments import eval_persistent_closed_loop as loop
-from sage.experiments.planner_sensitivity import (
+from tracer.experiments import eval_persistent_closed_loop as loop
+from tracer.experiments.planner_sensitivity import (
     belief_sensitivity_diagnostics,
     candidate_score_decomposition,
     mode_cost_selection_envelope,
 )
-from sage.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
-from sage.response.persistent_models import (
+from tracer.response.closed_loop import ClosedLoopSpec, PlanningCostConfig
+from tracer.response.persistent_models import (
     BeliefConditionedTeamResponseModel,
     PersistentTrajectoryModelConfig,
 )

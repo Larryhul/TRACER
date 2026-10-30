@@ -4,11 +4,11 @@ set -euo pipefail
 EPOCHS=${1:-60}
 DEVICE=${2:-cuda}
 CONFIG=${3:-configs/sage_socialgym.yaml}
-SAVE_DIR=${4:-experiments/sage/socialgym/default}
+SAVE_DIR=${4:-experiments/tracer/socialgym/default}
 NUM_ROBOTS=${5:-}
 NUM_ENTITIES=${6:-}
 
-CMD=(python -m sage.experiments.train_socialgym_sage \
+CMD=(python -m tracer.experiments.train_socialgym_sage \
   --config "${CONFIG}" \
   --epochs "${EPOCHS}" \
   --batch-size 128 \

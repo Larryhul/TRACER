@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pytest
 
-from sage.experiments import plot_reference_trajectories as common
-from sage.experiments.plot_multirobot_h3 import (
+from tracer.experiments import plot_reference_trajectories as common
+from tracer.experiments.plot_multirobot_h3 import (
     POLICIES,
     align_humans,
     draw_panel,

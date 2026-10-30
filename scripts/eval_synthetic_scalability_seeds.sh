@@ -21,14 +21,14 @@ run_eval() {
   local nr=$1
   local seed=$2
   local mode=$3
-  local checkpoint="experiments/sage/synthetic/nr${nr}_ne${NUM_ENTITIES}/synthetic_sage_epoch${EPOCH}.pt"
+  local checkpoint="experiments/tracer/synthetic/nr${nr}_ne${NUM_ENTITIES}/synthetic_sage_epoch${EPOCH}.pt"
 
   if [[ ! -f "${checkpoint}" ]]; then
     echo "[Synthetic seeds] missing checkpoint=${checkpoint}" >&2
     return 1
   fi
 
-  local cmd=(python -m sage.experiments.eval_synthetic_sage
+  local cmd=(python -m tracer.experiments.eval_synthetic_sage
     --config "${CONFIG}"
     --split test
     --checkpoint "${checkpoint}"
@@ -61,6 +61,6 @@ for seed in ${SEEDS}; do
   done
 done
 
-python -m sage.experiments.summarize_synthetic_seed_results   --input "${CSV}"   --output "${SUMMARY_CSV}"
+python -m tracer.experiments.summarize_synthetic_seed_results   --input "${CSV}"   --output "${SUMMARY_CSV}"
 
 echo "[Synthetic seeds] summary_csv=${SUMMARY_CSV}"

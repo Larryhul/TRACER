@@ -130,7 +130,7 @@ def evaluate(scenario: str, worker: int) -> str:
         MKL_NUM_THREADS="1",
     )
     command = [
-        str(PYTHON), "-u", "-m", "sage.experiments.run_socialgym2_tracer_loop",
+        str(PYTHON), "-u", "-m", "tracer.experiments.run_socialgym2_tracer_loop",
         "--source", str(SOURCE_ROOT / f"worker{worker}/social_gym"),
         "--output-dir", str(output),
         "--response-checkpoint", str(RESPONSE),
@@ -175,7 +175,7 @@ def evaluate(scenario: str, worker: int) -> str:
             check=True,
         )
     subprocess.run([
-        str(PYTHON), "-m", "sage.experiments.analyze_socialgym2_execution",
+        str(PYTHON), "-m", "tracer.experiments.analyze_socialgym2_execution",
         "--input", str(output),
         "--output", str(OUTPUT / f"execution_prefix_dev_{scenario}_diagnosis_{VERSION}.json"),
     ], cwd=ALGORITHM_ROOT, env=environment, check=True)

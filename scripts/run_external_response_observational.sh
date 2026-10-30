@@ -16,7 +16,7 @@ for dataset in thor_magni huron_sacson; do
     max_entities=1
   fi
   for seed in ${SEEDS}; do
-    PYTHONPATH=. "${PYTHON}" -u -m sage.experiments.run_external_response_benchmark \
+    PYTHONPATH=. "${PYTHON}" -u -m tracer.experiments.run_external_response_benchmark \
       --dataset "${dataset}" \
       --data-dir "${DATA_DIR}" \
       --output-dir "${OUTPUT_ROOT}/${dataset}" \

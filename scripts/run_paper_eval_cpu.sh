@@ -4,7 +4,7 @@
 # 运行: bash scripts/run_paper_eval_cpu.sh 2>&1 | tee results/paper_eval_cpu.log
 
 RESULT="results/paper_eval_cpu.csv"
-CFG="configs/sage.yaml"
+CFG="configs/tracer.yaml"
 DEV="cpu"
 SAMPLES=20
 STRIDE=10
@@ -20,10 +20,10 @@ run_homo() {
     echo "=== [Homogeneous] $ds guided=$guided ==="
     local extra=""
     [ "$guided" = "false" ] && extra="--unguided"
-    python -m sage.experiments.eval_real_sage \
+    python -m tracer.experiments.eval_real_sage \
       --config configs/sage_homogeneous.yaml \
       --dataset $ds --split test \
-      --checkpoint experiments/sage/eth_ucy/homogeneous/v2/${ds}_sage_epoch100.pt \
+      --checkpoint experiments/tracer/eth_ucy/homogeneous/v2/${ds}_sage_epoch100.pt \
       --samples $SAMPLES --stride $STRIDE --batch-size $BATCH \
       --limit-samples $LIMIT --device $DEV \
       $extra --save-csv $RESULT
@@ -36,10 +36,10 @@ run_decoupled() {
     echo "=== [Decoupled] $ds guided=$guided ==="
     local extra=""
     [ "$guided" = "false" ] && extra="--unguided"
-    python -m sage.experiments.eval_real_sage \
+    python -m tracer.experiments.eval_real_sage \
       --config configs/sage_decoupled.yaml \
       --dataset $ds --split test \
-      --checkpoint experiments/sage/eth_ucy/decoupled/v2/${ds}_sage_epoch100.pt \
+      --checkpoint experiments/tracer/eth_ucy/decoupled/v2/${ds}_sage_epoch100.pt \
       --samples $SAMPLES --stride $STRIDE --batch-size $BATCH \
       --limit-samples $LIMIT --device $DEV \
       $extra --save-csv $RESULT
@@ -57,7 +57,7 @@ echo ""
 echo "=== Phase 1/5: MID Baseline ==="
 for ds in $DS; do
   echo "--- [MID] $ds ---"
-  python -m sage.experiments.eval_learned_baseline \
+  python -m tracer.experiments.eval_learned_baseline \
     --config $CFG --dataset $ds --split test \
     --checkpoint experiments/baselines/mid/eth_ucy/${ds}_mid_epoch60.pt \
     --baseline mid \

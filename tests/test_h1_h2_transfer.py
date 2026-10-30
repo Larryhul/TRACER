@@ -3,12 +3,12 @@ from dataclasses import replace
 import pytest
 import torch
 
-from sage.response.h1_transfer import initialize_h1_encoder, initialize_single_robot_response
-from sage.response.models import ResponseModelConfig, TeamResponsePredictor
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
-from sage.experiments.calibrate_persistent_belief import calibration_scores
-from sage.response.external_checkpoint_adapter import delayed_response_prediction
-from sage.response.data import EntityResponseBatch
+from tracer.response.h1_transfer import initialize_h1_encoder, initialize_single_robot_response
+from tracer.response.models import ResponseModelConfig, TeamResponsePredictor
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.experiments.calibrate_persistent_belief import calibration_scores
+from tracer.response.external_checkpoint_adapter import delayed_response_prediction
+from tracer.response.data import EntityResponseBatch
 
 
 def test_h1_encoder_transfer_preserves_h2_mode_decoder_and_supports_extra_robot(tmp_path):

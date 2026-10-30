@@ -23,7 +23,7 @@ collect() {
         echo "SKIP completed $name"
         return
     fi
-    "$PYTHON" -u "$SOURCE/sage/experiments/collect_external_planner_supervision.py" \
+    "$PYTHON" -u "$SOURCE/tracer/experiments/collect_external_planner_supervision.py" \
         --source-metadata "$METADATA" --checkpoint "$CHECKPOINT" --calibration "$CALIBRATION" \
         --output-dir "$ROOT/$name" --split "$split" --case-splits "$SPLITS" \
         --case-subset "$@" --audit-stride 4 --continuation-windows 60 --continuation-branches 6 \

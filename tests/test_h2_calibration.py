@@ -5,8 +5,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sage.experiments.analyze_h2_calibration import _ece
-from sage.experiments.summarize_h2_probabilistic_diagnostics import summarize
+from tracer.experiments.analyze_h2_calibration import _ece
+from tracer.experiments.summarize_h2_probabilistic_diagnostics import summarize
 
 
 class H2CalibrationTest(unittest.TestCase):

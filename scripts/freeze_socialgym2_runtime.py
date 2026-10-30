@@ -46,8 +46,8 @@ def main() -> None:
         cached = args.vfs / "home/rosdev/social_gym" / relative
         if digest(patched) != digest(cached):
             raise ValueError(f"build source differs from declared checkout: {relative}")
-        patch.extend(difflib.unified_diff(original.read_text().splitlines(keepends=True),
-                                        patched.read_text().splitlines(keepends=True),
+        patch.extend(difflib.unified_diff(original.read_text(encoding="utf-8").splitlines(keepends=True),
+                                        patched.read_text(encoding="utf-8").splitlines(keepends=True),
                                         fromfile=f"a/{relative}", tofile=f"b/{relative}"))
         sources[relative] = {"original_sha256": digest(original), "patched_sha256": digest(patched)}
     patch_path = args.output_dir / "runtime.patch"

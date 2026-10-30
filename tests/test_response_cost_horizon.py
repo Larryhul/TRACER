@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from sage.response.closed_loop import PlanningCostConfig, expected_candidate_costs
+from tracer.response.closed_loop import PlanningCostConfig, expected_candidate_costs
 
 
 def test_short_response_cost_ignores_unreliable_suffix_without_changing_task_cost():

@@ -5,9 +5,9 @@ import pytest
 import torch
 import numpy as np
 
-from sage.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
-from sage.response.static_context import segment_context_features
-from sage.experiments.add_live_static_context import relative_static_segments, validate_rolling_reset
+from tracer.response.persistent_models import BeliefConditionedTeamResponseModel, PersistentTrajectoryModelConfig
+from tracer.response.static_context import segment_context_features
+from tracer.experiments.add_live_static_context import relative_static_segments, validate_rolling_reset
 
 
 def test_segment_context_is_endpoint_order_invariant():

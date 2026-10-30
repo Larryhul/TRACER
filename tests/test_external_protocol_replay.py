@@ -1,6 +1,6 @@
 import pytest
 
-from sage.experiments.replay_external_protocol import replay_parameters
+from tracer.experiments.replay_external_protocol import replay_parameters
 
 
 def _metadata():
