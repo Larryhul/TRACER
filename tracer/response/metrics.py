@@ -1,3 +1,5 @@
+"""Response metrics: Gaussian negative log-likelihood and trajectory errors."""
+
 from __future__ import annotations
 
 import math

@@ -1,3 +1,5 @@
+"""Consistency contract for closed-loop runs: task goals, observable-state hashing and candidate-state validation."""
+
 from __future__ import annotations
 
 import hashlib

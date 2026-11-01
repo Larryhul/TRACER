@@ -1,3 +1,5 @@
+"""ETH/UCY dataset wrapper that builds SAGE batches with a target-as-robot proxy and speed-derived role labels."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

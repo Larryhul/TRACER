@@ -1,3 +1,5 @@
+"""Joint candidate completion and coordination for multi-robot action sets."""
+
 import itertools
 import math
 

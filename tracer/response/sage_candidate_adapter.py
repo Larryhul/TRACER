@@ -1,3 +1,5 @@
+"""Adapter that turns SAGE-generated trajectories into TRACER candidate plans."""
+
 from __future__ import annotations
 
 import hashlib

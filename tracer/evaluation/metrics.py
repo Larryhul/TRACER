@@ -1,3 +1,5 @@
+"""Trajectory accuracy (ADE/FDE), goal reaching, collision, comfort and social-compliance metrics for SAGE evaluation."""
+
 from __future__ import annotations
 
 from typing import Dict

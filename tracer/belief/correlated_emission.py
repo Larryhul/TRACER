@@ -1,3 +1,5 @@
+"""Correlated emission models and sequence likelihoods for response-mode evidence."""
+
 from dataclasses import dataclass
 import math
 

@@ -1,3 +1,5 @@
+"""Batch containers and candidate shuffling utilities for entity-response learning."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, replace

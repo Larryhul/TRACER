@@ -1,3 +1,5 @@
+"""Mode-conditioned response likelihoods that connect observed responses to belief updates."""
+
 from __future__ import annotations
 
 import math

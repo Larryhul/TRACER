@@ -1,3 +1,5 @@
+"""Reliability-aware pairwise value features and model-action selection."""
+
 from __future__ import annotations
 
 import numpy as np

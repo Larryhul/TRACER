@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add a Colab quick-start notebook, README BibTeX, a ruff correctness check with pre-commit hooks, and module docstrings.
+- Add a 1280x640 social preview image (`docs/assets/social-preview.png`).
+
 ## 0.2.0 — 2026-10-30
 
 - Use the independent `tracer` namespace, including namespaced legacy modules.

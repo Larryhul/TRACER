@@ -1,3 +1,5 @@
+"""Heterogeneous scene batch: agent roles, histories, futures, masks and goals, plus velocity integration helpers."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

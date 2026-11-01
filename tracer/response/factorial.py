@@ -1,3 +1,5 @@
+"""Pairwise factorial interaction analysis for non-additive joint-action effects."""
+
 from __future__ import annotations
 
 import math

@@ -1,3 +1,5 @@
+"""Training and evaluation loops for response-prediction experiments."""
+
 from __future__ import annotations
 
 from collections import defaultdict

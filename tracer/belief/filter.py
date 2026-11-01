@@ -1,3 +1,5 @@
+"""Categorical belief filtering: Bayes updates, forgetting, hazard-based updates and change-point detection."""
+
 from __future__ import annotations
 
 from collections.abc import Hashable

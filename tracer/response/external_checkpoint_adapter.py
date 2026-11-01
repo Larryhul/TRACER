@@ -1,3 +1,5 @@
+"""Adapter that wraps external trajectory-model checkpoints as response predictors."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, replace

@@ -1,3 +1,5 @@
+"""Perception-mode utilities that control which entities the robot observes."""
+
 from __future__ import annotations
 
 from typing import Any, Mapping

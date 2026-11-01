@@ -1,3 +1,5 @@
+"""Social-force baseline for heterogeneous scenes."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

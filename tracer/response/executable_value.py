@@ -1,3 +1,5 @@
+"""Executable-value features and paired value fitting for response-aware action selection."""
+
 from __future__ import annotations
 
 import numpy as np

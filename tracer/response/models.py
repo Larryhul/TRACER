@@ -1,3 +1,5 @@
+"""Joint-action response predictors, including the TRACER team predictor and published-style baselines."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

@@ -1,3 +1,5 @@
+"""Synthetic closed-loop simulator: candidate pools, realized windows, planning costs and prefix execution."""
+
 from __future__ import annotations
 
 import copy

@@ -1,3 +1,5 @@
+"""Belief-conditioned and recurrent response models that carry identity-bound evidence across windows."""
+
 from __future__ import annotations
 
 import math

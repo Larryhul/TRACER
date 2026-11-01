@@ -1,3 +1,5 @@
+"""Initialization helpers that transfer encoder and single-robot response weights between models."""
+
 from pathlib import Path
 from typing import Any
 
