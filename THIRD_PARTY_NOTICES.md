@@ -13,3 +13,8 @@ Trajectron++-derived components retain the [Stanford Autonomous Systems Lab MIT 
 SocialGym2, CrowdNav, SICNav/CrowdSimPlus, SACSoN, Python-RVO2 and Bi3 are separate dependencies. Their full snapshots are not redistributed here. See [third_party/README.md](third_party/README.md) for source links and snapshot identity, and follow each project's license and installation requirements.
 
 The repository's [MIT license](LICENSE) applies to original code and repository documentation. Upstream notices remain in force. Manuscripts, figures and dataset inputs retain their separate rights and notices; the code license does not relicense them.
+
+## Project page assets
+
+- Geist and Geist Mono fonts (`docs/assets/fonts/`): Vercel, SIL Open Font License 1.1, https://github.com/vercel/geist-font
+- Phosphor icons (inlined in `docs/index.html`): Phosphor Icons, MIT license, https://github.com/phosphor-icons/core
