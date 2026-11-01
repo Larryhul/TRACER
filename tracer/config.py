@@ -1,3 +1,5 @@
+"""YAML loading and construction of the SAGE-compatible configuration objects used by TRACER."""
+
 from __future__ import annotations
 
 from dataclasses import fields

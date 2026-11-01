@@ -1,3 +1,5 @@
+"""Segment-level static context features."""
+
 from __future__ import annotations
 
 import torch

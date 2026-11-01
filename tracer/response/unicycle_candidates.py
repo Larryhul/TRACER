@@ -1,3 +1,5 @@
+"""Unicycle-feasible candidate prefixes: projection, braking and diversification."""
+
 from __future__ import annotations
 
 import configparser

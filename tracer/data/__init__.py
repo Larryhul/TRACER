@@ -1,3 +1,5 @@
+"""Scene containers and dataset adapters for heterogeneous multi-agent navigation."""
+
 from .heterogeneous_scene import (
     AgentRole,
     HeterogeneousSceneBatch,

@@ -1,3 +1,5 @@
+"""Stanford Drone Dataset adapter with semantic role labels and multi-robot scene construction."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

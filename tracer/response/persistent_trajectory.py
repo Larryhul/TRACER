@@ -1,3 +1,5 @@
+"""Synthetic episode datasets with persistent entity response modes."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

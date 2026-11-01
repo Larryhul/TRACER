@@ -6,6 +6,7 @@
   <a href="https://github.com/Larryhul/TRACER/actions/workflows/cpu-checks.yml"><img alt="CPU checks" src="https://github.com/Larryhul/TRACER/actions/workflows/cpu-checks.yml/badge.svg"></a>
   <a href="https://arxiv.org/abs/2609.18776"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2609.18776-b31b1b.svg"></a>
   <a href="LICENSE"><img alt="Code license: MIT" src="https://img.shields.io/badge/code-MIT-0d9488.svg"></a>
+  <a href="https://colab.research.google.com/github/Larryhul/TRACER/blob/main/notebooks/quickstart.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 </p>
 
 <p align="center"><a href="#quick-start">Quick start</a> · <a href="docs/reproduction.md">Experiments</a> · <a href="docs/models.md">Models</a> · <a href="results/README.md">Results</a> · <a href="https://arxiv.org/abs/2609.18776">Paper</a> · <a href="README.zh-CN.md">中文</a></p>
@@ -78,3 +79,15 @@ provenance/    File origins and checksums
 ## Citation
 
 Please cite the [paper](https://arxiv.org/abs/2609.18776) when using TRACER in research. [BibTeX](docs/citation.bib) · [CITATION.cff](CITATION.cff).
+
+```bibtex
+@misc{tracer_manuscript,
+  title = {TRACER: Adaptive Multi-Robot Social Navigation via Joint Human-Response Prediction and Interaction-Aware Replanning},
+  author = {Hu, Lan and Liwang, Minghui and Zhu, Wenbo and Yi, Xinlei and Gong, Wei and Hong, Yiguang and Hosseinalipour, Seyyedali},
+  year = {2026},
+  eprint = {2609.18776},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.RO},
+  url = {https://arxiv.org/abs/2609.18776}
+}
+```

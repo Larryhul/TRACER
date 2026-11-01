@@ -1,3 +1,5 @@
+"""Synthetic sequences with persistent response modes for belief experiments."""
+
 from __future__ import annotations
 
 import math

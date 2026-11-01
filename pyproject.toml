@@ -30,3 +30,11 @@ exclude = ["tests*", "third_party*", "data", "data.*", "paper*", "results*"]
 testpaths = ["tests"]
 addopts = "-ra"
 markers = ["archived_assets: requires the locally retained formal experiment archive"]
+
+[tool.ruff]
+target-version = "py311"
+extend-exclude = ["models", "dataset", "environment", "evaluation", "utils", "third_party", "tracer/legacy"]
+
+[tool.ruff.lint]
+# Correctness checks only: syntax errors, undefined names and invalid constructs.
+select = ["E9", "F63", "F7", "F82"]

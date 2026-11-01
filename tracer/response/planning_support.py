@@ -1,3 +1,5 @@
+"""Planning helpers: belief cost adjustment, clearance, candidate diversification and entity cost aggregation."""
+
 from __future__ import annotations
 
 import numpy as np

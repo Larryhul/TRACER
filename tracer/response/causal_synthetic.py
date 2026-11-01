@@ -1,3 +1,5 @@
+"""Synthetic robot-caused response datasets with controlled joint-action effects."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

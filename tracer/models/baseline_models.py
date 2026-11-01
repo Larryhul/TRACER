@@ -1,3 +1,5 @@
+"""Learned baselines (Trajectron++-style CVAE and MID-style diffusion) sharing the SAGE scene interface."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

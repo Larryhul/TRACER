@@ -1,3 +1,5 @@
+"""Differentiable safety-social energy (collision, social comfort, kinematics, goal progress) and bounded robot-only guidance for diffusion sampling."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

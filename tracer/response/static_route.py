@@ -1,3 +1,5 @@
+"""Static route representation and lookup."""
+
 from __future__ import annotations
 
 import heapq

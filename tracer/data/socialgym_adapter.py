@@ -1,3 +1,5 @@
+"""SocialGym scene adapter producing HeterogeneousSceneBatch objects from simulator rollouts."""
+
 from __future__ import annotations
 
 import csv

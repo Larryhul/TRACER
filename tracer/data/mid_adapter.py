@@ -1,3 +1,5 @@
+"""Adapters that convert MID/Trajectron++ scene tensors into HeterogeneousSceneBatch objects."""
+
 from __future__ import annotations
 
 from typing import Optional

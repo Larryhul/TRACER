@@ -1,3 +1,5 @@
+"""Controlled synthetic navigation scenes used for smoke tests, training examples and robot-count scaling."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

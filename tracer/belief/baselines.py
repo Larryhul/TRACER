@@ -1,3 +1,5 @@
+"""Recurrent baselines for persistent belief tracking."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

@@ -1,3 +1,5 @@
+"""Heterogeneous graph transformer encoder producing role- and relation-aware context tokens."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

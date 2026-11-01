@@ -1,3 +1,5 @@
+"""Conditional diffusion over joint robot and entity futures, with a context-conditioned temporal transformer denoiser and guided sampling."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
