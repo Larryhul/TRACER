@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRACER: Adaptive Multi-Robot Social Navigation via Joint Human-Response Prediction and Interaction-Aware Replanning</title>
+<meta name="description" content="TRACER predicts how people respond to joint robot actions, executes a short plan, and updates persistent beliefs from the observed response before replanning.">
+<meta property="og:title" content="TRACER"><meta property="og:description" content="TRACER predicts how people respond to joint robot actions, executes a short plan, and updates persistent beliefs from the observed response before replanning.">
+<meta property="og:image" content="https://larryhul.github.io/TRACER/assets/social-preview.png">
+<style>
+:root{--bg:#101c35;--card:#1b2a45;--ink:#eef2f9;--mute:#9db0cf;--acc:#5fd3c0;--line:#2a3b5c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:920px;margin:0 auto;padding:40px 20px 72px}h1{font-family:Georgia,serif;font-size:2.4rem;line-height:1.2;margin:.2em 0}
+h2{font-family:Georgia,serif;margin:2.2em 0 .6em;border-bottom:1px solid var(--line);padding-bottom:.25em}
+.tag{color:var(--acc);letter-spacing:.08em;font-size:.8rem;text-transform:uppercase}.authors{color:var(--mute)}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}.links a{background:var(--card);border:1px solid var(--line);color:var(--ink);text-decoration:none;padding:8px 16px;border-radius:999px}
+.links a:hover{border-color:var(--acc)}img{max-width:100%;height:auto;border-radius:10px;display:block;margin:12px auto;background:#fff}
+table{border-collapse:collapse;width:100%}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left}th{background:var(--card)}
+pre{background:#0b1427;border:1px solid var(--line);border-radius:10px;padding:14px;overflow:auto;font-size:.85rem}code{font-family:ui-monospace,Consolas,monospace}
+.note{color:var(--mute);font-size:.9rem}ul{padding-left:1.2em}a{color:var(--acc)}footer{margin-top:3em;color:var(--mute);font-size:.85rem}
+</style></head><body><main>
+<div class="tag">Multi-robot social navigation</div>
+<h1>TRACER: Adaptive Multi-Robot Social Navigation via Joint Human-Response Prediction and Interaction-Aware Replanning</h1>
+<p class="authors">Lan Hu, Minghui Liwang, Wenbo Zhu, Xinlei Yi, Wei Gong, Yiguang Hong, Seyyedali Hosseinalipour</p>
+<nav class="links"><a href="https://arxiv.org/abs/2609.18776">Paper (arXiv)</a><a href="https://github.com/Larryhul/TRACER">Code</a><a href="https://github.com/Larryhul/TRACER/blob/main/docs/reproduction.md">Reproduction</a><a href="https://github.com/Larryhul/TRACER/blob/main/results/README.md">Results</a><a href="https://colab.research.google.com/github/Larryhul/TRACER/blob/main/notebooks/quickstart.ipynb">Colab</a></nav>
+<img src="assets/hero.png" alt="TRACER" style="background:none">
+<h2>Overview</h2><p>TRACER predicts how people respond to joint robot actions, executes a short plan, and updates persistent beliefs from the observed response before replanning.</p><ul><li><b>Predict joint-action responses:</b> individual-robot effects and non-additive pairwise interactions.</li><li><b>Remember interactions:</b> identity-bound beliefs updated from executed-prefix observations.</li><li><b>Replan online:</b> response-aware candidate evaluation and synchronized execution.</li></ul>
+<h2>Method</h2><img src="assets/method.png" alt="TRACER method overview" style="max-width:100%">
+<h2>Demo</h2><p class="note">The CPU example trains a small response model on generated data, then runs seven decision windows with persistent belief updates. Runs on CPU with no dataset.</p><img src="assets/demo.gif" alt="TRACER CPU demonstration" style="max-width:640px"><pre><code>python -m tracer.demo --output outputs/demo</code></pre>
+<h2>Results</h2><table><tr><th>Setting</th><th>Reported result</th></tr><tr><td>Controlled joint-action response</td><td>Pair-effect RMSE decreases 23.94% relative to the capacity-matched additive predictor</td></tr><tr><td>Identity and memory</td><td>Persistent beliefs evaluated under ID/OOD identity and memory ablations</td></tr><tr><td>SocialGym2 navigation</td><td>Collision-free completion rises from 22.5% to 31.6% against GoAlone over 320 paired episodes</td></tr></table><p class="note">The SocialGym2 comparison is against GoAlone; it does not establish that every component ablation is worse. See the result index for 14 retained CSVs and their evidence boundaries.</p>
+<h2>Quick start</h2><pre><code>git clone https://github.com/Larryhul/TRACER.git
+cd TRACER
+python -m pip install -e ".[dev]"
+python -m tracer.demo --output outputs/demo</code></pre>
+<h2>BibTeX</h2><pre><code>@misc{tracer_manuscript,
+  title = {TRACER: Adaptive Multi-Robot Social Navigation via Joint Human-Response Prediction and Interaction-Aware Replanning},
+  author = {Hu, Lan and Liwang, Minghui and Zhu, Wenbo and Yi, Xinlei and Gong, Wei and Hong, Yiguang and Hosseinalipour, Seyyedali},
+  year = {2026},
+  eprint = {2609.18776},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.RO},
+  url = {https://arxiv.org/abs/2609.18776}
+}</code></pre>
+<footer>Code released under the MIT license. This page mirrors the <a href="https://github.com/Larryhul/TRACER">repository README</a>.</footer>
+</main></body></html>
